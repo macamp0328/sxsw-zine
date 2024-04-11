@@ -1,3 +1,18 @@
+# sxsw-zine
+
+## Project Goals
+- explore using next.js and Vercel tooling
+- explore AI tooling, like copilot and Vercel's v0
+- create a creative and minimal photo gallery to share the bands I got to see during SXSW 2024, at least something better than instagram
+- provide relevant links to bands when possible
+- provide an easy way for bands to download all pictures I captured of them
+
+
+## Resources Used:
+https://github.com/ixartz/Next-js-Boilerplate
+
+## Everything below was from boilerplate
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
