@@ -8,9 +8,9 @@
 - provide an easy way for bands to download all pictures I captured of them
 
 
-Schema
+## Schema
 
-Bands:
+### Bands:
  - id (uuid)
  - name (string)
  - origin (string) ?
@@ -22,7 +22,7 @@ Bands:
  - youtube_link (url) ?
  - genre (string) ?
 
-Venues:
+### Venues:
  - id (uuid)
  - name (string)
  - address 
@@ -32,7 +32,7 @@ Venues:
  - general_link (url) ?
  - instagram_handle (string) ?
 
-Pictures:
+### Pictures:
  - id (uuid)
  - filename (string)
  - height (num)
