@@ -1,16 +1,17 @@
-import { Button } from '@nextui-org/react';
 import type { Picture } from '@prisma/client';
 import React from 'react';
 
 import getZinePictures from '@/app/lib/actions';
 import { cutiveMono } from '@/app/ui/fonts';
 import PhotoBlock from '@/app/ui/photo-block';
+import WorkInProgressBanner from '@/app/ui/wip-banner';
 
 export default async function Home() {
   const zinePictures: Picture[] = await getZinePictures();
 
   return (
     <div className="relative">
+      <WorkInProgressBanner />
       <div
         className={`${cutiveMono.className} fixed left-0 top-0 z-50 w-full bg-transparent p-5 text-xl font-bold text-white xl:text-black`}
       >
@@ -21,13 +22,6 @@ export default async function Home() {
         {zinePictures.map((picture) => (
           <div key={picture.id} className="w-full max-w-6xl">
             <PhotoBlock {...picture} />
-            <div className="mt-2 border-t border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
-              <h1 className="text-xl font-bold">{picture.id}</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Photo by {picture.takenAt.toDateString()}
-              </p>
-              <Button>Add to Favorites</Button>
-            </div>
           </div>
         ))}
       </div>

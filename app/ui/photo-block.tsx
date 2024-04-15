@@ -2,6 +2,8 @@ import type { Picture } from '@prisma/client';
 import Image from 'next/image';
 import React from 'react';
 
+import BandDetails from './band-details';
+
 // interface PhotoBlockProps {
 //   fileName: string;
 //   id: string | number;
@@ -17,6 +19,7 @@ export default function PhotoBlock(picture: Picture) {
         width={4091}
         height={3068}
       />
+      <BandDetails picture={picture} />
     </div>
   );
 }

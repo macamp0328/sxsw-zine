@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 
 // get pictures
 export function getPictures() {
-  console.log(data);
   return data.pictures;
 }
 
@@ -20,11 +19,9 @@ export default async function getZinePictures(): Promise<Picture[]> {
       // where: { isZine: true },
       include: { band: true },
     });
-    console.log('pictures', pictures);
-    console.log('pictures', typeof pictures);
     return pictures;
   } catch (e) {
-    console.log(e);
+    console.error(e);
     throw e;
   }
 }
