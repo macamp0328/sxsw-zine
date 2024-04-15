@@ -1,11 +1,11 @@
 import type { Picture } from '@prisma/client';
 import React from 'react';
 
-interface BandDetails {
-  name: string;
-  genre: string;
-  members: string[];
-}
+// interface BandDetails {
+//   name: string;
+//   genre: string;
+//   members: string[];
+// }
 
 interface BandDetailsComponentProps {
   picture: Picture;
