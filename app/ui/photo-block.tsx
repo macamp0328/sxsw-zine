@@ -1,17 +1,18 @@
+import type { Picture } from '@prisma/client';
 import Image from 'next/image';
 import React from 'react';
 
-interface PhotoBlockProps {
-  fileName: string;
-  id: string | number;
-}
+// interface PhotoBlockProps {
+//   fileName: string;
+//   id: string | number;
+// }
 
-export default function PhotoBlock(props: PhotoBlockProps) {
+export default function PhotoBlock(picture: Picture) {
   return (
     <div>
       <Image
-        src={props.fileName}
-        alt={`Photo ${props.id}`}
+        src={picture.filePath}
+        alt={`Photo ${picture.id}`}
         // style={{ width: '100%', height: 'auto' }}
         width={4091}
         height={3068}

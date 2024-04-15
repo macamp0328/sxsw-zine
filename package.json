@@ -12,25 +12,23 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.10",
+    "@prisma/client": "^5.12.1",
     "framer-motion": "^11.0.28",
+    "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.1.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "@commitlint/cz-commitlint": "^19.2.0",
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "autoprefixer": "^10.0.1",
-    "postcss": "^8",
     "commitizen": "^4.3.0",
-    "tailwindcss": "^3.3.0",
     "eslint": "^8",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -51,9 +49,13 @@
     "eslint-plugin-testing-library": "^6.2.0",
     "eslint-plugin-unused-imports": "^3.1.0",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8",
     "prettier": "^3.2.5",
+    "prisma": "^5.12.1",
     "rimraf": "^5.0.5",
-    "tsx": "^4.7.2"
+    "tailwindcss": "^3.3.0",
+    "tsx": "^4.7.2",
+    "typescript": "^5"
   },
   "config": {
     "commitizen": {

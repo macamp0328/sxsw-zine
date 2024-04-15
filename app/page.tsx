@@ -1,19 +1,13 @@
 import { Button } from '@nextui-org/react';
+import type { Picture } from '@prisma/client';
 import React from 'react';
 
-import { getPictures } from '@/app/lib/actions';
+import getZinePictures from '@/app/lib/actions';
 import { cutiveMono } from '@/app/ui/fonts';
 import PhotoBlock from '@/app/ui/photo-block';
 
-type Picture = {
-  id: string;
-  fileName: string;
-  title: string;
-  band: string; // Assuming there's a 'band' field in your data
-};
-
-const Home: React.FC = () => {
-  const pictures: Picture[] = getPictures();
+export default async function Home() {
+  const zinePictures: Picture[] = await getZinePictures();
 
   return (
     <div className="relative">
@@ -24,13 +18,13 @@ const Home: React.FC = () => {
         <h2>SXSW</h2>
       </div>
       <div className="mx-auto mt-16 flex flex-col items-center gap-8 p-4">
-        {pictures.map((picture) => (
+        {zinePictures.map((picture) => (
           <div key={picture.id} className="w-full max-w-6xl">
-            <PhotoBlock fileName={picture.fileName} id={picture.id} />
+            <PhotoBlock {...picture} />
             <div className="mt-2 border-t border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
-              <h1 className="text-xl font-bold">{picture.title}</h1>
+              <h1 className="text-xl font-bold">{picture.id}</h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Photo by {picture.band} | {picture.title}
+                Photo by {picture.takenAt.toDateString()}
               </p>
               <Button>Add to Favorites</Button>
             </div>
@@ -39,6 +33,4 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}

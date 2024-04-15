@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  schemas = ["public", "auth"]
+}
+
+model Band {
+  id              String   @id @default(uuid())
+  name            String
+  origin          String?
+  bio             String?  @db.Text
+  milesThoughts   String?  @db.Text
+  instagramHandle String?
+  bandcampHandle  String?
+  generalLink     String?
+  youtubeLink     String?
+  genre           String?
+
+  pictures        Picture[]
+
+  @@schema("public")
+}
+
+model Venue {
+  id              String   @id @default(uuid())
+  name            String
+  address         String
+  city            String
+  state           String
+  zip             String
+  generalLink     String?
+  instagramHandle String?
+
+  pictures        Picture[]
+
+  @@schema("public")
+}
+
+model Picture {
+  id        String   @id @default(uuid())
+  filename  String
+  height    Int      // Assuming height is an integer number of pixels
+  width     Int      // Assuming width is an integer number of pixels
+  filePath  String   // Stored as a string path
+  takenAt   DateTime // Using DateTime for the timestamp
+  isIndoor  Boolean?
+  isZine    Boolean? // Picture is featured on homepage
+
+  bandId    String?  
+  venueId   String?  
+
+  band      Band?    @relation(fields: [bandId], references: [id])
+  venue     Venue?   @relation(fields: [venueId], references: [id])
+
+  @@schema("public")
+}
