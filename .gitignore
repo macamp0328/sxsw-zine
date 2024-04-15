@@ -1,6 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .env
+# Ignore jiti temp files
+duck2/AppData/Local/Temp/node-jiti/*
+duck2\AppData\Local\Temp\node-jiti\sxsw-zine-tailwind.config.ts.1cac0c04.js
+duck2/AppData/Local/Temp/node-jiti/sxsw-zine-tailwind.config.ts.1cac0c04.js
+
 
 # dependencies
 /node_modules
