@@ -7,9 +7,14 @@
 - provide relevant links to bands when possible
 - provide an easy way for bands to download all pictures I captured of them
 
+## High Level Thoughts
+- Very basic homepage with concise explanation of my goal/idea/experience
+- Make it clear they just need to scroll down
+- Some type of creative animation/transition based on scrolling
+- URL updates for each band's picture as the user scrolls
 
 ## Schema
-
+(off the top of my head notes)
 ### Bands:
  - id (uuid)
  - name (string)
