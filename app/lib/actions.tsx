@@ -5,7 +5,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 const data = require('./temp-data.json');
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
 
 // get pictures
 export function getPictures() {
@@ -14,7 +14,7 @@ export function getPictures() {
 
 // gets all zine pictures, which would be featured on main page
 // - this translates to one picture per band
-export default async function getZinePictures(): Promise<Picture[]> {
+export async function getZinePictures(): Promise<Picture[]> {
   noStore();
   try {
     const pictures = await prisma.picture.findMany({
@@ -28,8 +28,27 @@ export default async function getZinePictures(): Promise<Picture[]> {
   }
 }
 
+// gets picture, band, and venue details based on band slug
+export async function getPictureDetails(bandSlug: string): Promise<any> {
+  noStore();
+  try {
+    const picture = await prisma.picture.findFirst({
+      where: { band: { slug: bandSlug } },
+      include: { band: true, venue: true },
+    });
+    return picture;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 // get bands
 
 // get venues
 
 // get pictures of a band
+
+// export default function getNextBand(pictureId: string){
+
+// }

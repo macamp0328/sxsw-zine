@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
+import { cutiveMono } from './components/fonts';
 import { Providers } from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,7 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <header
+            className={`${cutiveMono.className} fixed left-0 top-0 z-50 w-full bg-transparent p-5 text-xl font-bold text-white xl:text-black`}
+          >
+            <h2>Miles&apos;s</h2>
+            <h2>SXSW</h2>
+          </header>
+
+          {children}
+        </Providers>
       </body>
     </html>
   );
