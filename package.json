@@ -11,6 +11,9 @@
     "check-types": "tsc --noEmit --pretty",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.12.1",
@@ -23,7 +26,7 @@
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "@commitlint/cz-commitlint": "^19.2.0",
-    "@types/node": "^20",
+    "@types/node": "^20.12.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
@@ -55,8 +58,9 @@
     "prisma": "^5.12.1",
     "rimraf": "^5.0.5",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.7.2",
-    "typescript": "^5"
+    "typescript": "^5.4.5"
   },
   "config": {
     "commitizen": {
