@@ -13,6 +13,22 @@
 - Some type of creative animation/transition based on scrolling
 - URL updates for each band's picture as the user scrolls
 
+## File Structure and Layouts
+
+`./sxsw-zine/`
+   - app/
+     - [band]/
+       - page.tsx
+       - layout.tsx (zine-page)
+     - components/
+       - zine-page.tsx
+       - picture-details.tsx
+       - band-links.tsx
+     - layout.tsx
+     - page.tsx
+  - public/photos
+
+
 ## Schema
 (off the top of my head notes)
 ### Bands:

@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["multiSchema"]
@@ -13,22 +10,20 @@ datasource db {
   provider = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
-  schemas = ["public", "auth"]
+  schemas = ["public"]
 }
 
 model Band {
   id              String   @id @default(uuid())
   name            String
+  slug            String   @unique
   origin          String?
   bio             String?  @db.Text
   milesThoughts   String?  @db.Text
-  instagramHandle String?
-  bandcampHandle  String?
-  generalLink     String?
-  youtubeLink     String?
   genre           String?
 
   pictures        Picture[]
+  links           Link[]
 
   @@schema("public")
 }
@@ -40,10 +35,9 @@ model Venue {
   city            String
   state           String
   zip             String
-  generalLink     String?
-  instagramHandle String?
 
   pictures        Picture[]
+  links           Link[]
 
   @@schema("public")
 }
@@ -55,14 +49,52 @@ model Picture {
   width     Int      // Assuming width is an integer number of pixels
   filePath  String   // Stored as a string path
   takenAt   DateTime // Using DateTime for the timestamp
-  isIndoor  Boolean?
-  isZine    Boolean? // Picture is featured on homepage
+  isIndoor  Boolean? @default(false)
+  isZine    Boolean? @default(false)  // Picture is featured on homepage
 
   bandId    String?  
   venueId   String?  
 
-  band      Band?    @relation(fields: [bandId], references: [id])
-  venue     Venue?   @relation(fields: [venueId], references: [id])
+  band      Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull)
+  venue     Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
+
+  @@schema("public")
+}
+
+enum Platform {
+  Instagram
+  YouTube
+  Bandcamp
+  Spotify
+  Facebook
+  Twitter
+  Internet
+
+  @@schema("public")
+}
+
+enum LinkType {
+  Profile
+  Video
+  Playlist
+  Album
+  Tour
+  Other
+
+  @@schema("public")
+}
+
+model Link {
+  id          String   @id @default(uuid())
+  url         String @db.VarChar(255)
+  platform    Platform
+  linkType    LinkType
+
+  bandId      String?
+  venueId     String?
+
+  band        Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull)
+  venue       Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
 
   @@schema("public")
 }
