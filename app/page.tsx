@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PhotoGallery from './components/photo-gallery';
 import StartPage from './components/start-page';
 
 export default async function Home() {
@@ -8,9 +9,7 @@ export default async function Home() {
       {/* <WorkInProgressBanner /> */}
       <StartPage />
 
-      {/* <div>
-        <PhotoGallery />
-      </div> */}
+      <PhotoGallery />
 
       <div className="flex min-h-screen snap-center items-center justify-center">
         End Page Content

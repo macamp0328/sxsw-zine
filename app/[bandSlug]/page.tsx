@@ -8,20 +8,15 @@ export default function PhotoPage({
 }: {
   params: { bandSlug: string };
 }) {
-  // const firstBandNameDefault = 'Willow Parlo';
-  console.log(params);
-  // if (params.bandName === 'bandname') {
-  //   // return <div>loading...</div>;
-  //   // set bandName value to default, "Willow Parlo"
-  //   router.replace(firstBandNameDefault);
-  // }
-
-  // perhaps we can check if slug exists
-
+  console.log('params', params);
   return (
-    <div className="snap-center min-h-screen flex justify-center items-center p-4">
-      <BandPhoto bandSlug={params.bandSlug} />
-      <BandDetails bandSlug={params.bandSlug} />
+    <div className="flex h-screen w-full snap-start flex-col items-center justify-evenly overflow-hidden">
+      <div className="relative m-2 w-full flex-1 object-cover">
+        <BandPhoto bandSlug={params.bandSlug} />
+      </div>
+      <div className="flex max-h-[10%] min-h-[5%] flex-initial flex-col items-center justify-center p-2 md:max-h-none">
+        <BandDetails bandSlug={params.bandSlug} />
+      </div>
     </div>
   );
 }

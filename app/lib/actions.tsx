@@ -10,7 +10,8 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 const data = require('./temp-data.json');
 
-const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
+// const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
+const prisma = new PrismaClient();
 
 // Define a type that reflects the structure including relationships
 type PictureWithRelations = Picture & {
