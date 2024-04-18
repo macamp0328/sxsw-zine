@@ -19,7 +19,7 @@ export default function PhotoPage({
   // perhaps we can check if slug exists
 
   return (
-    <div>
+    <div className="snap-center min-h-screen flex justify-center items-center p-4">
       <BandPhoto bandSlug={params.bandSlug} />
       <BandDetails bandSlug={params.bandSlug} />
     </div>

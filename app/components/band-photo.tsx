@@ -8,14 +8,13 @@ export default async function BandPhoto(params: { bandSlug: string }) {
   console.log('pictureDetails', pictureDetails);
 
   return (
-    <div>
-      <Image
-        src={pictureDetails.filePath}
-        alt={`Photo of ${pictureDetails.band.name} taken on ${pictureDetails.takenAt}`}
-        // style={{ width: '100%', height: 'auto' }}
-        width={pictureDetails.width}
-        height={pictureDetails.height}
-      />
-    </div>
+    <Image
+      src={pictureDetails.filePath}
+      alt={`Photo of ${pictureDetails.band.name} taken on ${pictureDetails.takenAt}`}
+      // style={{ width: '100%', height: 'auto' }}
+      width={pictureDetails.width}
+      height={pictureDetails.height}
+      className="size-full object-contain"
+    />
   );
 }
