@@ -18,6 +18,7 @@ export default async function BandPhoto(params: { bandSlug: string }) {
           fill
           sizes="100vw"
           style={{ objectFit: 'contain' }}
+          loading="lazy"
         />
       ) : (
         <p>Ooops. No photo available.</p>

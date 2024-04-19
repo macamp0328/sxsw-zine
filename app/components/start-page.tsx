@@ -17,16 +17,17 @@ export default function StartPage() {
         </div>
       </div>
 
-      <div className="relative m-2 w-full flex-1 object-cover">
-        <div className="size-full">
+      <div className=" m-2 w-full flex-1 object-cover">
+        <div className="relative size-full">
           <Image
             src="/photos/header-miles.jpg"
             alt="picture of Miles Camp, the maker of this page"
             fill
-            sizes="100vw"
+            sizes="50vw"
             style={{
               objectFit: 'contain',
             }}
+            priority
           />
         </div>
       </div>
