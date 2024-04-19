@@ -2,6 +2,7 @@ import React from 'react';
 
 import BandDetails from '@/app/components/band-details';
 import BandPhoto from '@/app/components/band-photo';
+import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 
 export default function PhotoPage({
   params,
@@ -11,6 +12,9 @@ export default function PhotoPage({
   console.log('params', params);
   return (
     <div className="flex h-screen w-full snap-start flex-col items-center justify-evenly overflow-hidden">
+      <div>
+        <ScrollURLUpdater urlSegment={params.bandSlug} />
+      </div>
       <div className="relative m-2 w-full flex-1 object-cover">
         <BandPhoto bandSlug={params.bandSlug} />
       </div>
