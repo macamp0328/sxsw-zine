@@ -1,12 +1,9 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import { cutiveMono } from './components/fonts';
 import { Providers } from './providers';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: `Miles's SXSW 2024`,
@@ -21,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={inter.className}>
+      <body className={cutiveMono.className}>
         <Providers>
           <header
             className={`${cutiveMono.className} fixed left-0 top-0 z-50 w-full bg-transparent p-5 text-xl font-bold text-black`}

@@ -1,20 +1,20 @@
 import Image from 'next/image';
 
-import { getPictureDetails } from '../lib/actions';
+import { type PictureWithRelationsAndUrl } from '../lib/actions';
 
-export default async function BandPhoto(params: { bandSlug: string }) {
-  const pictureDetails = await getPictureDetails(params.bandSlug, true);
-
-  if (!pictureDetails) {
-    return <p>Error loading picture details.</p>; // Handle null or undefined details
+export default async function BandPhoto(params: {
+  pictureDetails: PictureWithRelationsAndUrl;
+}) {
+  if (!params.pictureDetails) {
+    return <p>Error loading picture details.</p>;
   }
 
   return (
     <div className="absolute size-full">
-      {pictureDetails.url ? (
+      {params.pictureDetails.url ? (
         <Image
-          src={pictureDetails.url}
-          alt={`Photo of ${pictureDetails.band?.name} taken on ${pictureDetails.takenAt}`}
+          src={params.pictureDetails.url}
+          alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
           fill
           sizes="100vw"
           style={{ objectFit: 'contain' }}

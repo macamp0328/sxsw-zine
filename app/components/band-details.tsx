@@ -1,25 +1,27 @@
 import React from 'react';
 
-import { getPictureDetails } from '../lib/actions';
+import { type PictureWithRelationsAndUrl } from '../lib/actions';
 
-export default async function BandDetails(params: { bandSlug: string }) {
-  const pictureDetails = await getPictureDetails(params.bandSlug);
-
-  if (!pictureDetails) {
-    return <p>Error loading band details.</p>; // Handle null or undefined details
+export default async function BandDetails(params: {
+  pictureDetails: PictureWithRelationsAndUrl;
+}) {
+  if (!params.pictureDetails) {
+    return <p>Error loading band details.</p>;
   }
 
   return (
-    <div className=" bg-blue-200  text-center">
-      {pictureDetails.band ? (
+    <div className=" bg-gray-200  p-4 text-center">
+      {params.pictureDetails.band ? (
         <div>
-          <h1 className="text-xl font-bold">{pictureDetails.band.name}</h1>
+          <h1 className="text-xl font-bold">
+            {params.pictureDetails.band.name}
+          </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {pictureDetails.takenAt.toDateString()}
+            {params.pictureDetails.takenAt.toDateString()}
           </p>
-          {pictureDetails.venue && (
+          {params.pictureDetails.venue && (
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {pictureDetails.venue.name}
+              {params.pictureDetails.venue.name}
             </p>
           )}
         </div>

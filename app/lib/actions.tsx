@@ -14,7 +14,7 @@ const data = require('./temp-data.json');
 const prisma = new PrismaClient();
 
 // Define a type that reflects the structure including relationships
-type PictureWithRelationsAndUrl = Picture & {
+export type PictureWithRelationsAndUrl = Picture & {
   band: Band | null; // Assuming Band can be null
   venue: Venue | null; // Assuming Venue can be null
   url?: string | null; // Added property for the blob URL
@@ -31,7 +31,7 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   noStore();
   try {
     const pictures = await prisma.picture.findMany({
-      // where: { isZine: true },
+      where: { isZine: true },
       include: { band: true, venue: true },
     });
 
