@@ -6,7 +6,8 @@ import {
 } from '@prisma/client';
 import { unstable_noStore as noStore } from 'next/cache';
 
-import { listFiles } from './blobs';
+import { listFiles as listBlobFiles } from './blobs';
+import { listFiles as listS3Files } from './s3';
 
 // const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
 const prisma = new PrismaClient();
@@ -18,8 +19,14 @@ export type PictureWithRelationsAndUrl = Picture & {
   url?: string | null; // Added property for the blob URL
 };
 
+const listFiles = async () => {
+  if (process.env.STORAGE_TYPE === 's3') {
+    return listS3Files();
+  }
+  return listBlobFiles();
+};
+
 // gets all zine pictures, which would be featured on main page
-// - this translates to one picture per band
 export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   noStore();
   try {
@@ -28,16 +35,12 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
       include: { band: true, venue: true },
     });
 
-    // Retrieve all files from Blob storage
     const files = await listFiles();
-
-    // Create a map of filenames to URLs for quick lookup
     const fileMap = new Map(files.map((file) => [file.name, file.url]));
 
-    // Map over the pictures and add the URL from Blob storage
     const picturesWithUrls = pictures.map((picture) => ({
       ...picture,
-      url: fileMap.get(picture.filename) || null, // Add URL or null if not found
+      url: fileMap.get(picture.filename) || null,
     }));
 
     return picturesWithUrls;
