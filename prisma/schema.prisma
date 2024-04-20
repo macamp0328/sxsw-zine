@@ -21,6 +21,7 @@ model Band {
   bio             String?  @db.Text
   milesThoughts   String?  @db.Text
   genre           String?
+  instagramHandle String?
 
   pictures        Picture[]
   links           Link[]
@@ -45,11 +46,9 @@ model Venue {
 model Picture {
   id        String   @id @default(uuid())
   filename  String
-  height    Int      // Assuming height is an integer number of pixels
-  width     Int      // Assuming width is an integer number of pixels
-  filePath  String   // Stored as a string path
+  height    Int?      @default(0) // Assuming height is an integer number of pixels
+  width     Int?      @default(0) // Assuming width is an integer number of pixels
   takenAt   DateTime // Using DateTime for the timestamp
-  isIndoor  Boolean? @default(false)
   isZine    Boolean? @default(false)  // Picture is featured on homepage
 
   bandId    String?  

@@ -3,6 +3,7 @@
 .env
 # Ignore jiti temp files
 duck2/AppData/Local/Temp/node-jiti/*
+/prisma/scripts/images/*
 
 
 # dependencies
