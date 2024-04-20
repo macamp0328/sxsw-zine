@@ -32,13 +32,17 @@ const BandDetails = ({
               At {pictureDetails.venue.name}, {pictureDetails.venue.city}
             </p>
           )}
-          {/* <div className="mt-2 space-y-1">
-            {pictureDetails.band.links?.map((link, index) => (
-              <a key={index} href={link.url} className="text-blue-500 hover:underline">
-                {link.platform}: {link.linkType}
+          <div className="mt-2 space-y-1">
+            {pictureDetails.band.links?.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                className="text-blue-500 hover:underline"
+              >
+                {link.platform}
               </a>
             ))}
-          </div> */}
+          </div>
         </div>
       ) : (
         <p className="text-sm text-gray-500">

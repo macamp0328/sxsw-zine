@@ -1,5 +1,6 @@
 import {
   type Band,
+  type Link,
   type Picture,
   PrismaClient,
   type Venue,
@@ -14,8 +15,16 @@ const prisma = new PrismaClient();
 
 // Define a type that reflects the structure including relationships
 export type PictureWithRelationsAndUrl = Picture & {
-  band: Band | null; // Assuming Band can be null
-  venue: Venue | null; // Assuming Venue can be null
+  band:
+    | (Band & {
+        links: Link[]; // Include links as part of Band
+      })
+    | null; // Assuming Band can be null
+  venue:
+    | (Venue & {
+        links: Link[]; // Include links as part of Venue
+      })
+    | null; // Assuming Venue can be null
   url?: string | null; // Added property for the blob URL
 };
 
@@ -32,7 +41,10 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   try {
     const pictures = await prisma.picture.findMany({
       where: { isZine: true },
-      include: { band: true, venue: true },
+      include: {
+        band: { include: { links: true } },
+        venue: { include: { links: true } },
+      },
     });
 
     const files = await listFiles();
@@ -59,7 +71,10 @@ export async function getPictureDetails(
   try {
     const picture = await prisma.picture.findFirst({
       where: { band: { slug: bandSlug } },
-      include: { band: true, venue: true },
+      include: {
+        band: { include: { links: true } },
+        venue: { include: { links: true } },
+      },
     });
 
     if (picture && fetchBlobUrl) {
