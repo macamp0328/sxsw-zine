@@ -1,36 +1,48 @@
-id,filename,height,width,takenAt,isZine,bandId,venueId
-,R0055134.jpg,2906,3875,Mon Mar 11 2024 13:41:17 GMT-0500 (Central Daylight Time),TRUE,Willow Parlo,Parkside
-,R0055146.jpg,2707,3609,Mon Mar 11 2024 14:48:10 GMT-0500 (Central Daylight Time),TRUE,Ace Park,Vaquero Taquero - Downtown
-,R0055175.jpg,2917,3890,Mon Mar 11 2024 16:02:48 GMT-0500 (Central Daylight Time),TRUE,Red Axes,Mohawk Austin
-,R0055198.jpg,2793,3724,Mon Mar 11 2024 17:42:21 GMT-0500 (Central Daylight Time),TRUE,Mark Barden & Friends,Mohawk Austin
-,R0055209.jpg,2805,3740,Mon Mar 11 2024 18:12:07 GMT-0500 (Central Daylight Time),TRUE,Jo Alice,Mohawk Austin
-,R0055211.jpg,2874,3832,Mon Mar 11 2024 18:55:58 GMT-0500 (Central Daylight Time),TRUE,Telescreens,Mohawk Austin
-,R0055267.jpg,2877,3836,Tue Mar 12 2024 15:03:20 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055312.jpg,2156,2874,Tue Mar 12 2024 16:27:57 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055334.jpg,2867,3823,Tue Mar 12 2024 17:08:14 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055340.jpg,2815,3753,Tue Mar 12 2024 17:29:56 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055404.jpg,2867,3823,Wed Mar 13 2024 10:15:31 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055419.jpg,2905,3873,Wed Mar 13 2024 10:49:22 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055430.jpg,2790,3720,Wed Mar 13 2024 11:24:27 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055482.jpg,2546,3394,Wed Mar 13 2024 12:05:13 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055486.jpg,3100,4133,Wed Mar 13 2024 12:21:40 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055488.jpg,2913,3884,Wed Mar 13 2024 15:20:44 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055505.jpg,2845,3793,Wed Mar 13 2024 16:33:59 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055518.jpg,2714,3619,Wed Mar 13 2024 17:27:46 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055543.jpg,2867,3823,Wed Mar 13 2024 18:36:50 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055558.jpg,3175,4233,Wed Mar 13 2024 19:20:58 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055572.jpg,3157,4210,Thu Mar 14 2024 10:01:02 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055598.jpg,2593,3457,Thu Mar 14 2024 10:45:41 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055618.jpg,3027,4036,Thu Mar 14 2024 11:24:45 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055623.jpg,2964,3952,Thu Mar 14 2024 11:31:36 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055642.jpg,3091,4121,Thu Mar 14 2024 11:48:09 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055666.jpg,3043,4057,Thu Mar 14 2024 13:42:38 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055703.jpg,3079,4105,Thu Mar 14 2024 15:08:31 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055719.jpg,2841,3788,Thu Mar 14 2024 16:28:17 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055724.jpg,3007,4009,Thu Mar 14 2024 17:18:05 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055732.jpg,3062,4083,Thu Mar 14 2024 17:31:52 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055734.jpg,2735,3647,Thu Mar 14 2024 17:44:00 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055746.jpg,2785,3713,Thu Mar 14 2024 18:20:53 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055766.jpg,3009,4012,Fri Mar 15 2024 06:24:56 GMT-0500 (Central Daylight Time),TRUE,,
-,R0055769.jpg,3195,4260,Fri Mar 15 2024 06:50:29 GMT-0500 (Central Daylight Time),TRUE,,
-,R0056110.jpg,4122,3091,Sat Mar 16 2024 19:20:54 GMT-0500 (Central Daylight Time),TRUE,,
+filename,height,width,takenAt,isZine,bandId,venueId
+R0055134.jpg,2906,3875,Mon Mar 11 2024 13:41:17 GMT-0500 (Central Daylight Time),TRUE,Willow Parlo,Parkside
+R0055146.jpg,2707,3609,Mon Mar 11 2024 14:48:10 GMT-0500 (Central Daylight Time),TRUE,Ace Park,Vaquero Taquero - Downtown
+R0055175.jpg,2917,3890,Mon Mar 11 2024 16:02:48 GMT-0500 (Central Daylight Time),TRUE,Red Axes,Mohawk Austin
+R0055198.jpg,2793,3724,Mon Mar 11 2024 17:42:21 GMT-0500 (Central Daylight Time),TRUE,Mark Barden & Friends,Mohawk Austin
+R0055209.jpg,2805,3740,Mon Mar 11 2024 18:12:07 GMT-0500 (Central Daylight Time),TRUE,Jo Alice,Mohawk Austin
+R0055211.jpg,2874,3832,Mon Mar 11 2024 18:55:58 GMT-0500 (Central Daylight Time),TRUE,Telescreens,Mohawk Austin
+R0055267.jpg,2877,3836,Tue Mar 12 2024 15:03:20 GMT-0500 (Central Daylight Time),TRUE,Seán Barna,The Iron Bear
+R0055312.jpg,2156,2874,Tue Mar 12 2024 16:27:57 GMT-0500 (Central Daylight Time),TRUE,Henry Invisible,Mohawk Austin
+R0055334.jpg,2867,3823,Tue Mar 12 2024 17:08:14 GMT-0500 (Central Daylight Time),TRUE,FANTAAZMA,Mohawk Austin
+R0055340.jpg,2815,3753,Tue Mar 12 2024 17:29:56 GMT-0500 (Central Daylight Time),TRUE,Chartreuse,The 13th floor
+R0055404.jpg,2867,3823,Wed Mar 13 2024 10:15:31 GMT-0500 (Central Daylight Time),TRUE,Whitworth,The White Horse
+R0055419.jpg,2905,3873,Wed Mar 13 2024 10:49:22 GMT-0500 (Central Daylight Time),TRUE,MUGGER,HOTEL VEGAS
+R0055430.jpg,2790,3720,Wed Mar 13 2024 11:24:27 GMT-0500 (Central Daylight Time),TRUE,chokecherry,HOTEL VEGAS
+R0055482.jpg,2546,3394,Wed Mar 13 2024 12:05:13 GMT-0500 (Central Daylight Time),TRUE,Sextile,HOTEL VEGAS
+R0055486.jpg,3100,4133,Wed Mar 13 2024 12:21:40 GMT-0500 (Central Daylight Time),TRUE,Suckling,HOTEL VEGAS
+R0055488.jpg,2913,3884,Wed Mar 13 2024 15:20:44 GMT-0500 (Central Daylight Time),TRUE,Bad Bad Hats,Mohawk Austin
+R0055505.jpg,2845,3793,Wed Mar 13 2024 16:33:59 GMT-0500 (Central Daylight Time),TRUE,SNACKTIME,Mohawk Austin
+R0055518.jpg,2714,3619,Wed Mar 13 2024 17:27:46 GMT-0500 (Central Daylight Time),TRUE,Balthvs,Mohawk Austin
+R0055543.jpg,2867,3823,Wed Mar 13 2024 18:36:50 GMT-0500 (Central Daylight Time),TRUE,Thus Love,Mohawk Austin
+R0055558.jpg,3175,4233,Wed Mar 13 2024 19:20:58 GMT-0500 (Central Daylight Time),TRUE,Voxtrot,Mohawk Austin
+R0055572.jpg,3157,4210,Thu Mar 14 2024 10:01:02 GMT-0500 (Central Daylight Time),TRUE,RIP Dunes,The Volstead Lounge
+R0055598.jpg,2593,3457,Thu Mar 14 2024 10:45:41 GMT-0500 (Central Daylight Time),TRUE,Reyna Tropical,HOTEL VEGAS
+R0055623.jpg,2964,3952,Thu Mar 14 2024 11:31:36 GMT-0500 (Central Daylight Time),TRUE,cumgirl8,HOTEL VEGAS
+R0055642.jpg,3091,4121,Thu Mar 14 2024 11:48:09 GMT-0500 (Central Daylight Time),TRUE,Telescreens,The Volstead Lounge
+R0055666.jpg,3043,4057,Thu Mar 14 2024 13:42:38 GMT-0500 (Central Daylight Time),TRUE,Eyeam,Austin Garden & Studio
+R0055703.jpg,3079,4105,Thu Mar 14 2024 15:08:31 GMT-0500 (Central Daylight Time),TRUE,Dry Cleaning,BME @ Renaissance Hotel
+R0055719.jpg,2841,3788,Thu Mar 14 2024 16:28:17 GMT-0500 (Central Daylight Time),TRUE,Voxtrot,Stubb's Bar-B-Q
+R0055724.jpg,3007,4009,Thu Mar 14 2024 17:18:05 GMT-0500 (Central Daylight Time),TRUE,Babe Corner,Swan Dive
+R0055734.jpg,2735,3647,Thu Mar 14 2024 17:44:00 GMT-0500 (Central Daylight Time),TRUE,Super Duty Tough Work,Swan Dive
+R0055746.jpg,2785,3713,Thu Mar 14 2024 18:20:53 GMT-0500 (Central Daylight Time),TRUE,Zoon,Swan Dive
+R0055766.jpg,3009,4012,Fri Mar 15 2024 06:24:56 GMT-0500 (Central Daylight Time),TRUE,Hinds,High Noon
+R0055769.jpg,3195,4260,Fri Mar 15 2024 06:50:29 GMT-0500 (Central Daylight Time),TRUE,Shower Curtain,High Noon
+R0055785.jpg,2780,3707,Fri Mar 15 2024 07:50:55 GMT-0500 (Central Daylight Time),TRUE,The Barr Brothers,The Coral Snake
+R0055788.jpg,2839,3786,Fri Mar 15 2024 08:05:15 GMT-0500 (Central Daylight Time),TRUE,Mamalarky,The Coral Snake
+R0055802.jpg,3028,4037,Fri Mar 15 2024 09:35:48 GMT-0500 (Central Daylight Time),TRUE,Rose Hotel,High Noon
+R0055803.jpg,3135,4180,Fri Mar 15 2024 10:43:00 GMT-0500 (Central Daylight Time),TRUE,City of the Sun,The Coral Snake
+R0055832.jpg,2953,3938,Fri Mar 15 2024 11:36:40 GMT-0500 (Central Daylight Time),TRUE,The Deslondes,High Noon
+R0055850.jpg,2842,3789,Fri Mar 15 2024 12:15:28 GMT-0500 (Central Daylight Time),TRUE,Squirrel Flower,High Noon
+R0055860.jpg,2875,3833,Fri Mar 15 2024 16:54:14 GMT-0500 (Central Daylight Time),TRUE,Lucky Lo,Swan Dive
+R0055867.jpg,2761,3681,Fri Mar 15 2024 17:33:30 GMT-0500 (Central Daylight Time),TRUE,Divorce,Swan Dive
+R0055882.jpg,2964,3952,Fri Mar 15 2024 18:39:41 GMT-0500 (Central Daylight Time),TRUE,Angélica Garcia,Swan Dive
+R0055906.jpg,2880,3840,Sat Mar 16 2024 09:29:03 GMT-0500 (Central Daylight Time),TRUE,Urban Heat,The Coral Snake
+R0055917.jpg,3087,4116,Sat Mar 16 2024 10:12:36 GMT-0500 (Central Daylight Time),TRUE,The Tender Things,High Noon
+R0055981.jpg,2855,3807,Sat Mar 16 2024 12:36:41 GMT-0500 (Central Daylight Time),TRUE,Vera Ellen,Lazarus Brewing Co.
+R0055994.jpg,2771,3695,Sat Mar 16 2024 13:32:00 GMT-0500 (Central Daylight Time),TRUE,Ramesh Srivastava,Lazarus Brewing Co.
+R0056015.jpg,2922,3896,Sat Mar 16 2024 16:43:56 GMT-0500 (Central Daylight Time),TRUE,Emily Barker,Swan Dive
+R0056058.jpg,2651,3535,Sat Mar 16 2024 17:53:58 GMT-0500 (Central Daylight Time),TRUE,Hinds,Swan Dive

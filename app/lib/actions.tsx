@@ -8,8 +8,6 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 import { listFiles } from './blobs';
 
-const data = require('./temp-data.json');
-
 // const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
 const prisma = new PrismaClient();
 
@@ -19,11 +17,6 @@ export type PictureWithRelationsAndUrl = Picture & {
   venue: Venue | null; // Assuming Venue can be null
   url?: string | null; // Added property for the blob URL
 };
-
-// get pictures
-export function getPictures() {
-  return data.pictures;
-}
 
 // gets all zine pictures, which would be featured on main page
 // - this translates to one picture per band
@@ -79,13 +72,3 @@ export async function getPictureDetails(
     throw e;
   }
 }
-
-// get bands
-
-// get venues
-
-// get pictures of a band
-
-// export default function getNextBand(pictureId: string){
-
-// }
