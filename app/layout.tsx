@@ -1,5 +1,6 @@
 import './globals.css';
 
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 
 import { cutiveMono } from './components/fonts';
@@ -28,6 +29,7 @@ export default function RootLayout({
           </header>
 
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>
