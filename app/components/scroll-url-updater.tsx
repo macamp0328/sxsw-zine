@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
 interface RefreshOnVisibleProps {
-  urlSegment: string;
+  urlSegment?: string;
 }
 
 const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
@@ -12,12 +12,13 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentRef = ref.current; // Capture current ref
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log('Component is visible');
-          router.replace(`/${urlSegment}`, { scroll: false });
-          // router.push(`/${urlSegment}`, undefined, { scroll: false });
+          router.push(`#${urlSegment}`, {
+            scroll: false,
+          });
         }
       },
       {
@@ -27,18 +28,18 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
       },
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [router, urlSegment]);
 
-  return <div ref={ref} style={{ height: '1vh', border: '1px solid black' }} />;
+  return <div ref={ref} />;
 };
 
 export default RefreshOnVisible;
