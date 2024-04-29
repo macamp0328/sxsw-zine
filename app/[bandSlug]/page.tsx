@@ -1,25 +1,40 @@
 import React from 'react';
 
-import BandDetails from '@/app/components/band-details';
+import BandBonusDetails from '@/app/components/band-bonus-details';
+import BandMainDetails from '@/app/components/band-main-details';
 import BandPhoto from '@/app/components/band-photo';
+
+import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 import ScrollURLUpdater from '@/app/components/scroll-url-updater';
+
 
 export default function PhotoPage({
   params,
 }: {
-  params: { bandSlug: string };
+  params: {
+    bandSlug: string;
+    pictureDetails: PictureWithRelationsAndUrl;
+  };
 }) {
-  console.log('params', params);
   return (
-    <div className="flex h-screen w-full snap-start flex-col items-center justify-evenly overflow-hidden">
-      <div>
+
+    <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
+            <div>
         <ScrollURLUpdater urlSegment={params.bandSlug} />
       </div>
-      <div className="relative m-2 w-full flex-1 object-cover">
-        <BandPhoto bandSlug={params.bandSlug} />
+      <div className="m-1 flex-initial pt-24 md:hidden">
+        <BandMainDetails pictureDetails={params.pictureDetails} />
+
       </div>
-      <div className="flex max-h-[10%] min-h-[5%] flex-initial flex-col items-center justify-center p-2 md:max-h-none">
-        <BandDetails bandSlug={params.bandSlug} />
+      <div className="w-full flex-1 object-cover p-1 md:basis-3/4">
+        <BandPhoto pictureDetails={params.pictureDetails} />
+      </div>
+      <div className="m-1 flex flex-1 flex-col justify-center md:h-full md:basis-1/4 md:pr-8">
+        <div className="hidden md:flex ">
+          <BandMainDetails pictureDetails={params.pictureDetails} />
+        </div>
+
+        <BandBonusDetails pictureDetails={params.pictureDetails} />
       </div>
     </div>
   );

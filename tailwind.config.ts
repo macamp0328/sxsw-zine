@@ -10,11 +10,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      //   'gradient-conic':
-      //     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      // },
+      colors: {
+        background: 'var(--background)',
+        'bonus-text': 'var(--bonus-text)',
+        'button-background': 'var(--button-background)',
+        'button-text': 'var(--button-text)',
+        'main-text': 'var(--main-text)',
+        'sub-background': 'var(--sub-background)',
+        'sub-text': 'var(--sub-text)',
+      },
     },
   },
   darkMode: 'class',

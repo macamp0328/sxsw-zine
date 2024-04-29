@@ -8,6 +8,18 @@ const nextConfig = {
         port: '',
         // pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'sxsw-zine-bucket.s3.amazonaws.com',
+        port: '',
+        // pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'sxsw-zine-bucket.s3.us-east-1.amazonaws.com',
+        port: '',
+        // pathname: '**',
+      },
     ],
   },
   // experimental: {

@@ -1,12 +1,11 @@
 import './globals.css';
 
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import { cutiveMono } from './components/fonts';
 import { Providers } from './providers';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: `Miles's SXSW 2024`,
@@ -21,16 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={inter.className}>
+      <body className={cutiveMono.className}>
         <Providers>
-          <header
-            className={`${cutiveMono.className} fixed left-0 top-0 z-50 w-full bg-transparent p-5 text-xl font-bold text-black`}
-          >
-            <h2>Miles&apos;s</h2>
-            <h2>SXSW</h2>
+          <header className="fixed left-0 top-0 z-50 flex w-fit flex-col bg-transparent p-6 text-center text-2xl font-semibold text-main-text">
+            <p>
+              Miles&apos;s
+              <br />
+              SXSW
+            </p>
           </header>
 
           {children}
+          <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>

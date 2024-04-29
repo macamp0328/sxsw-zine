@@ -12,11 +12,15 @@
     "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node --project tsconfig.prisma.json prisma/seed.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.564.0",
+    "@aws-sdk/s3-request-presigner": "^3.565.0",
     "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.12.1",
+    "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10",
     "framer-motion": "^11.0.28",
     "next": "14.1.4",
     "react": "^18",
@@ -34,6 +38,8 @@
     "@vercel/blob": "^0.23.2",
     "autoprefixer": "^10.0.1",
     "commitizen": "^4.3.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
     "eslint": "^8",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -53,11 +59,13 @@
     "eslint-plugin-tailwindcss": "^3.15.1",
     "eslint-plugin-testing-library": "^6.2.0",
     "eslint-plugin-unused-imports": "^3.1.0",
+    "exif-reader": "^2.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prisma": "^5.12.1",
     "rimraf": "^5.0.5",
+    "sharp": "^0.33.3",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.2",

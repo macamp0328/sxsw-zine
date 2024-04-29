@@ -2,37 +2,34 @@ import Image from 'next/image';
 
 export default function StartPage() {
   return (
-    <div className="flex h-screen w-full snap-start flex-col items-center justify-evenly overflow-hidden md:flex-row md:items-stretch">
-      <div className="flex max-h-[15%] min-h-[25%] flex-initial flex-col items-center justify-center p-4 md:max-h-none md:min-h-0 md:flex-1">
-        <div className="flex-1" />
-        <p className="flex-1 text-xl text-gray-800">
-          A journey of SXSW 2024,
+    <div className="flex h-svh w-full snap-start flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch">
+      <div className="flex w-full flex-initial basis-1/4 flex-col items-center justify-end md:flex-auto md:justify-center">
+        <div className="hidden flex-1 md:flex" />
+        <h1 className="mb-4 mt-24 flex w-full items-center justify-center text-center align-bottom text-2xl text-main-text md:m-0 md:flex-1 md:text-3xl">
+          a sxsw journey,
           <br />
-          through the lens of Miles.
-        </p>
-        <div className="my-4 hidden flex-initial content-end justify-center md:flex">
-          <p className="flex content-center justify-center text-medium text-gray-700 ">
-            Go ahead, take a scroll.
-          </p>
+          through my lens.
+        </h1>
+        <div className="mb-12 hidden w-full flex-initial items-end justify-center md:flex md:flex-1">
+          <p className="text-medium text-sub-text ">Go ahead, take a scroll.</p>
         </div>
       </div>
 
-      <div className="relative m-2 w-full flex-1 object-cover">
-        <div className="size-full">
+      <div className="w-full flex-auto">
+        <div className="relative size-full">
           <Image
             src="/photos/header-miles.jpg"
             alt="picture of Miles Camp, the maker of this page"
             fill
-            sizes="100vw"
             style={{
               objectFit: 'contain',
             }}
+            priority
           />
         </div>
       </div>
-      {/* max-h-[10%] min-h-[15%] */}
-      <div className="my-4 flex-initial content-end justify-center md:hidden">
-        <p className="flex content-center justify-center text-medium text-gray-700 md:hidden">
+      <div className="mb-12 flex w-full flex-initial basis-1/6 items-end justify-center md:hidden">
+        <p className="text-medium text-sub-text md:hidden">
           Go ahead, take a scroll.
         </p>
       </div>
