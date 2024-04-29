@@ -23,7 +23,6 @@ export default function PhotoPage({
         <BandPhoto pictureDetails={params.pictureDetails} />
       </div>
       <div className="mx-2 flex flex-1 flex-col justify-center md:h-screen md:basis-1/4">
-
         <div className="hidden md:flex ">
           <BandMainDetails pictureDetails={params.pictureDetails} />
         </div>
