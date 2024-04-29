@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function StartPage() {
   return (
-    <div className="flex h-screen w-full snap-start flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch">
+    <div className="flex h-svh w-full snap-start flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch">
       <div className="flex w-full flex-initial basis-1/4 flex-col items-center justify-end md:flex-auto md:justify-center">
         <div className="hidden flex-1 md:flex" />
         <h1 className="mb-4 mt-24 flex w-full items-center justify-center text-center align-bottom text-2xl text-main-text md:m-0 md:flex-1 md:text-3xl">
