@@ -18,11 +18,10 @@ export default function PhotoPage({
       <div className="mx-2 mt-24 flex-initial md:hidden">
         <BandMainDetails pictureDetails={params.pictureDetails} />
       </div>
-      <div className="w-full flex-1 object-cover md:basis-3/4">
-        {/* <div className="relative m-2 w-full flex-1 object-cover"> */}
+      <div className="m-2 w-full flex-1 object-cover md:basis-3/4">
         <BandPhoto pictureDetails={params.pictureDetails} />
       </div>
-      <div className="mx-2 flex flex-1 flex-col justify-center md:h-full md:basis-1/4">
+      <div className="mr-8 flex flex-1 flex-col justify-center md:h-full md:basis-1/4">
         <div className="hidden md:flex ">
           <BandMainDetails pictureDetails={params.pictureDetails} />
         </div>
