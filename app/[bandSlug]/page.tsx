@@ -15,13 +15,13 @@ export default function PhotoPage({
 }) {
   return (
     <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
-      <div className="mx-2 mt-24 flex-initial md:hidden">
+      <div className="m-1 flex-initial pt-24 md:hidden">
         <BandMainDetails pictureDetails={params.pictureDetails} />
       </div>
-      <div className="m-2 w-full flex-1 object-cover md:basis-3/4">
+      <div className="w-full flex-1 object-cover p-1 md:basis-3/4">
         <BandPhoto pictureDetails={params.pictureDetails} />
       </div>
-      <div className="mr-8 flex flex-1 flex-col justify-center md:h-full md:basis-1/4">
+      <div className="m-1 flex flex-1 flex-col justify-center md:h-full md:basis-1/4 md:pr-8">
         <div className="hidden md:flex ">
           <BandMainDetails pictureDetails={params.pictureDetails} />
         </div>

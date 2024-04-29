@@ -23,7 +23,7 @@ const BandMainDetails = ({
           <p className="pb-2 text-base text-bonus-text md:pb-0">
             {pictureDetails.band.genre || 'Genre not specified'}
           </p>
-          <div className="flex w-full justify-between md:flex-col md:text-center">
+          <div className="flex w-full justify-between px-4 md:flex-col md:text-center">
             {pictureDetails.venue && (
               <p className="text-sm text-sub-text">
                 {pictureDetails.venue.name}
