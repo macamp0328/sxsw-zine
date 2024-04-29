@@ -3,28 +3,23 @@ import React from 'react';
 import BandBonusDetails from '@/app/components/band-bonus-details';
 import BandMainDetails from '@/app/components/band-main-details';
 import BandPhoto from '@/app/components/band-photo';
-
-import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 import ScrollURLUpdater from '@/app/components/scroll-url-updater';
-
+import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
 export default function PhotoPage({
   params,
 }: {
   params: {
-    bandSlug: string;
     pictureDetails: PictureWithRelationsAndUrl;
   };
 }) {
   return (
-
     <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
-            <div>
-        <ScrollURLUpdater urlSegment={params.bandSlug} />
+      <div>
+        <ScrollURLUpdater urlSegment={params.pictureDetails.band?.slug} />
       </div>
       <div className="m-1 flex-initial pt-24 md:hidden">
         <BandMainDetails pictureDetails={params.pictureDetails} />
-
       </div>
       <div className="w-full flex-1 object-cover p-1 md:basis-3/4">
         <BandPhoto pictureDetails={params.pictureDetails} />

@@ -9,10 +9,9 @@ export default async function PhotoGallery() {
   return (
     <>
       {zinePhotos.map((photo) => (
-        <div key={photo.id}>
+        <div key={photo.id} id={photo.band?.slug}>
           <PhotoPage
             params={{
-              bandSlug: photo.band ? photo.band.slug : '',
               pictureDetails: photo,
             }}
           />

@@ -17,7 +17,7 @@ const BandMainDetails = ({
     <div className="size-full">
       {pictureDetails.band ? (
         <div className="flex size-full flex-col items-center justify-end">
-          <h1 className="py-2 text-end text-3xl font-bold text-main-text">
+          <h1 className="py-2 text-center text-3xl font-bold text-main-text">
             {pictureDetails.band.name}
           </h1>
           <p className="pb-2 text-base text-bonus-text md:pb-0">
