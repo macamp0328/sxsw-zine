@@ -2,7 +2,7 @@ import React from 'react';
 
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
 
-const BandDetails = ({
+const BandBonusDetails = ({
   pictureDetails,
 }: {
   pictureDetails: PictureWithRelationsAndUrl;
@@ -14,25 +14,13 @@ const BandDetails = ({
   }
 
   return (
-    <div className="m-4 rounded-lg bg-white p-4 text-center shadow-lg">
+    <div className="w-full">
       {pictureDetails.band ? (
         <div>
-          <h1 className="text-2xl font-bold">{pictureDetails.band.name}</h1>
-          <p className="text-sm text-gray-600">
-            {pictureDetails.band.genre || 'Genre not specified'}
-          </p>
-          <p className="text-sm text-gray-600">
+          <p className="w-full overflow-y-auto rounded-md bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5">
             {pictureDetails.band.bio || 'No bio available'}
           </p>
-          <p className="mt-2 text-sm text-gray-500">
-            {pictureDetails.takenAt.toDateString()}
-          </p>
-          {pictureDetails.venue && (
-            <p className="text-sm text-gray-500">
-              At {pictureDetails.venue.name}, {pictureDetails.venue.city}
-            </p>
-          )}
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 text-center">
             {pictureDetails.band.links?.map((link) => (
               <a
                 key={link.id}
@@ -53,4 +41,4 @@ const BandDetails = ({
   );
 };
 
-export default BandDetails;
+export default BandBonusDetails;

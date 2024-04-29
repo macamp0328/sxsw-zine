@@ -10,15 +10,14 @@ export default async function BandPhoto(params: {
   }
 
   return (
-    <div className="absolute size-full">
+    <div className="relative size-full">
       {params.pictureDetails.url ? (
         <Image
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
-          fill
-          sizes="100vw"
-          style={{ objectFit: 'contain' }}
           loading="lazy"
+          fill
+          style={{ objectFit: 'contain' }}
         />
       ) : (
         <p>Ooops. No photo available.</p>

@@ -22,11 +22,9 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={cutiveMono.className}>
         <Providers>
-          <header
-            className={`${cutiveMono.className} fixed left-0 top-0 z-50 w-full bg-transparent p-5 text-xl font-bold text-black`}
-          >
-            <h2>Miles&apos;s</h2>
-            <h2>SXSW</h2>
+          <header className="fixed left-0 top-0 z-50 w-full bg-transparent p-6 text-2xl font-semibold text-main-text">
+            <p>Miles&apos;s</p>
+            <p>SXSW</p>
           </header>
 
           {children}
