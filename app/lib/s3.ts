@@ -1,10 +1,20 @@
 // s3Utils.ts
-import AWS from 'aws-sdk';
+
+import {
+  GetObjectCommand,
+  ListObjectsV2Command,
+  S3Client,
+} from '@aws-sdk/client-s3';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 // Configure AWS S3 using environment variables
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+  },
+
   region: process.env.AWS_REGION,
 });
 
@@ -27,7 +37,7 @@ export const getPresignedUrl = async (fileName: string): Promise<string> => {
   };
 
   try {
-    const url = await s3.getSignedUrlPromise('getObject', params);
+    const url = await getSignedUrl(s3, new GetObjectCommand(params), {});
     return url;
   } catch (error) {
     console.error(`Failed to generate presigned URL for ${fileName}:`, error);
@@ -41,9 +51,9 @@ export const getPresignedUrl = async (fileName: string): Promise<string> => {
  */
 export const listFiles = async (): Promise<S3File[]> => {
   try {
-    const { Contents } = await s3
-      .listObjectsV2({ Bucket: bucketName })
-      .promise();
+    const command = new ListObjectsV2Command({ Bucket: bucketName });
+    const { Contents } = await s3.send(command);
+    // const { Contents } = await s3.listObjectsV2({ Bucket: bucketName });
     if (!Contents) {
       console.log('No files found in the bucket.');
       return [];
