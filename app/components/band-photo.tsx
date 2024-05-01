@@ -15,7 +15,6 @@ export default async function BandPhoto(params: {
         <Image
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
-          loading="lazy"
           fill
           style={{ objectFit: 'contain' }}
         />

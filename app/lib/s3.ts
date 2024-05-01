@@ -33,7 +33,7 @@ export const getPresignedUrl = async (fileName: string): Promise<string> => {
   const params = {
     Bucket: bucketName,
     Key: fileName,
-    Expires: 3 * 24 * 60 * 60, // Expires in three days (in seconds)
+    Expires: 10 * 24 * 60 * 60, // Expires in ten days (in seconds)
   };
 
   try {
