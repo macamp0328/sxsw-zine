@@ -1,5 +1,7 @@
 # sxsw-zine
 
+currently deploayed at: https://sxsw-zine.vercel.app/
+
 ## Project Goals
 - explore using next.js and Vercel tooling
 - explore AI tooling, like copilot and Vercel's v0
