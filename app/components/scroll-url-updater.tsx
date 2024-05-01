@@ -16,7 +16,7 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          router.push(`#${urlSegment}`, {
+          router.replace(`#${urlSegment}`, {
             scroll: false,
           });
         }
@@ -24,7 +24,7 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
       {
         root: null, // Using the viewport as the root
         rootMargin: '0px',
-        threshold: 1.0, // Trigger when 100% of the component is visible
+        threshold: 0.5, // Trigger when 50% of the component is visible
       },
     );
 

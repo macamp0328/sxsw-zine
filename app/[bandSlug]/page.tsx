@@ -15,9 +15,8 @@ export default function PhotoPage({
 }) {
   return (
     <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
-      <div>
-        <ScrollURLUpdater urlSegment={params.pictureDetails.band?.slug} />
-      </div>
+      <ScrollURLUpdater urlSegment={params.pictureDetails.band?.slug} />
+
       <div className="m-1 flex-initial pt-24 md:hidden">
         <BandMainDetails pictureDetails={params.pictureDetails} />
       </div>
