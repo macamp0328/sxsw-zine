@@ -18,7 +18,7 @@ export default async function PhotoGallery() {
             <div className="m-1 flex-initial pt-24 md:hidden">
               <BandMainDetails pictureDetails={photo} />
             </div>
-            <div className="w-full flex-1 object-cover p-1 md:basis-3/4">
+            <div className="w-full flex-1 object-cover p-1 md:basis-3/4 md:pb-2">
               <BandPhoto pictureDetails={photo} />
             </div>
             <div className="m-1 flex flex-1 flex-col justify-center md:h-full md:basis-1/4 md:pr-8">

@@ -39,7 +39,7 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
     };
   }, [router, urlSegment]);
 
-  return <div ref={ref} />;
+  return <span ref={ref} />;
 };
 
 export default RefreshOnVisible;

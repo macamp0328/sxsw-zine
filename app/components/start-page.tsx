@@ -19,7 +19,7 @@ export default function StartPage() {
         </div>
       </div>
 
-      <div className="w-full flex-auto">
+      <div className="w-full flex-auto p-2">
         <div className="relative size-full">
           <Image
             src="/photos/header-miles.jpg"
