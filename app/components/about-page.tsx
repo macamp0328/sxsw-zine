@@ -7,8 +7,9 @@ export default function AboutPage() {
   return (
     <div
       id="about"
-      className={`flex w-full snap-start scroll-m-14 flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
+      className={`flex w-full snap-start flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
+      {/* scroll-m-14 */}
       <div className="flex size-full p-4 md:hidden">
         <div className="relative size-full min-h-[300px]">
           <Image
@@ -28,7 +29,7 @@ export default function AboutPage() {
           to catch 50 live sets. This isn&apos;t your typical, polished ad
           filled corporate fluff; it&apos;s a DIY tribute to live music,
           captured with a small camera (Ricoh GR II) during my perfectly paced
-          party. My collection is&apos;nt about pixel-perfect shots; it&apos;s a
+          party. My collection isn&apos;t about pixel-perfect shots; it&apos;s a
           gritty memory of every set I danced to. Dive into these visuals,
           listen to the sounds of the artists, support their socials, and let
           their art resonate with you. Every <b>dollar</b>, listen, and follow
