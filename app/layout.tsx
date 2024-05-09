@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
+import HeaderLogo from './components/header-logo';
 import { cutiveMono } from './other/fonts';
 import { Providers } from './providers';
 
@@ -22,13 +23,7 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={cutiveMono.className}>
         <Providers>
-          <header className="fixed left-0 top-0 z-50 flex w-fit flex-col bg-transparent p-6 text-center text-2xl font-semibold text-main-text">
-            <p>
-              Miles&apos;s
-              <br />
-              SXSW
-            </p>
-          </header>
+          <HeaderLogo />
 
           {children}
           <Analytics />
