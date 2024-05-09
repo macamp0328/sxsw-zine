@@ -47,3 +47,20 @@ body {
   --sub-text: rgba(158, 156, 156, 1);
 }
 
+.image-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-border::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 10px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  z-index: 0;
+  pointer-events: none;
+}

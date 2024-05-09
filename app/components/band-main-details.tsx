@@ -20,7 +20,7 @@ const BandMainDetails = ({
           <h1 className="py-2 text-center text-3xl font-bold text-main-text">
             {pictureDetails.band.name}
           </h1>
-          <p className="pb-2 text-base text-bonus-text md:pb-0">
+          <p className="pb-2 text-center text-base text-bonus-text md:pb-0">
             {pictureDetails.band.genre || 'Genre not specified'}
           </p>
           <div className="flex w-full justify-between px-4 md:flex-col md:text-center">
