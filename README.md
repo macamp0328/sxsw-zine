@@ -30,6 +30,11 @@ currently deploayed at: https://sxsw-zine.vercel.app/
      - page.tsx
   - public/photos
 
+## CLI commands so I don't forget
+database migrations: `npx prisma migrate dev --name init`
+database refresh/seed (warning, clears it all out): `npx prisma db seed`
+
+
 
 ## Schema
 (off the top of my head notes)

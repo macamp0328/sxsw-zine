@@ -68,6 +68,7 @@ enum Platform {
   Facebook
   Twitter
   Internet
+  Soundcloud
 
   @@schema("public")
 }
@@ -79,6 +80,9 @@ enum LinkType {
   Album
   Tour
   Other
+  Socials
+  Streaming
+  Internet
 
   @@schema("public")
 }

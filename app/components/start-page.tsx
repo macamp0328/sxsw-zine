@@ -28,7 +28,7 @@ export default function StartPage() {
             alt="picture of Miles Camp, the maker of this page"
             fill
             style={{
-              objectFit: "contain",
+              objectFit: 'contain',
             }}
             priority
           />
