@@ -19,6 +19,7 @@ const s3 = new S3Client({
 });
 
 const bucketName = 'sxsw-zine-bucket';
+const cloudfrontDistributionUrl = 'https://d2qb1jexhp0efc.cloudfront.net';
 
 type S3File = {
   name: string;
@@ -29,21 +30,21 @@ type S3File = {
  * Generate a presigned URL for a file in the S3 bucket.
  * @param fileName The name of the file for which to generate a presigned URL.
  */
-export const getPresignedUrl = async (fileName: string): Promise<string> => {
-  const params = {
-    Bucket: bucketName,
-    Key: fileName,
-    Expires: 10 * 24 * 60 * 60, // Expires in ten days (in seconds)
-  };
+// export const getPresignedUrl = async (fileName: string): Promise<string> => {
+//   const params = {
+//     Bucket: bucketName,
+//     Key: fileName,
+//     Expires: 10 * 24 * 60 * 60, // Expires in ten days (in seconds)
+//   };
 
-  try {
-    const url = await getSignedUrl(s3, new GetObjectCommand(params), {});
-    return url;
-  } catch (error) {
-    console.error(`Failed to generate presigned URL for ${fileName}:`, error);
-    throw new Error('Could not generate presigned URL');
-  }
-};
+//   try {
+//     const url = await getSignedUrl(s3, new GetObjectCommand(params), {});
+//     return url;
+//   } catch (error) {
+//     console.error(`Failed to generate presigned URL for ${fileName}:`, error);
+//     throw new Error('Could not generate presigned URL');
+//   }
+// };
 
 /**
  * List all files in the S3 bucket.
@@ -64,7 +65,7 @@ export const listFiles = async (): Promise<S3File[]> => {
         if (!file.Key) {
           return null; // Skip files without a key
         }
-        const url = await getPresignedUrl(file.Key);
+        const url = `${cloudfrontDistributionUrl}/${file.Key}`;
         return { name: file.Key, url };
       }),
     );

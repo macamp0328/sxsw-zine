@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    // unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -18,6 +18,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'sxsw-zine-bucket.s3.us-east-1.amazonaws.com',
+        port: '',
+        // pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'd2qb1jexhp0efc.cloudfront.net',
         port: '',
         // pathname: '**',
       },
