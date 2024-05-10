@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { robotoCondensed } from '../other/fonts';
 
@@ -99,14 +98,14 @@ export default function AboutPage() {
           with new webdev frameworks and tooling—a casual project to remember
           the times before social media. Stay tuned for blog posts where
           I&apos;ll nerd out about the technical details. In the meantime,{' '}
-          <Link
+          <a
             href="https://github.com/macamp0328/sxsw-zine"
             target="_blank"
             rel="noopener noreferrer"
             className="text-center text-sub-text underline"
           >
             check out the repo!
-          </Link>
+          </a>
         </p>
       </div>
       <div className="hidden size-full flex-col items-center justify-start p-6 md:col-span-2 md:flex">
@@ -120,14 +119,14 @@ export default function AboutPage() {
           with new webdev frameworks and tooling—a casual project to remember
           the times before social media. Stay tuned for blog posts where
           I&apos;ll nerd out about the technical details. In the meantime,{' '}
-          <Link
+          <a
             href="https://github.com/macamp0328/sxsw-zine"
             target="_blank"
             rel="noopener noreferrer"
             className="text-center text-sub-text underline"
           >
             check out the repo!
-          </Link>
+          </a>
         </p>
       </div>
     </div>

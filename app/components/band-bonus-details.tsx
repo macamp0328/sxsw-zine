@@ -1,7 +1,9 @@
+import { LinkType } from '@prisma/client';
 import React from 'react';
 
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
 import { robotoCondensed } from '../other/fonts';
+import LinksContextMenuButton from '../ui/linksContextMenuButton';
 
 const BandBonusDetails = ({
   pictureDetails,
@@ -19,20 +21,34 @@ const BandBonusDetails = ({
       {pictureDetails.band ? (
         <div>
           <p
-            className={`w-full overflow-y-auto bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:rounded-md md:p-5 ${robotoCondensed.className}`}
+            className={`w-full overflow-y-auto bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
           >
             {pictureDetails.band.bio || 'No bio available'}
           </p>
-          <div className="mt-2 text-center">
-            {pictureDetails.band.links?.map((link) => (
-              <a
-                key={link.id}
-                href={link.url}
-                className="text-blue-500 hover:underline"
-              >
-                {link.platform}
-              </a>
-            ))}
+          <div className="mt-2 flex justify-around text-center md:justify-between">
+            {pictureDetails.band &&
+              pictureDetails.band.links.some(
+                (link) => link.linkType === LinkType.Socials,
+              ) && (
+                <LinksContextMenuButton
+                  title="Socials"
+                  links={pictureDetails.band.links.filter(
+                    (link) => link.linkType === LinkType.Socials,
+                  )}
+                />
+              )}
+
+            {pictureDetails.band &&
+              pictureDetails.band.links.some(
+                (link) => link.linkType === LinkType.Streaming,
+              ) && (
+                <LinksContextMenuButton
+                  title="Streaming"
+                  links={pictureDetails.band.links.filter(
+                    (link) => link.linkType === LinkType.Streaming,
+                  )}
+                />
+              )}
           </div>
         </div>
       ) : (
