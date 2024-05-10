@@ -42,9 +42,9 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 transition-colors hover:bg-gray-700"
+            className="px-4 py-2 text-small transition-colors hover:bg-gray-700"
           >
-            {link.platform}
+            {link.platform.replace(/_/g, ' ')}
           </a>
         ))}
       </div>

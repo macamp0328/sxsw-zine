@@ -69,6 +69,8 @@ enum Platform {
   Twitter
   Internet
   Soundcloud
+  Apple_Music
+  YouTube_Music
 
   @@schema("public")
 }

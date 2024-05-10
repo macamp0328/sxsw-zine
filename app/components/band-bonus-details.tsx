@@ -49,6 +49,18 @@ const BandBonusDetails = ({
                   )}
                 />
               )}
+
+            {pictureDetails.band &&
+              pictureDetails.band.links.some(
+                (link) => link.linkType === LinkType.Internet,
+              ) && (
+                <LinksContextMenuButton
+                  title="Internet"
+                  links={pictureDetails.band.links.filter(
+                    (link) => link.linkType === LinkType.Internet,
+                  )}
+                />
+              )}
           </div>
         </div>
       ) : (
