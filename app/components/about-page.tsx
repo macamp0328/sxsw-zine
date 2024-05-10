@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { robotoCondensed } from '../other/fonts';
 
 export default function AboutPage() {
+  const drummingImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg `;
+  const nickelImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg `;
+
   return (
     <div
       id="about"
@@ -13,7 +16,7 @@ export default function AboutPage() {
       <div className="flex size-full p-4 md:hidden">
         <div className="relative size-full min-h-[300px]">
           <Image
-            src="/photos/drumming.jpg"
+            src={drummingImageUrl}
             alt="a random drummer in an empty lot"
             fill
             style={{
@@ -39,7 +42,7 @@ export default function AboutPage() {
       <div className="hidden size-full p-6 md:flex">
         <div className="relative size-full min-h-[200px]">
           <Image
-            src="/photos/drumming.jpg"
+            src={drummingImageUrl}
             alt="a random drummer in an empty lot"
             fill
             style={{
@@ -52,7 +55,7 @@ export default function AboutPage() {
       <div className="hidden size-full p-6 md:flex">
         <div className="relative size-full min-h-[200px]">
           <Image
-            src="/photos/nickel.jpg"
+            src={nickelImageUrl}
             alt="a boiler maker at Nickel City"
             fill
             style={{
@@ -76,7 +79,7 @@ export default function AboutPage() {
         <div className="flex size-full p-4 md:hidden">
           <div className="relative size-full min-h-[300px]">
             <Image
-              src="/photos/nickel.jpg"
+              src={nickelImageUrl}
               alt="a boiler maker at Nickel City"
               fill
               style={{

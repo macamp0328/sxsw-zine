@@ -1,5 +1,4 @@
 import { ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
-// eslint-disable-next-line import/no-extraneous-dependencies
 
 // Configure AWS S3 using environment variables
 const s3 = new S3Client({
@@ -11,8 +10,8 @@ const s3 = new S3Client({
   region: process.env.AWS_REGION,
 });
 
-const bucketName = 'sxsw-zine-bucket';
-const cloudfrontDistributionUrl = 'https://d2qb1jexhp0efc.cloudfront.net';
+const bucketName = process.env.S3_BUCKET_NAME || '';
+const cloudfrontDistributionUrl = process.env.AWS_CLOUDFRONT_DOMAIN || '';
 
 type S3File = {
   name: string;

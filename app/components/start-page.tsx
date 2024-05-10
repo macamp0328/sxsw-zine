@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
 export default function StartPage() {
+  const heroImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/header-miles.jpg `;
+
   return (
     <div
       id="landing"
@@ -22,11 +24,11 @@ export default function StartPage() {
       <div className="w-full flex-auto p-2">
         <div className="relative size-full">
           <Image
-            src="/photos/header-miles.jpg"
+            src={heroImageUrl}
             alt="picture of Miles Camp, the maker of this page"
             fill
             style={{
-              objectFit: 'contain',
+              objectFit: "contain",
             }}
             priority
           />
