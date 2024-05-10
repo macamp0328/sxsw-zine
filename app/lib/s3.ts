@@ -1,12 +1,5 @@
-// s3Utils.ts
-
-import {
-  GetObjectCommand,
-  ListObjectsV2Command,
-  S3Client,
-} from '@aws-sdk/client-s3';
+import { ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 // Configure AWS S3 using environment variables
 const s3 = new S3Client({
@@ -25,26 +18,6 @@ type S3File = {
   name: string;
   url: string;
 };
-
-/**
- * Generate a presigned URL for a file in the S3 bucket.
- * @param fileName The name of the file for which to generate a presigned URL.
- */
-// export const getPresignedUrl = async (fileName: string): Promise<string> => {
-//   const params = {
-//     Bucket: bucketName,
-//     Key: fileName,
-//     Expires: 10 * 24 * 60 * 60, // Expires in ten days (in seconds)
-//   };
-
-//   try {
-//     const url = await getSignedUrl(s3, new GetObjectCommand(params), {});
-//     return url;
-//   } catch (error) {
-//     console.error(`Failed to generate presigned URL for ${fileName}:`, error);
-//     throw new Error('Could not generate presigned URL');
-//   }
-// };
 
 /**
  * List all files in the S3 bucket.
