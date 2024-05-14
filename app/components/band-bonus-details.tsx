@@ -16,6 +16,22 @@ const BandBonusDetails = ({
     );
   }
 
+  // If only band.bio OR band.bio2 are populated, display that value.
+  // If both band.bio and band.bio2 are populated, then display one at random.
+  let bioText = 'No bio available, yet.';
+  if (pictureDetails.band) {
+    if (pictureDetails.band.bio && pictureDetails.band.bio2) {
+      bioText =
+        Math.random() > 0.5
+          ? pictureDetails.band.bio
+          : pictureDetails.band.bio2;
+    } else if (pictureDetails.band.bio) {
+      bioText = pictureDetails.band.bio;
+    } else if (pictureDetails.band.bio2) {
+      bioText = pictureDetails.band.bio2;
+    }
+  }
+
   return (
     <div className="w-full">
       {pictureDetails.band ? (
@@ -23,17 +39,21 @@ const BandBonusDetails = ({
           <p
             className={`w-full overflow-y-auto bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
           >
-            {pictureDetails.band.bio || 'No bio available'}
+            {bioText}
           </p>
           <div className="mt-2 flex justify-around text-center md:justify-between">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
-                (link) => link.linkType === LinkType.Socials,
+                (link) =>
+                  link.linkType === LinkType.Socials ||
+                  link.linkType === LinkType.Profile,
               ) && (
                 <LinksContextMenuButton
                   title="Socials"
                   links={pictureDetails.band.links.filter(
-                    (link) => link.linkType === LinkType.Socials,
+                    (link) =>
+                      link.linkType === LinkType.Socials ||
+                      link.linkType === LinkType.Profile,
                   )}
                 />
               )}

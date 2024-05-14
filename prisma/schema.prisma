@@ -19,7 +19,7 @@ model Band {
   slug            String   @unique
   origin          String?
   bio             String?  @db.Text
-  milesThoughts   String?  @db.Text
+  bio2            String?  @db.Text
   genre           String?
   instagramHandle String?
 
