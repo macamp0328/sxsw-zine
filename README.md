@@ -35,42 +35,6 @@ database migrations: `npx prisma migrate dev --name init`
 database refresh/seed (warning, clears it all out): `npx prisma db seed`
 
 
-
-## Schema
-(off the top of my head notes)
-### Bands:
- - id (uuid)
- - name (string)
- - origin (string) ?
- - bio (longer string) ?
- - miless_thoughts (longer string) ?
- - instagram_handle (string) ?
- - bandcamp_handle (string | url) ?
- - general_link (url) ?
- - youtube_link (url) ?
- - genre (string) ?
-
-### Venues:
- - id (uuid)
- - name (string)
- - address 
- - city
- - state
- - zip
- - general_link (url) ?
- - instagram_handle (string) ?
-
-### Pictures:
- - id (uuid)
- - filename (string)
- - height (num)
- - width (num)
-   filepath (path) ?
- - Bands_id (id) ?
- - Venue_id (id) ?
- - taken_at (timestamp) ?
- - isIndoor (boolean) ?
-
 ## Maybe features
 - jukebox mode where music starts to play and transitions as the user scrolls through page
 - pop up box to share other pictures of same band, and a download all button

@@ -18,6 +18,9 @@ const csvWriter = createObjectCsvWriter({
     { id: 'width', title: 'WIDTH' },
     { id: 'takenAt', title: 'TAKENAT' },
     { id: 'isZine', title: 'ISZINE' },
+    { id: 'fStop', title: 'FSTOP' },
+    { id: 'exposureTime', title: 'EXPOSURETIME' },
+    { id: 'ISO', title: 'ISO' },
     { id: 'bandId', title: 'BANDID' }, // Assuming these will be populated later
     { id: 'venueId', title: 'VENUEID' }, // Assuming these will be populated later
   ],
@@ -41,18 +44,22 @@ async function processImages() {
       const metadata = await sharp(imagePath).metadata();
       const { width, height, exif } = metadata;
 
-      // Initialize 'takenAt' variable
+      // Initialize 'takenAt' variable and additional EXIF fields
       let takenAt = '';
+      let fStop = '';
+      let exposureTime = '';
+      let ISO = '';
 
       // Check if EXIF data exists and process it
       if (exif) {
         try {
           const exifData = exifReader(exif);
-          // Correct path to the 'DateTimeOriginal' within the 'Photo' object
-          takenAt =
-            exifData.Photo && exifData.Photo.DateTimeOriginal
-              ? exifData.Photo.DateTimeOriginal
-              : '';
+          console.log('EXIF Data:', exifData); // Debug: log entire EXIF data
+          takenAt = exifData?.Photo?.DateTimeOriginal || '';
+          fStop = exifData?.Photo?.FNumber || '';
+          exposureTime = exifData?.Photo?.ExposureTime || '';
+          ISO = exifData?.Photo?.ISOSpeedRatings || '';
+          console.log(`ISO Speed Ratings for ${file}:`, ISO);
         } catch (exifError) {
           console.error(`Error reading EXIF for ${file}:`, exifError);
         }
@@ -66,6 +73,9 @@ async function processImages() {
         width,
         takenAt,
         isZine: true,
+        fStop,
+        exposureTime,
+        ISO,
         bandId: '', // Left blank, assuming to be populated later
         venueId: '', // Left blank, assuming to be populated later
       });

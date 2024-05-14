@@ -44,18 +44,21 @@ model Venue {
 }
 
 model Picture {
-  id        String   @id @default(uuid())
-  filename  String
-  height    Int?      @default(0) // Assuming height is an integer number of pixels
-  width     Int?      @default(0) // Assuming width is an integer number of pixels
-  takenAt   DateTime // Using DateTime for the timestamp
-  isZine    Boolean? @default(false)  // Picture is featured on homepage
+  id           String   @id @default(uuid())
+  filename     String
+  height       Int?      @default(0) // Assuming height is an integer number of pixels
+  width        Int?      @default(0) // Assuming width is an integer number of pixels
+  takenAt      DateTime // Using DateTime for the timestamp
+  isZine       Boolean? @default(false)  // Picture is featured on homepage
+  fStop        String?
+  exposureTime String?
+  ISO          String?
 
-  bandId    String?  
-  venueId   String?  
+  bandId       String?  
+  venueId      String?  
 
-  band      Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull)
-  venue     Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
+  band         Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull)
+  venue        Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
 
   @@schema("public")
 }
@@ -71,6 +74,7 @@ enum Platform {
   Soundcloud
   Apple_Music
   YouTube_Music
+  SXSW
 
   @@schema("public")
 }
