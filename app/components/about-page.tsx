@@ -1,10 +1,9 @@
-import Image from 'next/image';
-
 import { robotoCondensed } from '../other/fonts';
+import ImageOverlay from '../ui/image-overlay';
 
 export default function AboutPage() {
-  const drummingImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg `;
-  const nickelImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg `;
+  const drummingImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg`;
+  const nickelImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg`;
 
   return (
     <div
@@ -14,7 +13,7 @@ export default function AboutPage() {
       {/* scroll-m-14 */}
       <div className="flex size-full p-4 md:hidden">
         <div className="relative size-full min-h-[300px]">
-          <Image
+          <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
             fill
@@ -40,7 +39,7 @@ export default function AboutPage() {
       </div>
       <div className="hidden size-full p-6 md:flex">
         <div className="relative size-full min-h-[200px]">
-          <Image
+          <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
             fill
@@ -53,7 +52,7 @@ export default function AboutPage() {
       </div>
       <div className="hidden size-full p-6 md:flex">
         <div className="relative size-full min-h-[200px]">
-          <Image
+          <ImageOverlay
             src={nickelImageUrl}
             alt="a boiler maker at Nickel City"
             fill
@@ -77,7 +76,7 @@ export default function AboutPage() {
         </p>
         <div className="flex size-full p-4 md:hidden">
           <div className="relative size-full min-h-[300px]">
-            <Image
+            <ImageOverlay
               src={nickelImageUrl}
               alt="a boiler maker at Nickel City"
               fill

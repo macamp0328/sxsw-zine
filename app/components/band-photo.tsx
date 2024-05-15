@@ -1,6 +1,5 @@
-import Image from 'next/image';
-
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
+import ImageOverlay from '../ui/image-overlay';
 
 export default async function BandPhoto(params: {
   pictureDetails: PictureWithRelationsAndUrl;
@@ -12,7 +11,7 @@ export default async function BandPhoto(params: {
   return (
     <div className="relative size-full">
       {params.pictureDetails.url ? (
-        <Image
+        <ImageOverlay
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
           fill

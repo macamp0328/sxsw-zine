@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import ImageOverlay from '../ui/image-overlay';
 
 export default function StartPage() {
   const heroImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/header-miles.jpg `;
@@ -25,7 +25,7 @@ export default function StartPage() {
 
       <div className="w-full flex-auto p-2">
         <div className="relative size-full">
-          <Image
+          <ImageOverlay
             src={heroImageUrl}
             alt="picture of Miles Camp, the maker of this page"
             fill
