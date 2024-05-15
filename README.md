@@ -1,6 +1,6 @@
 # sxsw-zine
 
-currently deploayed at: https://sxsw-zine.vercel.app/
+currently deploayed at: https://miless-sxsw.vercel.app/
 
 ## Project Goals
 - explore using next.js and Vercel tooling
@@ -14,21 +14,6 @@ currently deploayed at: https://sxsw-zine.vercel.app/
 - Make it clear they just need to scroll down
 - Some type of creative animation/transition based on scrolling
 - URL updates for each band's picture as the user scrolls
-
-## File Structure and Layouts
-
-`./sxsw-zine/`
-   - app/
-     - [band]/
-       - page.tsx
-       - layout.tsx (zine-page)
-     - components/
-       - zine-page.tsx
-       - picture-details.tsx
-       - band-links.tsx
-     - layout.tsx
-     - page.tsx
-  - public/photos
 
 ## CLI commands so I don't forget
 database migrations: `npx prisma migrate dev --name init`
