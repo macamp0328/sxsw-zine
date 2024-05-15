@@ -23,14 +23,26 @@ const BandMainDetails = ({
           <p className="pb-2 text-center text-base text-bonus-text md:pb-0">
             {pictureDetails.band.genre || 'Genre not specified'}
           </p>
-          <div className="flex w-full justify-between px-4 md:flex-col md:text-center">
+          <div className="flex w-full flex-wrap justify-between px-4 md:flex-col md:text-center">
             {pictureDetails.venue && (
               <p className="text-sm text-sub-text">
                 {pictureDetails.venue.name}
               </p>
             )}
             <p className="text-sm text-sub-text">
-              {pictureDetails.takenAt.toDateString()}
+              {/* 4:20pm on March 11 */}
+              {new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+              })
+                .format(pictureDetails.takenAt)
+                .toLowerCase()}{' '}
+              on{' '}
+              {new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                day: 'numeric',
+              }).format(pictureDetails.takenAt)}
             </p>
           </div>
         </div>

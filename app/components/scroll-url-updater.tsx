@@ -16,7 +16,7 @@ const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          router.replace(`#${urlSegment}`, {
+          router.push(`#${urlSegment}`, {
             scroll: false,
           });
         }

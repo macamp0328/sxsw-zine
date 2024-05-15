@@ -17,7 +17,9 @@ export default function StartPage() {
           through my lens.
         </h1>
         <div className="mb-12 hidden w-full flex-initial items-end justify-center md:flex md:flex-1">
-          <p className="text-medium text-sub-text ">Go ahead, take a scroll.</p>
+          <p className="animate-bounce text-medium text-sub-text">
+            Go ahead, take a scroll.
+          </p>
         </div>
       </div>
 
@@ -35,7 +37,7 @@ export default function StartPage() {
         </div>
       </div>
       <div className="mb-12 flex w-full flex-initial basis-1/6 items-end justify-center md:hidden">
-        <p className="text-medium text-sub-text md:hidden">
+        <p className="animate-bounce text-medium text-sub-text md:hidden">
           Go ahead, take a scroll.
         </p>
       </div>
