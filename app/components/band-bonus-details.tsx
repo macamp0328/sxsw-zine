@@ -32,6 +32,11 @@ const BandBonusDetails = ({
     }
   }
 
+  // Split the bio text into parts, using the band name as the separator
+  const bioParts = bioText.split(
+    new RegExp(`(${pictureDetails.band?.name})`, 'gi'),
+  );
+
   return (
     <div className="w-full">
       {pictureDetails.band ? (
@@ -39,7 +44,15 @@ const BandBonusDetails = ({
           <p
             className={`w-full overflow-y-auto bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
           >
-            {bioText}
+            {bioParts.map((part, index) =>
+              part.toLowerCase() === pictureDetails.band?.name.toLowerCase() ? (
+                // eslint-disable-next-line react/no-array-index-key
+                <strong key={part + index}>{part}</strong>
+              ) : (
+                // eslint-disable-next-line react/no-array-index-key
+                <span key={part + index}>{part}</span>
+              ),
+            )}
           </p>
           <div className="mt-8 flex justify-around gap-1 text-center md:justify-between">
             {pictureDetails.band &&
