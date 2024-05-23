@@ -1,7 +1,7 @@
 import ImageOverlay from '../ui/image-overlay';
 
 export default function StartPage() {
-  const heroImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/header-miles.jpg `;
+  const heroImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`;
 
   return (
     <div
