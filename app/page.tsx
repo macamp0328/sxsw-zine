@@ -8,11 +8,11 @@ import StartPage from './components/start-page';
 
 export default async function Home() {
   return (
-    <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll bg-background">
+    <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background">
       <StartPage />
 
       <div>
-        <ScrollURLUpdater urlSegment="about" />
+        {/* <ScrollURLUpdater urlSegment="about" /> */}
         <AboutPage />
       </div>
 

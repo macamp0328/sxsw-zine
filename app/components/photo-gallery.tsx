@@ -5,6 +5,16 @@ import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 
 import { getZinePictures } from '../lib/actions';
 
+// Slugify function
+const slugify = (text: string): string => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+};
+
 export default async function PhotoGallery() {
   const zinePhotos = await getZinePictures();
 
@@ -13,7 +23,9 @@ export default async function PhotoGallery() {
       {zinePhotos.map((photo) => (
         <div key={photo.id} id={photo.band?.slug}>
           <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
-            <ScrollURLUpdater urlSegment={photo.band?.slug} />
+            <ScrollURLUpdater
+              urlSegment={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
+            />
 
             <div className="m-1 flex-initial pt-24 md:hidden">
               <BandMainDetails pictureDetails={photo} />

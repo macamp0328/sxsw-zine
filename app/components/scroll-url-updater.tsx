@@ -3,43 +3,77 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
-interface RefreshOnVisibleProps {
+interface ScrollURLUpdaterProps {
   urlSegment?: string;
 }
 
-const RefreshOnVisible: React.FC<RefreshOnVisibleProps> = ({ urlSegment }) => {
+const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentRef = ref.current; // Capture current ref
-    const observer = new IntersectionObserver(
+    const currentRef = ref.current;
+    const intersectionObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          router.push(`#${urlSegment}`, {
+          console.log(`Intersecting: ${urlSegment}`);
+          router.replace(`#${urlSegment}`, {
             scroll: false,
           });
         }
       },
       {
-        root: null, // Using the viewport as the root
+        root: null,
         rootMargin: '0px',
-        threshold: 1.0, // Trigger when 100% of the component is visible
+        threshold: 0.5, // Trigger when 50% of the component is visible to handle scrolling up and down
       },
     );
 
     if (currentRef) {
-      observer.observe(currentRef);
+      intersectionObserver.observe(currentRef);
     }
 
     return () => {
       if (currentRef) {
-        observer.unobserve(currentRef);
+        intersectionObserver.unobserve(currentRef);
       }
     };
   }, [router, urlSegment]);
 
-  return <span ref={ref} />;
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1); // Remove the '#' from the hash
+      const element = document.getElementById(hash);
+      if (element) {
+        console.log(`Hash change detected for: ${hash}`);
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else if (!hash) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    // Only attach the event listener if there's a URL segment
+    if (urlSegment) {
+      window.addEventListener('hashchange', handleHashChange);
+    }
+
+    // Scroll to the element on component mount if there's a hash in the URL
+    const hash = window.location.hash.substring(1);
+    const element = document.getElementById(hash);
+    if (hash && element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else if (hash && !element) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    return () => {
+      if (urlSegment) {
+        window.removeEventListener('hashchange', handleHashChange);
+      }
+    };
+  }, [urlSegment]);
+
+  return <span id={urlSegment} ref={ref} />;
 };
 
-export default RefreshOnVisible;
+export default ScrollURLUpdater;
