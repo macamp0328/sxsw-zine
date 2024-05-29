@@ -16,7 +16,6 @@ const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log(`Intersecting: ${urlSegment}`);
           router.replace(`#${urlSegment}`, {
             scroll: false,
           });
@@ -45,7 +44,6 @@ const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
       const hash = window.location.hash.substring(1); // Remove the '#' from the hash
       const element = document.getElementById(hash);
       if (element) {
-        console.log(`Hash change detected for: ${hash}`);
         element.scrollIntoView({ behavior: 'smooth' });
       } else if (!hash) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
