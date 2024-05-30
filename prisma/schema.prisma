@@ -48,7 +48,7 @@ model Picture {
   filename     String
   height       Int?      @default(0) // Assuming height is an integer number of pixels
   width        Int?      @default(0) // Assuming width is an integer number of pixels
-  takenAt      DateTime // Using DateTime for the timestamp
+  takenAt      DateTime @db.Timestamptz(3) 
   isZine       Boolean? @default(false)  // Picture is featured on homepage
   fStop        String?
   exposureTime String?

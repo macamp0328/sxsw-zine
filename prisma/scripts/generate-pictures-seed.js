@@ -54,12 +54,25 @@ async function processImages() {
       if (exif) {
         try {
           const exifData = exifReader(exif);
-          console.log('EXIF Data:', exifData); // Debug: log entire EXIF data
-          takenAt = exifData?.Photo?.DateTimeOriginal || '';
+          // Extract and format 'takenAt' value
+          const dateTimeOriginal = exifData?.Photo?.DateTimeOriginal;
+          if (dateTimeOriginal) {
+            // Step 1: Parse the original date string
+            const originalDate = new Date(dateTimeOriginal);
+
+            // Step 2: Add one hour to the date
+            originalDate.setHours(originalDate.getHours() + 1);
+
+            // Step 3: Add 5 hours to convert from CDT to UTC
+            originalDate.setHours(originalDate.getHours() + 5);
+
+            // Step 4: Convert the CDT date to a UTC string
+            takenAt = originalDate.toISOString();
+          }
+
           fStop = exifData?.Photo?.FNumber || '';
           exposureTime = exifData?.Photo?.ExposureTime || '';
           ISO = exifData?.Photo?.ISOSpeedRatings || '';
-          console.log(`ISO Speed Ratings for ${file}:`, ISO);
         } catch (exifError) {
           console.error(`Error reading EXIF for ${file}:`, exifError);
         }
