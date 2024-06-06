@@ -37,7 +37,6 @@ const listFiles = async () => {
 
 // gets all zine pictures, which would be featured on main page
 export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
-  noStore();
   try {
     const pictures = await prisma.picture.findMany({
       where: { isZine: true },
@@ -45,8 +44,38 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
         band: { include: { links: true } },
         venue: { include: { links: true } },
       },
+      orderBy: { takenAt: 'asc' },
     });
 
+    const files = await listFiles();
+    const fileMap = new Map(files.map((file) => [file.name, file.url]));
+
+    const picturesWithUrls = pictures.map((picture) => ({
+      ...picture,
+      url: fileMap.get(picture.filename) || null,
+    }));
+
+    return picturesWithUrls;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+// gets all additional pictures for a band if any are available
+export async function getBandPictures(
+  bandId: string,
+  venueId: string,
+): Promise<PictureWithRelationsAndUrl[]> {
+  try {
+    const pictures = await prisma.picture.findMany({
+      where: { bandId, venueId, isZine: false },
+      include: {
+        band: { include: { links: true } },
+        venue: { include: { links: true } },
+      },
+      orderBy: { takenAt: 'asc' },
+    });
     const files = await listFiles();
     const fileMap = new Map(files.map((file) => [file.name, file.url]));
 

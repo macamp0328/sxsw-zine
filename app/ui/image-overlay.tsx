@@ -40,7 +40,6 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({ src, alt, ...props }) => {
               alt={`Zoomed in ${alt}`}
               layout="fill"
               objectFit="contain"
-              {...props}
             />
           </div>
         </div>
