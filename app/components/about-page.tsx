@@ -30,11 +30,10 @@ export default function AboutPage() {
           to catch 50 live sets. This isn&apos;t your typical, polished ad
           filled corporate fluff; it&apos;s a DIY tribute to live music,
           captured with a small camera (Ricoh GR II) during my perfectly paced
-          party. My collection isn&apos;t about pixel-perfect shots; it&apos;s a
-          gritty memory of every set I danced to. Dive into these visuals,
-          listen to the sounds of the artists, support their socials, and let
-          their art resonate with you. Every <b>dollar</b>, listen, and follow
-          counts.
+          party. My collection is a gritty memory of every set I danced to. Dive
+          into these visuals, listen to the sounds of the artists, support their
+          socials, and let their art resonate with you. Every <b>dollar</b>,
+          listen, and follow counts.
         </p>
       </div>
       <div className="hidden size-full p-6 md:flex">
@@ -106,6 +105,10 @@ export default function AboutPage() {
             check out the repo!
           </a>
         </p>
+        <p className="mt-6 w-full text-center text-base text-main-text md:hidden md:text-lg">
+          <b>Footnote 3:</b> I utilized AI to help write the descriptions about
+          the artists.
+        </p>
       </div>
       <div className="hidden size-full flex-col items-center justify-start p-6 md:col-span-2 md:flex">
         <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
@@ -126,6 +129,10 @@ export default function AboutPage() {
           >
             check out the repo!
           </a>
+        </p>
+        <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
+          <b>Footnote 3:</b> I utilized AI to help write the descriptions about
+          the artists.
         </p>
       </div>
     </div>

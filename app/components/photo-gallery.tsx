@@ -4,6 +4,7 @@ import BandPhoto from '@/app/components/band-photo';
 import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 
 import { getZinePictures } from '../lib/actions';
+import Thumbnails from './thumbnails';
 
 // Slugify function
 const slugify = (text: string): string => {
@@ -30,14 +31,21 @@ export default async function PhotoGallery() {
             <div className="m-1 flex-initial pt-24 md:hidden">
               <BandMainDetails pictureDetails={photo} />
             </div>
-            <div className="mt-4 w-full flex-1 object-cover md:basis-3/5 md:pb-8">
+            <div className="relative mt-4 flex w-full flex-1 object-cover md:basis-2/3 md:pb-8">
               <BandPhoto pictureDetails={photo} />
+              {photo.band && photo.venue && (
+                <div className="mx-4 mt-4 flex flex-col justify-center">
+                  <Thumbnails
+                    bandId={photo.band.id}
+                    venueId={photo.venue?.id}
+                  />
+                </div>
+              )}
             </div>
-            <div className="mx-2 mt-4 flex flex-1 flex-col justify-start md:h-full md:basis-1/5 md:justify-center md:pr-8">
-              <div className="hidden md:flex ">
+            <div className="mx-4 mt-4 flex flex-1 flex-col justify-start md:h-full md:basis-1/3 md:justify-center md:pr-8">
+              <div className="hidden md:flex">
                 <BandMainDetails pictureDetails={photo} />
               </div>
-
               <BandBonusDetails pictureDetails={photo} />
             </div>
           </div>

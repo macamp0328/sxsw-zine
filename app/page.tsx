@@ -26,11 +26,13 @@ export default async function Home() {
           You&apos;ve reached the end of the festival.
         </p>
         <p className="text-center text-sub-text">
-          Thank you for visiting my gallery!
+          If you made it this far, you should probably go back and listen to
+          some music.
         </p>
         <p className="mt-4 text-center text-sub-text">
           If you would like to see the source code for this project, you can
-          find it on GitHub:
+          find it on GitHub. I am treating this as a sandbox, so it will
+          continue to evolve.
         </p>
         <a
           href="https://github.com/macamp0328/sxsw-zine"
