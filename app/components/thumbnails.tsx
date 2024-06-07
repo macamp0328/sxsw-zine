@@ -17,16 +17,18 @@ export default async function Thumbnails({
   }
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex items-center justify-center space-x-2 overflow-x-auto overflow-y-hidden">
       {bandPhotos.slice(0, 8).map((photo) =>
         photo.url ? (
-          <div key={photo.id} className="thumbnail-item">
+          <div
+            key={photo.id}
+            className="relative aspect-square size-20 shrink-0 sm:size-32 lg:size-16"
+          >
             <ImageOverlay
               src={photo.url}
               alt={`Photo of ${photo.band?.name} taken on ${photo.takenAt}`}
-              width={100} // Thumbnail width
-              height={100} // Thumbnail height
-              className="rounded-md object-cover shadow-md" // Adjusted to cover for thumbnail effect
+              className="rounded-md object-cover" // Adjusted to cover for thumbnail effect
+              isRotate
             />
           </div>
         ) : null,

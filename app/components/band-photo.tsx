@@ -14,8 +14,7 @@ export default async function BandPhoto(params: {
         <ImageOverlay
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
-          fill
-          style={{ objectFit: 'contain' }}
+          isRotate
         />
       ) : (
         <p>Ooops. No photo available.</p>

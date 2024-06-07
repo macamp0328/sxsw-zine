@@ -46,10 +46,10 @@ model Venue {
 model Picture {
   id           String   @id @default(uuid())
   filename     String
-  height       Int?      @default(0) // Assuming height is an integer number of pixels
-  width        Int?      @default(0) // Assuming width is an integer number of pixels
+  height       Int      @default(0) // Assuming height is an integer number of pixels
+  width        Int      @default(0) // Assuming width is an integer number of pixels
   takenAt      DateTime @db.Timestamptz(3) 
-  isZine       Boolean? @default(false)  // Picture is featured on homepage
+  isZine       Boolean  @default(false)  // Picture is featured on homepage
   fStop        String?
   exposureTime String?
   ISO          String?

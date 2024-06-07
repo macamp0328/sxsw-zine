@@ -28,11 +28,8 @@ export default function StartPage() {
           <ImageOverlay
             src={heroImageUrl}
             alt="picture of Miles Camp, the maker of this page"
-            fill
-            style={{
-              objectFit: 'contain',
-            }}
             priority
+            isRotate
           />
         </div>
       </div>

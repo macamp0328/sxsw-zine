@@ -16,11 +16,8 @@ export default function AboutPage() {
           <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
-            fill
-            style={{
-              objectFit: 'contain',
-            }}
             priority
+            isRotate
           />
         </div>
       </div>
@@ -41,11 +38,8 @@ export default function AboutPage() {
           <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
-            fill
-            style={{
-              objectFit: 'contain',
-            }}
             priority
+            isRotate
           />
         </div>
       </div>
@@ -54,11 +48,8 @@ export default function AboutPage() {
           <ImageOverlay
             src={nickelImageUrl}
             alt="a boiler maker at Nickel City"
-            fill
-            style={{
-              objectFit: 'contain',
-            }}
             priority
+            isRotate
           />
         </div>
       </div>
@@ -78,11 +69,8 @@ export default function AboutPage() {
             <ImageOverlay
               src={nickelImageUrl}
               alt="a boiler maker at Nickel City"
-              fill
-              style={{
-                objectFit: 'contain',
-              }}
               priority
+              isRotate
             />
           </div>
         </div>
@@ -113,14 +101,11 @@ export default function AboutPage() {
       <div className="hidden size-full flex-col items-center justify-start p-6 md:col-span-2 md:flex">
         <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
           <b>Footnote 1:</b> For the bands featured, these photos are yours for
-          the taking. Hit me up. This zine is for you, by you, and is a
-          heartfelt thank you for filling our city with your tunes.
+          the taking. Just click the download button.
         </p>
         <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
-          <b>Footnote 2:</b> This site is also my playground for experimenting
-          with new webdev frameworks and tooling—a casual project to remember
-          the times before social media. Stay tuned for blog posts where
-          I&apos;ll nerd out about the technical details. In the meantime,{' '}
+          <b>Footnote 2:</b> This site is also a playground. Stay tuned for blog
+          posts about technical details. In the meantime,{' '}
           <a
             href="https://github.com/macamp0328/sxsw-zine"
             target="_blank"

@@ -28,13 +28,18 @@ export default async function PhotoGallery() {
               urlSegment={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
             />
 
-            <div className="m-1 flex-initial pt-24 md:hidden">
+            {/* Mobile Title */}
+            <div className="m-1 block shrink-0 pb-8 pt-24 md:hidden">
               <BandMainDetails pictureDetails={photo} />
             </div>
-            <div className="relative mt-4 flex w-full flex-1 object-cover md:basis-2/3 md:pb-8">
-              <BandPhoto pictureDetails={photo} />
+
+            {/* Image and thumbnails */}
+            <div className="flex w-full grow flex-col bg-gray-400 md:grow-0 md:items-center md:justify-center md:pb-8">
+              <div className="size-full grow md:flex md:h-full md:w-auto md:items-center md:justify-center">
+                <BandPhoto pictureDetails={photo} />
+              </div>
               {photo.band && photo.venue && (
-                <div className="mx-4 mt-4 flex flex-col justify-center">
+                <div className="mt-2">
                   <Thumbnails
                     bandId={photo.band.id}
                     venueId={photo.venue?.id}
@@ -42,10 +47,15 @@ export default async function PhotoGallery() {
                 </div>
               )}
             </div>
-            <div className="mx-4 mt-4 flex flex-1 flex-col justify-start md:h-full md:basis-1/3 md:justify-center md:pr-8">
-              <div className="hidden md:flex">
-                <BandMainDetails pictureDetails={photo} />
-              </div>
+
+            {/* Desktop Details */}
+            <div className="mx-4 mt-4 hidden shrink-0 flex-col justify-start md:block md:h-full md:justify-center">
+              <BandMainDetails pictureDetails={photo} />
+              <BandBonusDetails pictureDetails={photo} />
+            </div>
+
+            {/* Mobile Details */}
+            <div className="mx-4 mb-4 mt-auto block shrink-0 p-4 md:hidden">
               <BandBonusDetails pictureDetails={photo} />
             </div>
           </div>

@@ -2,18 +2,44 @@
 
 'use client';
 
+import clsx from 'clsx';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface ImageOverlayProps extends ImageProps {
   src: string; // Ensuring 'src' is always required
+  alt: string; // Ensuring 'alt' is always required
+  isRotate?: boolean; // Optional rotate flag
 }
 
-const ImageOverlay: React.FC<ImageOverlayProps> = ({ src, alt, ...props }) => {
+const ImageOverlay: React.FC<ImageOverlayProps> = ({
+  src,
+  alt,
+  isRotate = false,
+  className,
+  ...props
+}) => {
   const [showOverlay, setShowOverlay] = useState(false);
 
   const toggleOverlay = () => setShowOverlay(!showOverlay);
+
+  const rotationClasses = [
+    '-rotate-1',
+    '-rotate-1',
+    '-rotate-2',
+    'rotate-0',
+    'rotate-0',
+    'rotate-1',
+    'rotate-1',
+    'rotate-2',
+  ];
+  const randomRotationClass =
+    rotationClasses[Math.floor(Math.random() * rotationClasses.length)];
+
+  const imageClass = clsx('object-contain', className, {
+    [randomRotationClass]: isRotate,
+  });
 
   return (
     <>
@@ -21,10 +47,17 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({ src, alt, ...props }) => {
         onClick={toggleOverlay}
         role="button"
         tabIndex={0}
-        className="cursor-pointer"
+        className="relative size-full cursor-pointer"
         aria-label={alt}
       >
-        <Image src={src} alt={alt} {...props} />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          quality={100}
+          className={imageClass}
+          {...props}
+        />
       </div>
       {showOverlay && (
         <div
@@ -39,7 +72,8 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({ src, alt, ...props }) => {
               src={src}
               alt={`Zoomed in ${alt}`}
               layout="fill"
-              objectFit="contain"
+              quality={100}
+              className="object-contain"
             />
           </div>
         </div>
