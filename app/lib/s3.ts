@@ -28,7 +28,7 @@ export const listFiles = async (): Promise<S3File[]> => {
     const { Contents } = await s3.send(command);
     // const { Contents } = await s3.listObjectsV2({ Bucket: bucketName });
     if (!Contents) {
-      console.log('No files found in the bucket.');
+      console.error('No files found in the bucket.');
       return [];
     }
 

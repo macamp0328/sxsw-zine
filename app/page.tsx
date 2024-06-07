@@ -8,7 +8,7 @@ import StartPage from './components/start-page';
 
 export default async function Home() {
   return (
-    <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-gradient-to-b from-gray-100 to-gray-300">
+    <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-purple-200">
       <StartPage />
 
       <div>
