@@ -42,7 +42,7 @@ const BandBonusDetails = ({
       {pictureDetails.band ? (
         <div>
           <p
-            className={`w-full overflow-y-auto bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
+            className={`w-full overflow-y-auto border-3 border-sub-text bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
           >
             {bioParts.map((part, index) =>
               part.toLowerCase() === pictureDetails.band?.name.toLowerCase() ? (
@@ -54,7 +54,7 @@ const BandBonusDetails = ({
               ),
             )}
           </p>
-          <div className="mt-8 flex justify-around gap-1 text-center md:flex-col md:justify-between md:gap-4">
+          <div className="mt-8 flex justify-around gap-1 text-center md:flex-col md:justify-between md:gap-3">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
                 (link) =>

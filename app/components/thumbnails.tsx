@@ -22,7 +22,7 @@ export default async function Thumbnails({
         photo.url ? (
           <div
             key={photo.id}
-            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-2 border-white md:min-w-24"
+            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-3 border-sub-background md:min-w-24"
           >
             <ImageOverlay
               src={photo.url}

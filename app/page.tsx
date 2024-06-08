@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ScrollURLUpdater from '@/app/components/scroll-url-updater';
-
 import AboutPage from './components/about-page';
 import PhotoGallery from './components/photo-gallery';
 import StartPage from './components/start-page';
@@ -19,17 +17,16 @@ export default async function Home() {
 
       <div
         id="footer"
-        className="flex min-h-screen snap-center flex-col items-center justify-center"
+        className="flex min-h-screen snap-center flex-col items-center justify-center md:px-32"
       >
-        <ScrollURLUpdater urlSegment="footer" />
-        <p className="text-center text-main-text">
+        <p className="text-main-text text-center">
           You&apos;ve reached the end of the festival.
         </p>
-        <p className="text-center text-sub-text">
+        <p className="text-sub-text text-center">
           If you made it this far, you should probably go back and listen to
           some music.
         </p>
-        <p className="mt-4 text-center text-sub-text">
+        <p className="text-sub-text mt-4 text-center">
           If you would like to see the source code for this project, you can
           find it on GitHub. I am treating this as a sandbox, so it will
           continue to evolve.
@@ -38,7 +35,7 @@ export default async function Home() {
           href="https://github.com/macamp0328/sxsw-zine"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center text-sub-text underline"
+          className="text-sub-text text-center underline"
         >
           GitHub Repository
         </a>

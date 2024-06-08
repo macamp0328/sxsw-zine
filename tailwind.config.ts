@@ -14,12 +14,12 @@ const config: Config = {
     extend: {
       colors: {
         background: 'var(--background)',
-        'bonus-text': 'var(--bonus-text)',
+        'bonus-text': colors.zinc[600],
         'button-background': 'var(--button-background)',
         'button-text': 'var(--button-text)',
-        'main-text': colors.slate[800],
-        'sub-background': 'var(--sub-background)',
-        'sub-text': 'var(--sub-text)',
+        'main-text': colors.slate[900],
+        'sub-background': colors.slate[300],
+        'sub-text': colors.stone[700],
       },
     },
   },
