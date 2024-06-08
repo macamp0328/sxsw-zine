@@ -71,7 +71,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
             <Image
               src={src}
               alt={`Zoomed in ${alt}`}
-              layout="fill"
+              fill
               quality={100}
               className="object-contain"
             />

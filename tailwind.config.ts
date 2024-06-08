@@ -1,6 +1,8 @@
 import { nextui } from '@nextui-org/react';
 import type { Config } from 'tailwindcss';
 
+const colors = require('tailwindcss/colors');
+
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -15,7 +17,7 @@ const config: Config = {
         'bonus-text': 'var(--bonus-text)',
         'button-background': 'var(--button-background)',
         'button-text': 'var(--button-text)',
-        'main-text': 'var(--main-text)',
+        'main-text': colors.slate[800],
         'sub-background': 'var(--sub-background)',
         'sub-text': 'var(--sub-text)',
       },

@@ -17,12 +17,12 @@ export default async function Thumbnails({
   }
 
   return (
-    <div className="flex items-center justify-center space-x-2 overflow-x-auto overflow-y-hidden">
+    <div className="flex items-center justify-center space-x-2 overflow-hidden ">
       {bandPhotos.slice(0, 8).map((photo) =>
         photo.url ? (
           <div
             key={photo.id}
-            className="relative aspect-square size-20 shrink-0 sm:size-32 lg:size-16"
+            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-2 border-white md:min-w-24"
           >
             <ImageOverlay
               src={photo.url}

@@ -16,11 +16,11 @@ const BandMainDetails = ({
   return (
     <div className="size-full">
       {pictureDetails.band ? (
-        <div className="flex size-full flex-col items-center justify-end">
+        <div className="size-full flex-1 flex-col content-center items-center justify-end">
           <h1 className="py-2 text-center text-3xl font-bold text-main-text">
             {pictureDetails.band.name}
           </h1>
-          <p className="pb-2 text-center text-base text-bonus-text md:pb-0">
+          <p className="pb-2 text-center text-sm text-bonus-text md:pb-0">
             {pictureDetails.band.genre || 'Genre not specified'}
           </p>
           <div className="flex w-full flex-wrap justify-between px-4 md:flex-col md:text-center">

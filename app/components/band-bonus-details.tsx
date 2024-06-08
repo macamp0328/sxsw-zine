@@ -54,7 +54,7 @@ const BandBonusDetails = ({
               ),
             )}
           </p>
-          <div className="mt-8 flex justify-around gap-1 text-center md:justify-between">
+          <div className="mt-8 flex justify-around gap-1 text-center md:flex-col md:justify-between md:gap-4">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
                 (link) =>

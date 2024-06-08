@@ -23,23 +23,23 @@ export default async function PhotoGallery() {
     <>
       {zinePhotos.map((photo) => (
         <div key={photo.id} id={photo.band?.slug}>
-          <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:pt-24">
+          <div className="flex h-svh w-full snap-center flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24">
             <ScrollURLUpdater
               urlSegment={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
             />
 
             {/* Mobile Title */}
-            <div className="m-1 block shrink-0 pb-8 pt-24 md:hidden">
+            <div className="m-1 block shrink-0 pb-4 pt-24 md:hidden">
               <BandMainDetails pictureDetails={photo} />
             </div>
 
             {/* Image and thumbnails */}
-            <div className="flex w-full grow flex-col bg-gray-400 md:grow-0 md:items-center md:justify-center md:pb-8">
-              <div className="size-full grow md:flex md:h-full md:w-auto md:items-center md:justify-center">
+            <div className="relative flex grow flex-col items-center justify-center md:pb-12">
+              <div className="mb-8 size-full grow">
                 <BandPhoto pictureDetails={photo} />
               </div>
               {photo.band && photo.venue && (
-                <div className="mt-2">
+                <div className="absolute bottom-0 z-10 mb-4">
                   <Thumbnails
                     bandId={photo.band.id}
                     venueId={photo.venue?.id}
@@ -48,14 +48,18 @@ export default async function PhotoGallery() {
               )}
             </div>
 
-            {/* Desktop Details */}
-            <div className="mx-4 mt-4 hidden shrink-0 flex-col justify-start md:block md:h-full md:justify-center">
-              <BandMainDetails pictureDetails={photo} />
-              <BandBonusDetails pictureDetails={photo} />
+            {/* Desktop Title and Details */}
+            <div className="hidden w-1/4 flex-col pb-16 pr-8 md:flex">
+              <div className="flex-1">
+                <BandMainDetails pictureDetails={photo} />
+              </div>
+              <div className=" flex-1">
+                <BandBonusDetails pictureDetails={photo} />
+              </div>
             </div>
 
             {/* Mobile Details */}
-            <div className="mx-4 mb-4 mt-auto block shrink-0 p-4 md:hidden">
+            <div className="mx-2 mb-2 mt-auto block shrink-0 p-4 md:hidden">
               <BandBonusDetails pictureDetails={photo} />
             </div>
           </div>
