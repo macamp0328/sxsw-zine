@@ -20,7 +20,7 @@ export default async function Home() {
         className="flex min-h-screen snap-center flex-col items-center justify-center md:px-32"
       >
         <p className="text-center text-main-text">
-          You&apos;ve reached the end of the festival.
+          You&apos;ve reached the end of the almost 50 sets.
         </p>
         <p className="text-center text-sub-text">
           If you made it this far, you should probably go back and listen to
