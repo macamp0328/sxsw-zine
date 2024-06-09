@@ -35,6 +35,7 @@ const BandMainDetails = ({
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true,
+                timeZone: 'America/Chicago',
               })
                 .format(pictureDetails.takenAt)
                 .toLowerCase()}{' '}
@@ -42,6 +43,7 @@ const BandMainDetails = ({
               {new Intl.DateTimeFormat('en-US', {
                 month: 'long',
                 day: 'numeric',
+                timeZone: 'America/Chicago',
               }).format(pictureDetails.takenAt)}
             </p>
           </div>

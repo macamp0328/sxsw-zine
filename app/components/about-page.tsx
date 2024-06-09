@@ -10,9 +10,8 @@ export default function AboutPage() {
       id="about"
       className={`flex w-full snap-start flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
-      {/* scroll-m-14 */}
       <div className="flex size-full p-4 md:hidden">
-        <div className="relative size-full min-h-[300px]">
+        <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
@@ -65,7 +64,7 @@ export default function AboutPage() {
           town—or inspire you to visit their country.
         </p>
         <div className="flex size-full p-4 md:hidden">
-          <div className="relative size-full min-h-[300px]">
+          <div className="relative min-h-[300px] w-full">
             <ImageOverlay
               src={nickelImageUrl}
               alt="a boiler maker at Nickel City"
