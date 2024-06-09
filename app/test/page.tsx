@@ -63,7 +63,7 @@ const ResponsiveLayout: React.FC = () => {
         <h1 className="mb-4 -rotate-2 text-3xl font-bold italic">Title</h1>
         <div className="mt-auto">
           <h2 className="mb-2 rotate-1 text-2xl font-bold">Description</h2>
-          <p className="font-handwritten text-sm leading-loose">
+          <p className="text-sm leading-loose">
             Description section pushed to the bottom. Description section pushed
             to the bottom. Description section pushed to the bottom. Description
             section pushed to the bottom. Description section pushed to the
@@ -76,7 +76,7 @@ const ResponsiveLayout: React.FC = () => {
       {/* Mobile Description Section */}
       <div className="mt-auto block border-t-4 border-yellow-500 bg-gray-800 p-4 lg:hidden">
         <h2 className="mb-2 rotate-1 text-2xl font-bold">Description</h2>
-        <p className="font-handwritten text-sm leading-loose">
+        <p className="text-sm leading-loose">
           Description section pushed to the bottom. Description section pushed
           to the bottom. Description section pushed to the bottom. Description
           section pushed to the bottom. Description section pu shed to the
