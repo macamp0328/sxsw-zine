@@ -6,7 +6,7 @@ import StartPage from './components/start-page';
 
 export default async function Home() {
   return (
-    <div className="h-svh w-full snap-y snap-proximity overflow-y-scroll scroll-smooth bg-neutral-200">
+    <div className="h-svh w-full snap-y  overflow-y-scroll scroll-smooth bg-neutral-200">
       <StartPage />
 
       <div>
