@@ -6,7 +6,7 @@ import StartPage from './components/start-page';
 
 export default async function Home() {
   return (
-    <div className="h-svh w-full snap-y  overflow-y-scroll scroll-smooth bg-neutral-200">
+    <div className="h-svh w-full overflow-y-scroll scroll-smooth bg-neutral-200">
       <StartPage />
 
       <div>
@@ -17,7 +17,7 @@ export default async function Home() {
 
       <div
         id="footer"
-        className="flex min-h-screen snap-center flex-col items-center justify-center md:px-32"
+        className="flex min-h-screen flex-col items-center justify-center md:px-32"
       >
         <p className="text-center text-main-text">
           You&apos;ve reached the end of the almost 50 sets.
