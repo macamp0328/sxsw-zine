@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <div
       id="about"
-      className={`flex w-full flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
+      className={`flex w-full snap-start snap-always flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
       <div className="flex size-full bg-sub-background p-2 shadow-xl md:hidden">
         <div className="relative min-h-[300px] w-full">
@@ -33,7 +33,7 @@ export default function AboutPage() {
         </p>
       </div>
       <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
-        <div className="relative size-full min-h-[200px]">
+        <div className="relative size-full min-h-[300px]">
           <ImageOverlay
             src={drummingImageUrl}
             alt="a random drummer in an empty lot"
@@ -43,7 +43,7 @@ export default function AboutPage() {
         </div>
       </div>
       <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
-        <div className="relative size-full min-h-[200px]">
+        <div className="relative size-full min-h-[300px]">
           <ImageOverlay
             src={nickelImageUrl}
             alt="a boiler maker at Nickel City"

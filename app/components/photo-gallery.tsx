@@ -23,7 +23,7 @@ export default async function PhotoGallery() {
     <>
       {zinePhotos.map((photo) => (
         <div key={photo.id} id={photo.band?.slug}>
-          <div className="flex h-svh w-full flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-16">
+          <div className="flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-16">
             <ScrollURLUpdater
               urlSegment={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
             />
