@@ -29,7 +29,6 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
     '-rotate-1',
     '-rotate-2',
     'rotate-0',
-    'rotate-0',
     'rotate-1',
     'rotate-1',
     'rotate-2',
