@@ -49,14 +49,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
         className="relative size-full cursor-pointer"
         aria-label={alt}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          quality={100}
-          className={imageClass}
-          {...props}
-        />
+        <Image src={src} alt={alt} fill className={imageClass} {...props} />
       </div>
       {showOverlay && (
         <div

@@ -10,7 +10,7 @@ export default function AboutPage() {
       id="about"
       className={`flex w-full flex-col items-center justify-center pb-28 pt-20 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
-      <div className="flex size-full p-4 md:hidden">
+      <div className="flex size-full bg-sub-background p-2 shadow-xl md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={drummingImageUrl}
@@ -20,8 +20,8 @@ export default function AboutPage() {
           />
         </div>
       </div>
-      <div className="flex h-fit w-full items-center justify-center p-6">
-        <p className="w-full text-center text-lg text-main-text md:text-xl lg:text-2xl">
+      <div className="flex h-fit w-full items-center justify-center p-6 md:pr-12">
+        <p className="w-full text-center text-lg text-main-text md:text-right md:text-xl">
           Welcome to my slice of SXSW 2024—a digital zine documenting my quest
           to catch 50 live sets. This isn&apos;t your typical, polished ad
           filled corporate fluff; it&apos;s a DIY tribute to live music,
@@ -32,7 +32,7 @@ export default function AboutPage() {
           listen, and follow counts.
         </p>
       </div>
-      <div className="hidden size-full p-6 md:flex">
+      <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
         <div className="relative size-full min-h-[200px]">
           <ImageOverlay
             src={drummingImageUrl}
@@ -42,7 +42,7 @@ export default function AboutPage() {
           />
         </div>
       </div>
-      <div className="hidden size-full p-6 md:flex">
+      <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
         <div className="relative size-full min-h-[200px]">
           <ImageOverlay
             src={nickelImageUrl}
@@ -52,8 +52,8 @@ export default function AboutPage() {
           />
         </div>
       </div>
-      <div className="flex size-full flex-col items-center justify-center p-6">
-        <p className="w-full text-center text-lg text-main-text md:text-xl lg:text-2xl">
+      <div className="flex size-full flex-col items-center justify-center p-6 md:pl-12">
+        <p className="w-full text-center text-lg text-main-text md:text-left md:text-xl">
           This project is my love letter to the joy that live music brings me
           and every hidden treasure I discovered when I lost my way. By train,
           bike, and foot, soaked by rain and drenched in sweat under the
@@ -63,16 +63,18 @@ export default function AboutPage() {
           perhaps discover your next favorite artist who might soon visit your
           town—or inspire you to visit their country.
         </p>
-        <div className="flex size-full p-4 md:hidden">
-          <div className="relative min-h-[300px] w-full">
-            <ImageOverlay
-              src={nickelImageUrl}
-              alt="a boiler maker at Nickel City"
-              priority
-              isRotate
-            />
-          </div>
+      </div>
+      <div className="flex size-full bg-sub-background p-2 shadow-xl md:hidden">
+        <div className="relative min-h-[300px] w-full">
+          <ImageOverlay
+            src={nickelImageUrl}
+            alt="a boiler maker at Nickel City"
+            priority
+            isRotate
+          />
         </div>
+      </div>
+      <div className="flex size-full flex-col items-center justify-center p-6 md:pl-12">
         <p className="mt-6 w-full text-center text-base text-main-text md:hidden md:text-lg">
           <b>Footnote 1:</b> For the bands featured, these photos are yours for
           the taking. Hit me up. This zine is for you, by you, and is a

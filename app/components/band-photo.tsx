@@ -15,6 +15,7 @@ export default async function BandPhoto(params: {
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
           isRotate
+          quality={100}
         />
       ) : (
         <p>Ooops. No photo available.</p>
