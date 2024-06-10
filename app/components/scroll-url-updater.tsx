@@ -3,11 +3,18 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
+import type { PictureWithRelationsAndUrl } from '../lib/actions';
+import { generatePictureMetadata, updateMetadata } from '../lib/metadata-utils';
+
 interface ScrollURLUpdaterProps {
   urlSegment?: string;
+  pictureDetails: PictureWithRelationsAndUrl;
 }
 
-const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
+const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({
+  urlSegment,
+  pictureDetails,
+}) => {
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -15,10 +22,13 @@ const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
     const currentRef = ref.current;
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && urlSegment) {
           router.replace(`#${urlSegment}`, {
             scroll: false,
           });
+
+          const metadata = generatePictureMetadata(pictureDetails);
+          updateMetadata(metadata);
         }
       },
       {
@@ -37,7 +47,7 @@ const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({ urlSegment }) => {
         intersectionObserver.unobserve(currentRef);
       }
     };
-  }, [router, urlSegment]);
+  }, [router, urlSegment, pictureDetails]);
 
   useEffect(() => {
     const handleHashChange = () => {

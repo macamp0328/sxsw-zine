@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
+
 import { robotoCondensed } from '../other/fonts';
 import ImageOverlay from '../ui/image-overlay';
+
+export const metadata: Metadata = {
+  title: 'Abouts',
+  description:
+    'About Page: Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets. This isn&apos;t your typical, polished ad filled corporate fluff; it&apos;s a DIY tribute to live music, captured with a small camera (Ricoh GR II) during my perfectly paced party. My collection is a gritty memory of every set I danced to. Dive into these visuals, listen to the sounds of the artists, support their socials, and let their art resonate with you. Every dollar, listen, and follow counts.',
+};
 
 export default function AboutPage() {
   const drummingImageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg`;

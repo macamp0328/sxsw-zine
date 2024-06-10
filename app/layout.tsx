@@ -9,9 +9,12 @@ import { cutiveMono } from './other/fonts';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: `Miles's SXSW 2024`,
+  title: {
+    template: `%s | Miles's SXSW`,
+    default: `Miles's SXSW`,
+  },
   description:
-    'A musical photo journey of SXSW 2024 through the eyes of Miles.',
+    'a sxsw journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
 };
 
 export default function RootLayout({
