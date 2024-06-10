@@ -1,12 +1,12 @@
-import BandBonusDetails from '@/app/components/band-bonus-details';
-import BandMainDetails from '@/app/components/band-main-details';
-import BandPhoto from '@/app/components/band-photo';
-import ScrollURLUpdater from '@/app/components/scroll-url-updater';
+import React from 'react';
 
-import { getZinePictures } from '../lib/actions';
+import type { PictureWithRelationsAndUrl } from '../lib/actions';
+import BandBonusDetails from './band-bonus-details';
+import BandMainDetails from './band-main-details';
+import BandPhoto from './band-photo';
+import ScrollURLUpdater from './scroll-url-updater';
 import Thumbnails from './thumbnails';
 
-// Slugify function
 const slugify = (text: string): string => {
   return text
     .toLowerCase()
@@ -16,13 +16,18 @@ const slugify = (text: string): string => {
     .replace(/-+/g, '-');
 };
 
-export default async function PhotoGallery() {
-  const zinePhotos = await getZinePictures();
+interface PhotoGalleryProps {
+  zinePhotos: PictureWithRelationsAndUrl[];
+}
 
+const PhotoGallery: React.FC<PhotoGalleryProps> = ({ zinePhotos }) => {
   return (
     <>
       {zinePhotos.map((photo) => (
-        <div key={photo.id} id={photo.band?.slug}>
+        <div
+          key={photo.id}
+          id={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
+        >
           <div className="flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-16">
             <ScrollURLUpdater
               urlSegment={`${photo.band?.slug}-${slugify(photo.venue?.name || '')}`}
@@ -68,4 +73,6 @@ export default async function PhotoGallery() {
       ))}
     </>
   );
-}
+};
+
+export default PhotoGallery;

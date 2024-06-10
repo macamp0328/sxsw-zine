@@ -1,20 +1,46 @@
+// app/page.tsx
+import Head from 'next/head';
 import React from 'react';
 
 import AboutPage from './components/about-page';
 import PhotoGallery from './components/photo-gallery';
 import StartPage from './components/start-page';
+import { getZinePictures } from './lib/actions';
+import { generatePictureMetadata } from './lib/metadata-utils';
 
 export default async function Home() {
+  const zinePhotos = await getZinePictures();
+
+  // Generate default metadata for the initial load
+  const defaultPhoto = zinePhotos[0];
+  const initialMetadata = generatePictureMetadata(defaultPhoto);
+
   return (
     <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-neutral-200">
+      <Head>
+        <title>{initialMetadata.title?.toString() || "Miles's SXSW"}</title>
+        <meta
+          name="description"
+          content={
+            initialMetadata.description || 'A SXSW journey through my lens.'
+          }
+        />
+        {/* {initialMetadata.openGraph?.images && (
+          <meta
+            property="og:image"
+            content={initialMetadata.openGraph.images[0].url.toString()}
+          />
+        )}
+        {initialMetadata.twitter?.images && (
+          <meta
+            name="twitter:image"
+            content={initialMetadata.twitter.images[0].toString()}
+          />
+        )} */}
+      </Head>
       <StartPage />
-
-      <div>
-        <AboutPage />
-      </div>
-
-      <PhotoGallery />
-
+      <AboutPage />
+      <PhotoGallery zinePhotos={zinePhotos} />
       <div
         id="footer"
         className="flex min-h-screen snap-start snap-always flex-col items-center justify-center md:px-32"
