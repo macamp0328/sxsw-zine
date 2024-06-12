@@ -7,30 +7,30 @@ export function generatePictureMetadata(
 ): Metadata {
   if (!pictureDetails) {
     return {
-      title: "Miles's SXSW",
+      title: "Miles's SXSW 2024: A DIY Music Zine",
       description:
-        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+        'Experience SXSW 2024 through the lens of Miles, a music enthusiast on a quest to catch 50 live sets. This digital zine is a gritty, unfiltered tribute to the vibrant energy of live music.',
       openGraph: {
         type: 'website',
-        title: "Miles's SXSW",
+        title: "Miles's SXSW 2024: A DIY Music Zine",
         description:
-          'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+          'Dive into the raw, unpolished beauty of SXSW 2024. Captured with a small camera, this digital zine is a tribute to the pulsating rhythm of live music and the artists who create it.',
         images: [
           {
             url: '/photos/header-miles.jpg',
-            alt: "Miles's SXSW",
+            alt: "Cover image for Miles's SXSW 2024 Zine",
           },
         ],
       },
       twitter: {
         card: 'summary_large_image',
-        title: "Miles's SXSW",
+        title: "Miles's SXSW 2024: A DIY Music Zine",
         description:
-          'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+          'Join Miles on a journey through SXSW 2024. This digital zine, captured with a Ricoh GR II, is a raw, unfiltered celebration of live music and the artists who bring it to life.',
         images: [
           {
             url: '/photos/header-miles.jpg',
-            alt: "Miles's SXSW",
+            alt: "Cover image for Miles's SXSW 2024 Zine",
           },
         ],
       },
@@ -42,30 +42,30 @@ export function generatePictureMetadata(
   const venueName = pictureDetails.venue?.name || 'Unknown Venue';
   const description =
     pictureDetails.band?.bio ||
-    `Check out this amazing photo of ${bandName} at ${venueName}.`;
+    `${bandName}! This is from their performance at ${venueName} during SXSW 2024!`;
 
   return {
-    title: `${bandName} at ${venueName} | Miles's SXSW`,
+    title: `${bandName}!! | Miles's SXSW 2024`,
     description,
     openGraph: {
       type: 'article',
-      title: `${bandName} at ${venueName} | Miles's SXSW`,
+      title: `${bandName} on stage at ${venueName} during SXSW 2024 | Miles's SXSW`,
       description,
       images: [
         {
           url: pictureUrl,
-          alt: `${bandName} at ${venueName} | Miles's SXSW`,
+          alt: `${bandName} on stage at ${venueName} during SXSW 2024 | Miles's SXSW`,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${bandName} at ${venueName} | Miles's SXSW`,
+      title: `${bandName} on stage at ${venueName} during SXSW 2024 | Miles's SXSW`,
       description,
       images: [
         {
           url: pictureUrl,
-          alt: `${bandName} at ${venueName} | Miles's SXSW`,
+          alt: `${bandName} on stage at ${venueName} during SXSW 2024 | Miles's SXSW`,
         },
       ],
     },

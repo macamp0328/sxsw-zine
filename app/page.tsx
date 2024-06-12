@@ -5,30 +5,30 @@ import { fetchZinePictures } from './lib/actions';
 
 export async function generateMetadata() {
   return {
-    title: "Miles's SXSW",
+    title: "Miles's SXSW 2024: A DIY Music Zine",
     description:
-      'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+      'Experience SXSW 2024 through the lens of Miles, a music enthusiast on a quest to catch 50 live sets. This digital zine is a gritty, unfiltered tribute to the vibrant energy of live music.',
     openGraph: {
       type: 'website',
-      title: "Miles's SXSW",
+      title: "Miles's SXSW 2024: A DIY Music Zine",
       description:
-        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+        'Dive into the raw, unpolished beauty of SXSW 2024. Captured with a small camera, this digital zine is a tribute to the pulsating rhythm of live music and the artists who create it.',
       images: [
         {
           url: '/photos/header-miles.jpg', // Ensure this path is correct relative to the public folder
-          alt: "Miles's SXSW",
+          alt: "Cover image for Miles's SXSW 2024 Zine",
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: "Miles's SXSW",
+      title: "Miles's SXSW 2024: A DIY Music Zine",
       description:
-        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+        'Join Miles on a journey through SXSW 2024. This digital zine, captured with a Ricoh GR II, is a raw, unfiltered celebration of live music and the artists who bring it to life.',
       images: [
         {
           url: '/photos/header-miles.jpg', // Ensure this path is correct relative to the public folder
-          alt: "Miles's SXSW",
+          alt: "Cover image for Miles's SXSW 2024 Zine",
         },
       ],
     },

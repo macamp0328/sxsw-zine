@@ -10,9 +10,9 @@ import HeaderLogo from './components/header-logo';
 import { cutiveMono } from './lib/fonts';
 
 export const metadata: Metadata = {
-  title: `Miles's SXSW`,
+  title: "Miles's SXSW 2024: A DIY Music Zine",
   description:
-    'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+    'Experience SXSW 2024 through the lens of Miles, a music enthusiast on a quest to catch 50 live sets. This digital zine is a gritty, unfiltered tribute to the vibrant energy of live music.',
 };
 
 export default function RootLayout({
