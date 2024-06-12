@@ -29,7 +29,7 @@ export default function Zine({
   return (
     <div
       ref={containerRef}
-      className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-neutral-200"
+      className="h-svh w-full snap-y snap-mandatory overflow-y-scroll bg-neutral-200"
     >
       <Landing />
       <About />
