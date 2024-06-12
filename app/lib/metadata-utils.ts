@@ -45,27 +45,27 @@ export function generatePictureMetadata(
     `Check out this amazing photo of ${bandName} at ${venueName}.`;
 
   return {
-    title: `${bandName} at ${venueName}`,
+    title: `${bandName} at ${venueName} | Miles's SXSW`,
     description,
     openGraph: {
       type: 'article',
-      title: `${bandName} at ${venueName}`,
+      title: `${bandName} at ${venueName} | Miles's SXSW`,
       description,
       images: [
         {
           url: pictureUrl,
-          alt: `${bandName} at ${venueName}`,
+          alt: `${bandName} at ${venueName} | Miles's SXSW`,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${bandName} at ${venueName}`,
+      title: `${bandName} at ${venueName} | Miles's SXSW`,
       description,
       images: [
         {
           url: pictureUrl,
-          alt: `${bandName} at ${venueName}`,
+          alt: `${bandName} at ${venueName} | Miles's SXSW`,
         },
       ],
     },

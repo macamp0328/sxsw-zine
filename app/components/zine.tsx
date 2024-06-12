@@ -1,6 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
 import type { PictureWithRelationsAndUrl } from '../lib/actions';
@@ -17,16 +16,15 @@ export default function Zine({
   initialPicture?: PictureWithRelationsAndUrl;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
     if (initialPicture) {
       const element = document.getElementById(initialPicture.setSlug);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'instant' });
       }
     }
-  }, [initialPicture, pathname]);
+  });
 
   return (
     <div

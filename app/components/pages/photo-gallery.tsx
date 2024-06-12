@@ -8,6 +8,8 @@ import BandPhoto from '@/app/components/band-photo';
 import Thumbnails from '@/app/components/thumbnails';
 import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
+import ScrollURLUpdater from '../scroll-url-updater';
+
 export default function PhotoGallery({
   zinePicture,
 }: {
@@ -19,10 +21,10 @@ export default function PhotoGallery({
       className="flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-16"
     >
       <div>
-        {/* <ScrollURLUpdater
+        <ScrollURLUpdater
           urlSegment={zinePicture.setSlug}
           pictureDetails={zinePicture}
-        /> */}
+        />
       </div>
       <div className="m-1 block shrink-0 pb-4 pt-24 md:hidden">
         <BandMainDetails pictureDetails={zinePicture} />
