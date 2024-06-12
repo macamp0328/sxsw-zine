@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -17,7 +17,6 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.564.0",
     "@aws-sdk/s3-request-presigner": "^3.565.0",
-    "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.14.0",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
 import type { PictureWithRelationsAndUrl } from '../lib/actions';
-import { generatePictureMetadata, updateMetadata } from '../lib/metadata-utils';
+import { updateMetadata } from '../lib/metadata-utils';
 
 interface ScrollURLUpdaterProps {
   urlSegment?: string;
@@ -17,71 +17,45 @@ const ScrollURLUpdater: React.FC<ScrollURLUpdaterProps> = ({
 }) => {
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
+  const lastUrlSegment = useRef<string | null>(null);
 
   useEffect(() => {
     const currentRef = ref.current;
-    const intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && urlSegment) {
-          router.replace(`#${urlSegment}`, {
-            scroll: false,
-          });
 
-          const metadata = generatePictureMetadata(pictureDetails);
-          updateMetadata(metadata);
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && urlSegment !== lastUrlSegment.current) {
+          const newUrl = `/${urlSegment}`;
+          router.replace(newUrl);
+          updateMetadata(pictureDetails);
+          lastUrlSegment.current = urlSegment || '';
         }
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5, // Trigger when 50% of the component is visible to handle scrolling up and down
-      },
+      });
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      observerOptions,
     );
 
     if (currentRef) {
-      intersectionObserver.observe(currentRef);
+      observer.observe(currentRef);
     }
 
     return () => {
       if (currentRef) {
-        intersectionObserver.unobserve(currentRef);
+        observer.unobserve(currentRef);
       }
     };
   }, [router, urlSegment, pictureDetails]);
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.substring(1); // Remove the '#' from the hash
-      const element = document.getElementById(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      } else if (!hash) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
-
-    // Only attach the event listener if there's a URL segment
-    if (urlSegment) {
-      window.addEventListener('hashchange', handleHashChange);
-    }
-
-    // Scroll to the element on component mount if there's a hash in the URL
-    const hash = window.location.hash.substring(1);
-    const element = document.getElementById(hash);
-    if (hash && element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else if (hash && !element) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    return () => {
-      if (urlSegment) {
-        window.removeEventListener('hashchange', handleHashChange);
-      }
-    };
-  }, [urlSegment]);
-
-  return <span id={urlSegment} ref={ref} />;
+  return <div ref={ref} id={urlSegment} />;
 };
 
 export default ScrollURLUpdater;

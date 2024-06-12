@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 'use client';
 
 import clsx from 'clsx';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ImageOverlayProps extends ImageProps {
   src: string; // Ensuring 'src' is always required
@@ -21,39 +19,61 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
   ...props
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
+  const [rotationClass, setRotationClass] = useState('');
+
+  useEffect(() => {
+    if (isRotate) {
+      const rotationClasses = [
+        '-rotate-1',
+        '-rotate-1',
+        '-rotate-2',
+        'rotate-0',
+        'rotate-1',
+        'rotate-1',
+        'rotate-2',
+      ];
+      const randomRotationClass =
+        rotationClasses[Math.floor(Math.random() * rotationClasses.length)];
+      setRotationClass(randomRotationClass);
+    }
+  }, [isRotate]);
 
   const toggleOverlay = () => setShowOverlay(!showOverlay);
 
-  const rotationClasses = [
-    '-rotate-1',
-    '-rotate-1',
-    '-rotate-2',
-    'rotate-0',
-    'rotate-1',
-    'rotate-1',
-    'rotate-2',
-  ];
-  const randomRotationClass =
-    rotationClasses[Math.floor(Math.random() * rotationClasses.length)];
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleOverlay();
+    }
+  };
 
   const imageClass = clsx('object-contain', className, {
-    [randomRotationClass]: isRotate,
+    [rotationClass]: rotationClass,
   });
 
   return (
     <>
       <div
         onClick={toggleOverlay}
+        onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
         className="relative size-full cursor-pointer"
         aria-label={alt}
       >
-        <Image src={src} alt={alt} fill className={imageClass} {...props} />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={imageClass}
+          {...props}
+        />
       </div>
       {showOverlay && (
         <div
           onClick={toggleOverlay}
+          onKeyDown={handleKeyDown}
           role="button"
           tabIndex={0}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
@@ -64,6 +84,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
               src={src}
               alt={`Zoomed in ${alt}`}
               fill
+              sizes="100vw"
               quality={100}
               className="object-contain"
             />

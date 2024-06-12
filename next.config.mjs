@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN:
+      process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN,
+  },
   images: {
     unoptimized: false,
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '03i2epsncrja4pcn.public.blob.vercel-storage.com',
-        port: '',
-        // pathname: '**',
-      },
       {
         protocol: 'https',
         hostname: 'sxsw-zine-bucket.s3.amazonaws.com',

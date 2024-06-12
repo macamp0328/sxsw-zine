@@ -1,45 +1,42 @@
-import React from 'react';
+// app/page.tsx
 
-import AboutPage from './components/about-page';
-import PhotoGallery from './components/photo-gallery';
-import StartPage from './components/start-page';
+import { Zine } from './components/zine';
+import { fetchZinePictures } from './lib/actions';
+
+export async function generateMetadata() {
+  return {
+    title: "Miles's SXSW",
+    description:
+      'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+    openGraph: {
+      type: 'website',
+      title: "Miles's SXSW",
+      description:
+        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+      images: [
+        {
+          url: '/photos/header-miles.jpg', // Ensure this path is correct relative to the public folder
+          alt: "Miles's SXSW",
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: "Miles's SXSW",
+      description:
+        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+      images: [
+        {
+          url: '/photos/header-miles.jpg', // Ensure this path is correct relative to the public folder
+          alt: "Miles's SXSW",
+        },
+      ],
+    },
+  };
+}
 
 export default async function Home() {
-  return (
-    <div className="h-svh w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-neutral-200">
-      <StartPage />
+  const zinePictures = await fetchZinePictures();
 
-      <div>
-        <AboutPage />
-      </div>
-
-      <PhotoGallery />
-
-      <div
-        id="footer"
-        className="flex min-h-screen snap-start snap-always flex-col items-center justify-center md:px-32"
-      >
-        <p className="text-center text-main-text">
-          You&apos;ve reached the end of the almost 50 sets.
-        </p>
-        <p className="text-center text-sub-text">
-          If you made it this far, you should probably go back and listen to
-          some music.
-        </p>
-        <p className="mt-4 text-center text-sub-text">
-          If you would like to see the source code for this project, you can
-          find it on GitHub. I am treating this as a sandbox, so it will
-          continue to evolve.
-        </p>
-        <a
-          href="https://github.com/macamp0328/sxsw-zine"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-center text-sub-text underline"
-        >
-          GitHub Repository
-        </a>
-      </div>
-    </div>
-  );
+  return <Zine zinePictures={zinePictures} />;
 }

@@ -1,7 +1,9 @@
+'use client';
+
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
 import ImageOverlay from '../ui/image-overlay';
 
-export default async function BandPhoto(params: {
+export default function BandPhoto(params: {
   pictureDetails: PictureWithRelationsAndUrl;
 }) {
   if (!params.pictureDetails) {

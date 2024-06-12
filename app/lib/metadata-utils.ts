@@ -3,83 +3,102 @@ import type { Metadata } from 'next';
 import type { PictureWithRelationsAndUrl } from './actions';
 
 export function generatePictureMetadata(
-  photo: PictureWithRelationsAndUrl,
+  pictureDetails: PictureWithRelationsAndUrl | null,
 ): Metadata {
-  const title = photo.band
-    ? `${photo.band.name} at ${photo.venue?.name} | Miles's SXSW`
-    : `Miles's SXSW`;
-  const description = photo.band?.bio || 'An amazing snapshot from SXSW 2024.';
-  const imageUrl = photo.url || '/default-image.jpg';
+  if (!pictureDetails) {
+    return {
+      title: "Miles's SXSW",
+      description:
+        'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+      openGraph: {
+        type: 'website',
+        title: "Miles's SXSW",
+        description:
+          'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+        images: [
+          {
+            url: '/photos/header-miles.jpg',
+            alt: "Miles's SXSW",
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: "Miles's SXSW",
+        description:
+          'A SXSW journey through my lens. Welcome to my slice of SXSW 2024—a digital zine documenting my quest to catch 50 live sets.',
+        images: [
+          {
+            url: '/photos/header-miles.jpg',
+            alt: "Miles's SXSW",
+          },
+        ],
+      },
+    };
+  }
+
+  const bandName = pictureDetails.band?.name || 'Unknown Band';
+  const pictureUrl = pictureDetails.url || '';
+  const venueName = pictureDetails.venue?.name || 'Unknown Venue';
+  const description =
+    pictureDetails.band?.bio ||
+    `Check out this amazing photo of ${bandName} at ${venueName}.`;
 
   return {
-    title,
+    title: `${bandName} at ${venueName}`,
     description,
     openGraph: {
-      title,
+      type: 'article',
+      title: `${bandName} at ${venueName}`,
       description,
       images: [
         {
-          url: imageUrl,
-          width: 800,
-          height: 600,
-          alt: title,
+          url: pictureUrl,
+          alt: `${bandName} at ${venueName}`,
         },
       ],
-      type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: `${bandName} at ${venueName}`,
       description,
-      images: [imageUrl],
+      images: [
+        {
+          url: pictureUrl,
+          alt: `${bandName} at ${venueName}`,
+        },
+      ],
     },
   };
 }
 
-export function updateMetadata(metadata: Metadata) {
-  // Handle title update
-  if (typeof metadata.title === 'string') {
-    document.title = metadata.title;
-  } else if (metadata.title && 'default' in metadata.title) {
-    document.title = metadata.title.default;
+export function updateMetadata(pictureDetails: PictureWithRelationsAndUrl) {
+  const metadata = generatePictureMetadata(pictureDetails);
+
+  if (metadata.title) {
+    document.title = metadata.title as string;
   }
 
-  // Handle description update
-  document
-    .querySelector('meta[name="description"]')
-    ?.setAttribute('content', metadata.description || '');
+  const metaTags: Record<string, string | undefined> = {
+    description: metadata.description || '',
+    'og:title': metadata.openGraph?.title as string,
+    'og:description': metadata.openGraph?.description || '',
+    'og:image': Array.isArray(metadata.openGraph?.images)
+      ? (metadata.openGraph?.images[0] as any).url
+      : (metadata.openGraph?.images as any).url,
+    'twitter:title': metadata.twitter?.title as string,
+    'twitter:description': metadata.twitter?.description || '',
+    'twitter:image': Array.isArray(metadata.twitter?.images)
+      ? (metadata.twitter?.images[0] as any).url
+      : (metadata.twitter?.images as any).url,
+  };
 
-  // Handle Open Graph image update
-  if (metadata.openGraph?.images) {
-    const ogImage = Array.isArray(metadata.openGraph.images)
-      ? metadata.openGraph.images[0]
-      : metadata.openGraph.images;
-    const ogImageMetaTag = document.querySelector('meta[property="og:image"]');
-    if (ogImageMetaTag) {
-      ogImageMetaTag.setAttribute('content', ogImage.toString());
-    } else {
-      const newOgImage = document.createElement('meta');
-      newOgImage.setAttribute('property', 'og:image');
-      newOgImage.setAttribute('content', ogImage.toString());
-      document.head.appendChild(newOgImage);
+  Object.keys(metaTags).forEach((key) => {
+    const metaTag =
+      document.querySelector(`meta[name="${key}"]`) ||
+      document.querySelector(`meta[property="${key}"]`);
+    if (metaTag && metaTags[key]) {
+      metaTag.setAttribute('content', metaTags[key] || '');
     }
-  }
-
-  // Handle Twitter image update
-  if (metadata.twitter?.images) {
-    const twitterImage = Array.isArray(metadata.twitter.images)
-      ? metadata.twitter.images[0]
-      : metadata.twitter.images;
-    const twitterImageMetaTag = document.querySelector(
-      'meta[name="twitter:image"]',
-    );
-    if (twitterImageMetaTag) {
-      twitterImageMetaTag.setAttribute('content', twitterImage.toString());
-    } else {
-      const newTwitterImage = document.createElement('meta');
-      newTwitterImage.setAttribute('name', 'twitter:image');
-      newTwitterImage.setAttribute('content', twitterImage.toString());
-      document.head.appendChild(newTwitterImage);
-    }
-  }
+  });
 }

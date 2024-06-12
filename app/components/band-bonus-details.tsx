@@ -1,8 +1,10 @@
+'use client';
+
 import { LinkType } from '@prisma/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
-import { robotoCondensed } from '../other/fonts';
+import { robotoCondensed } from '../lib/fonts';
 import LinksContextMenuButton from '../ui/linksContextMenuButton';
 
 const BandBonusDetails = ({
@@ -10,26 +12,28 @@ const BandBonusDetails = ({
 }: {
   pictureDetails: PictureWithRelationsAndUrl;
 }) => {
+  const [bioText, setBioText] = useState('No bio available, yet.');
+
+  useEffect(() => {
+    if (pictureDetails?.band) {
+      if (pictureDetails.band.bio && pictureDetails.band.bio2) {
+        setBioText(
+          Math.random() > 0.5
+            ? pictureDetails.band.bio
+            : pictureDetails.band.bio2,
+        );
+      } else if (pictureDetails.band.bio) {
+        setBioText(pictureDetails.band.bio);
+      } else if (pictureDetails.band.bio2) {
+        setBioText(pictureDetails.band.bio2);
+      }
+    }
+  }, [pictureDetails]);
+
   if (!pictureDetails) {
     return (
       <p className="text-center text-gray-500">Error loading band details.</p>
     );
-  }
-
-  // If only band.bio OR band.bio2 are populated, display that value.
-  // If both band.bio and band.bio2 are populated, then display one at random.
-  let bioText = 'No bio available, yet.';
-  if (pictureDetails.band) {
-    if (pictureDetails.band.bio && pictureDetails.band.bio2) {
-      bioText =
-        Math.random() > 0.5
-          ? pictureDetails.band.bio
-          : pictureDetails.band.bio2;
-    } else if (pictureDetails.band.bio) {
-      bioText = pictureDetails.band.bio;
-    } else if (pictureDetails.band.bio2) {
-      bioText = pictureDetails.band.bio2;
-    }
   }
 
   // Split the bio text into parts, using the band name as the separator
@@ -42,7 +46,7 @@ const BandBonusDetails = ({
       {pictureDetails.band ? (
         <div>
           <p
-            className={`w-full overflow-y-auto border-3 border-sub-text bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
+            className={`w-full overflow-y-auto border-4 border-sub-text bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
           >
             {bioParts.map((part, index) =>
               part.toLowerCase() === pictureDetails.band?.name.toLowerCase() ? (

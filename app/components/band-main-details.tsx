@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
@@ -17,7 +19,7 @@ const BandMainDetails = ({
     <div className="size-full">
       {pictureDetails.band ? (
         <div className="size-full flex-1 flex-col content-center items-center justify-end">
-          <h1 className="py-2 text-center text-3xl font-bold text-main-text">
+          <h1 className="py-2 text-center text-xl font-bold text-main-text lg:text-3xl">
             {pictureDetails.band.name}
           </h1>
           <p className="pb-2 text-center text-sm text-bonus-text md:pb-0">

@@ -1,3 +1,5 @@
+// lib/actions.ts
+
 import {
   type Band,
   type Link,
@@ -5,27 +7,40 @@ import {
   PrismaClient,
   type Venue,
 } from '@prisma/client';
-import { unstable_noStore as noStore } from 'next/cache';
 
 import { listFiles as listBlobFiles } from './blobs';
 import { listFiles as listS3Files } from './s3';
 
-// const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
 const prisma = new PrismaClient();
 
-// Define a type that reflects the structure including relationships
+const slugify = (text: string): string => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+};
+
+// Define the type for NonZinePicture
+export type NonZinePicture = Picture & {
+  url?: string | null;
+};
+
 export type PictureWithRelationsAndUrl = Picture & {
   band:
     | (Band & {
-        links: Link[]; // Include links as part of Band
+        links: Link[];
       })
-    | null; // Assuming Band can be null
+    | null;
   venue:
     | (Venue & {
-        links: Link[]; // Include links as part of Venue
+        links: Link[];
       })
-    | null; // Assuming Venue can be null
-  url?: string | null; // Added property for the blob URL
+    | null;
+  url?: string | null;
+  setSlug: string;
+  notZinePictures?: NonZinePicture[]; // Add this field to PictureWithRelationsAndUrl
 };
 
 const listFiles = async () => {
@@ -35,10 +50,9 @@ const listFiles = async () => {
   return listBlobFiles();
 };
 
-// gets all zine pictures, which would be featured on main page
 export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   try {
-    const pictures = await prisma.picture.findMany({
+    const zinePictures = await prisma.picture.findMany({
       where: { isZine: true },
       include: {
         band: { include: { links: true } },
@@ -47,75 +61,83 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
       orderBy: { takenAt: 'asc' },
     });
 
-    const files = await listFiles();
-    const fileMap = new Map(files.map((file) => [file.name, file.url]));
+    const bandVenuePairs = zinePictures
+      .map((picture) => ({
+        bandId: picture.bandId,
+        venueId: picture.venueId,
+      }))
+      .filter((pair) => pair.bandId && pair.venueId);
 
-    const picturesWithUrls = pictures.map((picture) => ({
-      ...picture,
-      url: fileMap.get(picture.filename) || null,
-    }));
-
-    return picturesWithUrls;
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-}
-
-// gets all additional pictures for a band if any are available
-export async function getBandPictures(
-  bandId: string,
-  venueId: string,
-): Promise<PictureWithRelationsAndUrl[]> {
-  try {
-    const pictures = await prisma.picture.findMany({
-      where: { bandId, venueId, isZine: false },
+    const nonZinePictures = await prisma.picture.findMany({
+      where: {
+        isZine: false,
+        OR: bandVenuePairs.map((pair) => ({
+          bandId: pair.bandId,
+          venueId: pair.venueId,
+        })),
+      },
       include: {
         band: { include: { links: true } },
         venue: { include: { links: true } },
       },
       orderBy: { takenAt: 'asc' },
     });
+
     const files = await listFiles();
     const fileMap = new Map(files.map((file) => [file.name, file.url]));
 
-    const picturesWithUrls = pictures.map((picture) => ({
-      ...picture,
-      url: fileMap.get(picture.filename) || null,
-    }));
+    type PictureWithRelations = Picture & {
+      band?: Band | null;
+      venue?: Venue | null;
+    };
 
-    return picturesWithUrls;
+    const mapPicturesWithUrls = (pictures: PictureWithRelations[]) =>
+      pictures.map((picture) => ({
+        ...picture,
+        url: fileMap.get(picture.filename) || null,
+        setSlug: `${picture.band?.slug}-${slugify(picture.venue?.name || '')}`,
+      }));
+
+    const zinePicturesWithUrls = mapPicturesWithUrls(
+      zinePictures,
+    ) as PictureWithRelationsAndUrl[];
+    const nonZinePicturesWithUrls = mapPicturesWithUrls(
+      nonZinePictures,
+    ) as NonZinePicture[];
+
+    const zinePictureMap = zinePicturesWithUrls.reduce(
+      (acc, picture) => {
+        const key = `${picture.bandId}-${picture.venueId}`;
+        acc[key] = picture;
+        return acc;
+      },
+      {} as Record<string, PictureWithRelationsAndUrl>,
+    );
+
+    nonZinePicturesWithUrls.forEach((picture) => {
+      const key = `${picture.bandId}-${picture.venueId}`;
+      if (zinePictureMap[key]) {
+        if (!zinePictureMap[key].notZinePictures) {
+          zinePictureMap[key].notZinePictures = [];
+        }
+        zinePictureMap[key].notZinePictures!.push(picture);
+      }
+    });
+
+    return Object.values(zinePictureMap);
   } catch (e) {
     console.error(e);
     throw e;
   }
 }
 
-// Update the function to accept a boolean flag for fetching Blob URLs
-export async function getPictureDetails(
-  bandSlug: string,
-  fetchBlobUrl: boolean = false,
-): Promise<PictureWithRelationsAndUrl | null> {
-  noStore();
-  try {
-    const picture = await prisma.picture.findFirst({
-      where: { band: { slug: bandSlug } },
-      include: {
-        band: { include: { links: true } },
-        venue: { include: { links: true } },
-      },
-    });
+let cachedZinePictures: PictureWithRelationsAndUrl[] | null = null;
 
-    if (picture && fetchBlobUrl) {
-      const files = await listFiles();
-      const fileMap = new Map(files.map((file) => [file.name, file.url]));
-      const url = fileMap.get(picture.filename) || null; // Assuming 'filename' is a field in the Picture model
-      return { ...picture, url }; // Return the picture with the URL
-    }
-
-    return picture; // Return the picture without URL if not requested
-  } catch (e) {
-    console.error(e);
-    throw e;
+export async function fetchZinePictures(): Promise<
+  PictureWithRelationsAndUrl[]
+> {
+  if (!cachedZinePictures) {
+    cachedZinePictures = await getZinePictures();
   }
+  return cachedZinePictures;
 }
