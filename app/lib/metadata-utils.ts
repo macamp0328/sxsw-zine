@@ -45,7 +45,7 @@ export function generatePictureMetadata(
     `${bandName}! This is from their performance at ${venueName} during SXSW 2024!`;
 
   return {
-    title: `${bandName}!! | Miles's SXSW 2024`,
+    title: `${bandName} | Miles's SXSW 2024`,
     description,
     openGraph: {
       type: 'article',
