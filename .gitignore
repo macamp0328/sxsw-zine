@@ -6,7 +6,7 @@
 duck2/AppData/Local/Temp/node-jiti/*
 /prisma/scripts/images/*
 notepad.md
-/app/test
+/app/test*
 
 # dependencies
 /node_modules
