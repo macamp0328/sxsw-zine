@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       'Dive into the raw, unpolished beauty of SXSW 2024. Captured with a small camera, this digital zine is a tribute to the pulsating rhythm of live music and the artists who create it.',
     images: [
       {
-        url: 'https://www.campmiles.com/photos/header-miles.jpg',
+        url: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`,
         alt: "Cover image for Miles's SXSW 2024 Zine",
       },
     ],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       'Join Miles on a journey through SXSW 2024. This digital zine, captured with a Ricoh GR II, is a raw, unfiltered celebration of live music and the artists who bring it to life.',
     images: [
       {
-        url: 'https://www.campmiles.com/photos/header-miles.jpg',
+        url: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`,
         alt: "Cover image for Miles's SXSW 2024 Zine",
       },
     ],
