@@ -30,11 +30,11 @@ export default function PhotoGallery({
         <BandMainDetails pictureDetails={zinePicture} />
       </div>
       <div className="relative flex grow flex-col items-center justify-center md:pb-12">
-        <div className="mb-8 size-full grow">
+        <div className="mb-2 size-full grow xs:mb-8">
           <BandPhoto pictureDetails={zinePicture} />
         </div>
         {zinePicture.band && zinePicture.notZinePictures && (
-          <div className="absolute bottom-0 z-10 mb-4">
+          <div className="mb-2 xs:absolute xs:bottom-0 xs:z-10 xs:mb-4">
             <Thumbnails
               notZinePictures={zinePicture.notZinePictures}
               band={zinePicture.band}

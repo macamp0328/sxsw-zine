@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '380px',
+      },
       colors: {
         background: 'var(--background)',
         'bonus-text': colors.zinc[600],

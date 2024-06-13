@@ -17,12 +17,12 @@ export default function Thumbnails({
   }
 
   return (
-    <div className="flex items-center justify-center space-x-2 overflow-hidden ">
+    <div className="flex flex-wrap items-center justify-center space-x-2 overflow-hidden">
       {notZinePictures.slice(0, 8).map((picture) =>
         picture.url ? (
           <div
             key={picture.id}
-            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-2 border-sub-background md:min-w-24"
+            className="relative flex aspect-square min-w-12 shrink grow-0 rounded-md border-2 border-sub-background xs:min-w-16 md:min-w-24"
           >
             <ImageOverlay
               src={picture.url}

@@ -21,7 +21,7 @@ const LinksContextMenuButton: React.FC<LinksContextMenuButtonProps> = ({
       <button
         type="button"
         onClick={toggleMenu}
-        className="bg-main-text p-2 text-sm text-sub-background underline decoration-sub-background decoration-solid decoration-1 underline-offset-8 transition-colors hover:bg-gray-900 xl:p-4"
+        className="bg-main-text p-1 text-xs text-sub-background transition-colors hover:bg-gray-900 xs:p-2 xs:text-sm xs:underline xs:decoration-sub-background xs:decoration-solid xs:decoration-1 xs:underline-offset-8 xl:p-4"
       >
         {title}
       </button>
