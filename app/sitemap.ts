@@ -1,12 +1,29 @@
 import type { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+import { fetchZinePictures } from './lib/actions';
+
+const BASE_URL = 'https://campmiles.com';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const zinePictures = await fetchZinePictures();
+
+  const links = [
     {
-      url: 'https://miless-sxsw.vercel.app/',
+      url: BASE_URL,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'yearly' as const,
       priority: 1,
     },
   ];
+
+  zinePictures.forEach((zinePicture) => {
+    links.push({
+      url: `${BASE_URL}/${zinePicture.setSlug}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.9,
+    });
+  });
+
+  return links;
 }

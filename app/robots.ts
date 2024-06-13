@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://miless-sxsw.vercel.app/sitemap.xml',
+    sitemap: 'https://campmiles.com/sitemap.xml',
   };
 }
