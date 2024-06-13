@@ -47,7 +47,7 @@ const BandBonusDetails = ({
         <div>
           <div className="squiggle-texture-overlay relative w-full space-y-3 border-4 border-sub-text bg-sub-background p-2 md:my-3 md:p-3">
             <p
-              className={`text-center text-sm text-bonus-text ${robotoCondensed.className} z-10`}
+              className={`text-center text-sm text-bonus-text ${robotoCondensed.className}`}
             >
               {bioParts.map((part, index) =>
                 part.toLowerCase() ===
