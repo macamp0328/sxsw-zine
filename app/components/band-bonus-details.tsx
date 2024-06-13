@@ -45,7 +45,7 @@ const BandBonusDetails = ({
     <div className="w-full">
       {pictureDetails.band ? (
         <div>
-          <div className="squiggle-texture-overlay relative w-full border-4 border-sub-text bg-sub-background p-3 md:my-5 md:p-5">
+          <div className="squiggle-texture-overlay relative w-full space-y-3 border-4 border-sub-text bg-sub-background p-2 md:my-3 md:p-3">
             <p
               className={`text-center text-sm text-bonus-text ${robotoCondensed.className} z-10`}
             >
@@ -60,8 +60,11 @@ const BandBonusDetails = ({
                 ),
               )}
             </p>
+            <p className="text-center text-sm text-bonus-text">
+              listen to: <strong>coming very soon</strong>
+            </p>
           </div>
-          <div className="mt-8 flex justify-around gap-1 text-center md:flex-col md:gap-3">
+          <div className="mt-6 flex justify-around gap-1 text-center md:flex-col md:gap-3">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
                 (link) =>

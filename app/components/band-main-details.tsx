@@ -19,13 +19,16 @@ const BandMainDetails = ({
     <div className="size-full">
       {pictureDetails.band ? (
         <div className="size-full flex-1 flex-col content-center items-center justify-end">
-          <h1 className="py-2 text-center text-xl font-bold text-main-text lg:text-3xl">
+          <h1 className="text-center text-xl font-bold text-main-text lg:text-3xl">
             {pictureDetails.band.name}
           </h1>
-          <p className="pb-2 text-center text-sm text-bonus-text md:pb-0">
-            {pictureDetails.band.genre || 'Genre not specified'}
+          <p className="mb-4 text-center text-xs text-bonus-text md:pb-0 lg:text-sm">
+            {`(${pictureDetails.band.origin})`}
           </p>
-          <div className="flex w-full content-center items-center justify-between px-4 text-center md:flex-col">
+          <p className="mb-1 text-center text-sm text-bonus-text md:pb-0">
+            {pictureDetails.band.genre?.toLowerCase() ?? 'Genre not specified'}
+          </p>
+          <div className="flex w-full content-center items-center justify-around pb-2 text-center md:flex-col">
             {pictureDetails.venue && (
               <p className="text-sm text-sub-text">
                 {pictureDetails.venue.name}
