@@ -22,13 +22,14 @@ export default function Thumbnails({
         picture.url ? (
           <div
             key={picture.id}
-            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-3 border-sub-background md:min-w-24"
+            className="relative flex aspect-square min-w-16 shrink grow-0 rounded-md border-2 border-sub-background md:min-w-24"
           >
             <ImageOverlay
               src={picture.url}
               alt={`Photo of ${band.name} taken on ${picture.takenAt}`}
               className="rounded-md object-cover" // Adjusted to cover for thumbnail effect
               isRotate
+              sizes="25vw"
             />
           </div>
         ) : null,

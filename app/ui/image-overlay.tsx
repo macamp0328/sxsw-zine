@@ -16,6 +16,8 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
   alt,
   isRotate = false,
   className,
+  sizes = '100vw',
+  quality = 100,
   ...props
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -65,8 +67,9 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
           src={src}
           alt={alt}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={sizes}
           className={imageClass}
+          quality={quality}
           {...props}
         />
       </div>
