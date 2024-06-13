@@ -18,7 +18,7 @@ export default function PhotoGallery({
   return (
     <div
       id={zinePicture.setSlug}
-      className=" texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-16"
+      className=" texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:px-8 md:pt-24 lg:pt-20"
     >
       <div>
         <ScrollURLUpdater
@@ -42,11 +42,11 @@ export default function PhotoGallery({
           </div>
         )}
       </div>
-      <div className="hidden w-1/4 flex-col pb-16 pr-8 md:flex">
+      <div className="hidden w-1/4 flex-col pb-16 pr-16 md:flex">
         <div className="flex-1">
           <BandMainDetails pictureDetails={zinePicture} />
         </div>
-        <div className=" flex-1">
+        <div className="flex-1">
           <BandBonusDetails pictureDetails={zinePicture} />
         </div>
       </div>
