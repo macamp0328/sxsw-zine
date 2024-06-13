@@ -1,6 +1,6 @@
 # sxsw-zine
 
-currently deploayed at: https://miless-sxsw.vercel.app/
+currently deploayed at: https://campmiles.com
 
 ## Project Goals
 - explore using next.js and Vercel tooling
