@@ -15,10 +15,7 @@ const config: Config = {
         xs: '380px',
       },
       colors: {
-        background: 'var(--background)',
-        'bonus-text': colors.zinc[600],
-        'button-background': 'var(--button-background)',
-        'button-text': 'var(--button-text)',
+        'bonus-text': colors.zinc[700],
         'main-text': colors.slate[900],
         'sub-background': colors.slate[300],
         'sub-text': colors.stone[700],

@@ -6,14 +6,12 @@ interface LinksContextMenuProps {
   isOpen: boolean;
   onClose: () => void;
   links: { url: string; platform: string }[];
-  isLeftButton?: boolean;
 }
 
 const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
   isOpen,
   onClose,
   links,
-  isLeftButton = true,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,8 +30,8 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
 
   return (
     <div
-      className={`${isOpen ? 'block' : 'hidden'} absolute z-10 mt-2 bg-gray-800 text-white shadow-lg`}
-      style={{ bottom: '0%', [isLeftButton ? 'left' : 'right']: '0%' }}
+      className={`${isOpen ? 'block' : 'hidden'} button-texture-overlay absolute z-10 mt-2 bg-main-text text-xs text-sub-background xs:text-sm`}
+      style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)' }}
     >
       <div ref={ref} className="flex flex-col">
         {links.map((link) => (
@@ -42,7 +40,7 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 text-small transition-colors hover:bg-gray-700"
+            className="px-4 py-2 text-xs transition-colors hover:bg-gray-700 xs:text-sm"
           >
             {link.platform.replace(/_/g, ' ')}
           </a>

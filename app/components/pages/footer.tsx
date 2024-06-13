@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <div
       id="footer"
-      className="flex min-h-screen snap-start snap-always flex-col items-center justify-center md:px-32"
+      className="texture-overlay flex min-h-screen snap-start snap-always flex-col items-center justify-center md:px-32"
     >
       <p className="text-center text-main-text">
         You&apos;ve reached the end of the almost 50 sets.

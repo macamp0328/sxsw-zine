@@ -45,19 +45,22 @@ const BandBonusDetails = ({
     <div className="w-full">
       {pictureDetails.band ? (
         <div>
-          <p
-            className={`w-full overflow-y-auto border-4 border-sub-text bg-sub-background p-3 text-center text-sm text-bonus-text md:my-5 md:p-5 ${robotoCondensed.className}`}
-          >
-            {bioParts.map((part, index) =>
-              part.toLowerCase() === pictureDetails.band?.name.toLowerCase() ? (
-                // eslint-disable-next-line react/no-array-index-key
-                <strong key={part + index}>{part}</strong>
-              ) : (
-                // eslint-disable-next-line react/no-array-index-key
-                <span key={part + index}>{part}</span>
-              ),
-            )}
-          </p>
+          <div className="squiggle-texture-overlay relative w-full border-4 border-sub-text bg-sub-background p-3 md:my-5 md:p-5">
+            <p
+              className={`text-center text-sm text-bonus-text ${robotoCondensed.className} z-10`}
+            >
+              {bioParts.map((part, index) =>
+                part.toLowerCase() ===
+                pictureDetails.band?.name.toLowerCase() ? (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <strong key={part + index}>{part}</strong>
+                ) : (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <span key={part + index}>{part}</span>
+                ),
+              )}
+            </p>
+          </div>
           <div className="mt-8 flex justify-around gap-1 text-center md:flex-col md:gap-3">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
@@ -66,7 +69,7 @@ const BandBonusDetails = ({
                   link.linkType === LinkType.Profile,
               ) && (
                 <LinksContextMenuButton
-                  title="Socials"
+                  title="socials"
                   links={pictureDetails.band.links.filter(
                     (link) =>
                       link.linkType === LinkType.Socials ||
@@ -80,7 +83,7 @@ const BandBonusDetails = ({
                 (link) => link.linkType === LinkType.Streaming,
               ) && (
                 <LinksContextMenuButton
-                  title="Streaming"
+                  title="streaming"
                   links={pictureDetails.band.links.filter(
                     (link) => link.linkType === LinkType.Streaming,
                   )}
@@ -92,7 +95,7 @@ const BandBonusDetails = ({
                 (link) => link.linkType === LinkType.Internet,
               ) && (
                 <LinksContextMenuButton
-                  title="Internet"
+                  title="website"
                   links={pictureDetails.band.links.filter(
                     (link) => link.linkType === LinkType.Internet,
                   )}

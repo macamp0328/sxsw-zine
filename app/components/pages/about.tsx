@@ -18,9 +18,9 @@ export default function About() {
   return (
     <div
       id="about"
-      className={`flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
+      className={`texture-overlay flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
-      <div className="flex size-full bg-sub-background p-2 shadow-xl md:hidden">
+      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 shadow-xl md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={drummingImageUrl}
@@ -43,7 +43,7 @@ export default function About() {
           listen, and follow counts.
         </p>
       </div>
-      <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
+      <div className="squiggle-texture-overlay m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
         <div className="relative size-full min-h-[300px]">
           <ImageOverlay
             src={drummingImageUrl}
@@ -54,7 +54,7 @@ export default function About() {
           />
         </div>
       </div>
-      <div className="m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
+      <div className="squiggle-texture-overlay m-2 hidden size-full bg-sub-background p-6 shadow-2xl md:flex">
         <div className="relative size-full min-h-[300px]">
           <ImageOverlay
             src={nickelImageUrl}
@@ -77,7 +77,7 @@ export default function About() {
           town—or inspire you to visit their country.
         </p>
       </div>
-      <div className="flex size-full bg-sub-background p-2 shadow-xl md:hidden">
+      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 shadow-xl md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={nickelImageUrl}

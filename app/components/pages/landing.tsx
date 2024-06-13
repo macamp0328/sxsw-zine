@@ -8,7 +8,7 @@ export default function Landing() {
   return (
     <div
       id="landing"
-      className="flex h-svh w-full snap-start snap-normal flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch"
+      className="texture-overlay flex h-svh w-full snap-start snap-normal flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch"
     >
       {/* <ScrollURLUpdater urlSegment="landing" /> */}
       <div className="flex w-full flex-initial basis-1/4 flex-col items-center justify-end md:flex-auto md:justify-center">

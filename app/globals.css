@@ -4,13 +4,79 @@
 
 
 :root {
-  --background: rgba(244, 244, 244, 1);
-  --big-shadow: 0px 4px 4.5px 0px rgba(158, 156, 156, 0.5);
-  --bonus-text: rgba(14, 14, 14, 1);
-  --button-background: rgba(208, 167, 167, 1);
-  --button-text: rgba(65, 54, 54, 1);
-  --main-text: rgba(64, 64, 64, 1);
-  --other-shadow: 0px 2px 2px 0px rgba(64, 64, 64, 0.5);
-  --sub-background: rgba(165, 164, 164, 1);
-  --sub-text: rgba(158, 156, 156, 1);
+}
+
+
+/* styles/globals.css */
+@layer components {
+  .texture-overlay{
+    position: relative;
+    overflow: hidden;
+  }
+
+  .texture-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/backgrounds/gravel.webp');
+    background-repeat: repeat; /* Make the pattern repeat */
+    background-size: auto; /* Keep the natural size of the pattern */
+    background-position: center;
+    opacity: 0.3; /* Adjust opacity as needed */
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0; /* Ensure it's behind other content */
+  }
+
+  .squiggle-texture-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .squiggle-texture-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/backgrounds/45degree_fabric.webp');
+    background-repeat: repeat; /* Make the pattern repeat */
+    background-size: auto; /* Keep the natural size of the pattern */
+    background-position: center;
+    opacity: 0.4; /* Adjust opacity as needed */
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0; /* Ensure it's behind other content */
+  }
+
+  .button-texture-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button-texture-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/backgrounds/memphis-mini.webp');
+    background-repeat: repeat; /* Make the pattern repeat */
+    background-size: auto; /* Keep the natural size of the pattern */
+    background-position: center;
+    opacity: 0.4; /* Adjust opacity as needed */
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0; /* Ensure it's behind other content */
+  }  
+
+  h1, p, a {
+    position: relative;
+    z-index: 1; /* Place the content above the texture */
+  }  
 }
