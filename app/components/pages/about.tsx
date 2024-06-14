@@ -2,7 +2,7 @@
 
 import type { Metadata } from 'next';
 
-import { robotoCondensed } from '../../lib/fonts';
+import { cutiveMono, robotoCondensed } from '../../lib/fonts';
 import ImageOverlay from '../../ui/image-overlay';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function About() {
       id="about"
       className={`texture-overlay flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
-      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 shadow-xl md:hidden">
+      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={drummingImageUrl}
@@ -77,7 +77,7 @@ export default function About() {
           town—or inspire you to visit their country.
         </p>
       </div>
-      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 shadow-xl md:hidden">
+      <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
             src={nickelImageUrl}
@@ -88,37 +88,12 @@ export default function About() {
           />
         </div>
       </div>
-      <div className="flex size-full flex-col items-center justify-center p-6 md:pl-12">
-        <p className="mt-6 w-full text-center text-base text-main-text md:hidden md:text-lg">
-          <b>Footnote 1:</b> For the bands featured, these photos are yours for
-          the taking. Hit me up. This zine is for you, by you, and is a
-          heartfelt thank you for filling our city with your music.
-        </p>
-        <p className="mt-6 w-full text-center text-base text-main-text md:hidden md:text-lg">
-          <b>Footnote 2:</b> This site is also my playground for experimenting
-          with new webdev frameworks and tooling—a casual project to remember
-          the times before social media. Stay tuned for blog posts where
-          I&apos;ll nerd out about the technical details. In the meantime,{' '}
-          <a
-            href="https://github.com/macamp0328/sxsw-zine"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center text-sub-text underline"
-          >
-            check out the repo!
-          </a>
-        </p>
-        <p className="mt-6 w-full text-center text-base text-main-text md:hidden md:text-lg">
-          <b>Footnote 3:</b> I utilized AI to help write the descriptions about
-          the artists.
-        </p>
-      </div>
-      <div className="hidden size-full flex-col items-center justify-start p-6 md:col-span-2 md:flex">
-        <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
+      <div className=" size-full flex-col items-center justify-start p-6 md:col-span-2 md:flex md:px-12">
+        <p className="mt-6 w-full text-center text-base text-main-text md:text-lg">
           <b>Footnote 1:</b> For the bands featured, these photos are yours for
           the taking. Just click the download button.
         </p>
-        <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
+        <p className="mt-6 w-full text-center text-base text-main-text md:text-lg">
           <b>Footnote 2:</b> This site is also a playground. Stay tuned for blog
           posts about technical details. In the meantime,{' '}
           <a
@@ -130,9 +105,16 @@ export default function About() {
             check out the repo!
           </a>
         </p>
-        <p className="mt-6 w-full text-center text-sm text-main-text md:text-lg">
+        <p className="mt-6 w-full text-center text-base text-main-text md:text-lg">
           <b>Footnote 3:</b> I utilized AI to help write the descriptions about
           the artists.
+        </p>
+      </div>
+      <div className="mt-12 w-full justify-center text-center md:col-span-2 md:text-3xl">
+        <p
+          className={`animate-bounce text-lg text-sub-text ${cutiveMono.className}`}
+        >
+          <strong>Come on now, just keep scrolling.</strong>
         </p>
       </div>
     </div>

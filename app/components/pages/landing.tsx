@@ -19,7 +19,7 @@ export default function Landing() {
           through my lens.
         </h1>
         <div className="mb-12 hidden w-full flex-initial items-end justify-center md:flex md:flex-1">
-          <p className="animate-bounce text-base text-sub-text">
+          <p className="animate-bounce text-lg text-sub-text">
             Go ahead, take a scroll.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function Landing() {
         </div>
       </div>
       <div className="mb-12 flex w-full flex-initial basis-1/6 items-end justify-center md:hidden">
-        <p className="animate-bounce text-base text-sub-text md:hidden">
+        <p className="animate-bounce text-lg text-sub-text md:hidden">
           Go ahead, take a scroll.
         </p>
       </div>
