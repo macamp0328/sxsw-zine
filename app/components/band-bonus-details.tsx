@@ -64,7 +64,7 @@ const BandBonusDetails = ({
               listen to: <strong>coming soon...</strong>
             </p>
           </div>
-          <div className="mt-6 flex justify-around gap-1 text-center md:flex-col md:gap-3">
+          <div className="mt-6 flex justify-around gap-1 text-center md:flex-col md:gap-2">
             {pictureDetails.band &&
               pictureDetails.band.links.some(
                 (link) =>

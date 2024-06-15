@@ -19,7 +19,11 @@ const DownloadBandPicturesButton: React.FC<DownloadButtonProps> = ({
    * Handles the download click event.
    * Fetches the zip file from the server and triggers the download.
    */
-  const handleDownloadClick = async () => {
+  const handleDownloadClick = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+
     startTransition(async () => {
       try {
         const response = await fetch('/api/download-images', {
