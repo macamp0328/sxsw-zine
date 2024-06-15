@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import type { Readable } from 'stream';
 
-import { getBandFilenames } from '@/app/lib/actions'; // Import the function to get filenames
+import { getBandFilenames } from '@/app/lib/actions';
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
