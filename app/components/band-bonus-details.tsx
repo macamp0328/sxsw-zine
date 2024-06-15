@@ -61,7 +61,7 @@ const BandBonusDetails = ({
               )}
             </p>
             <p className="text-center text-sm text-bonus-text">
-              listen to: <strong>coming very soon</strong>
+              listen to: <strong>coming soon...</strong>
             </p>
           </div>
           <div className="mt-6 flex justify-around gap-1 text-center md:flex-col md:gap-3">

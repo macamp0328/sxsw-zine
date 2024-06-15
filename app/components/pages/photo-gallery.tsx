@@ -6,7 +6,8 @@ import BandBonusDetails from '@/app/components/band-bonus-details';
 import BandMainDetails from '@/app/components/band-main-details';
 import BandPhoto from '@/app/components/band-photo';
 import Thumbnails from '@/app/components/thumbnails';
-import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
+import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
+import DownloadBandPicturesButton from '@/app/ui/downloadBandPicturesButton';
 
 import ScrollURLUpdater from '../scroll-url-updater';
 
@@ -18,7 +19,7 @@ export default function PhotoGallery({
   return (
     <div
       id={zinePicture.setSlug}
-      className=" texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-20"
+      className="texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8 md:pt-24 lg:pt-20"
     >
       <div>
         <ScrollURLUpdater
@@ -39,6 +40,10 @@ export default function PhotoGallery({
               notZinePictures={zinePicture.notZinePictures}
               band={zinePicture.band}
             />
+            {/* Add the download button here */}
+            <div className="mt-2 flex justify-center">
+              <DownloadBandPicturesButton bandId={zinePicture.band.id} />
+            </div>
           </div>
         )}
       </div>

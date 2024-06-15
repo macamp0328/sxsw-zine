@@ -1,4 +1,4 @@
-// lib/actions.ts
+'use server';
 
 import {
   type Band,
@@ -13,6 +13,35 @@ import { listFiles as listS3Files } from './s3';
 
 const prisma = new PrismaClient();
 
+/**
+ * Fetches filenames of pictures associated with a specific band.
+ * @param bandId - The ID of the band.
+ * @returns A list of filenames.
+ */
+export async function getBandFilenames(bandId: string): Promise<string[]> {
+  try {
+    const pictures = await prisma.picture.findMany({
+      where: { bandId },
+      select: { filename: true },
+    });
+
+    const files = await listS3Files();
+    const filenames = pictures.map((picture) => picture.filename);
+
+    return files
+      .filter((file) => filenames.includes(file.name))
+      .map((file) => file.name);
+  } catch (error) {
+    console.error('Error fetching band filenames:', error);
+    throw new Error('Failed to fetch band filenames');
+  }
+}
+
+/**
+ * Slugifies a given text.
+ * @param text - The text to slugify.
+ * @returns The slugified text.
+ */
 const slugify = (text: string): string => {
   return text
     .toLowerCase()
@@ -22,7 +51,6 @@ const slugify = (text: string): string => {
     .replace(/-+/g, '-');
 };
 
-// Define the type for NonZinePicture
 export type NonZinePicture = Picture & {
   url?: string | null;
 };
@@ -40,9 +68,13 @@ export type PictureWithRelationsAndUrl = Picture & {
     | null;
   url?: string | null;
   setSlug: string;
-  notZinePictures?: NonZinePicture[]; // Add this field to PictureWithRelationsAndUrl
+  notZinePictures?: NonZinePicture[];
 };
 
+/**
+ * Lists files based on the storage type.
+ * @returns A list of files.
+ */
 const listFiles = async () => {
   if (process.env.STORAGE_TYPE === 's3') {
     return listS3Files();
@@ -50,6 +82,10 @@ const listFiles = async () => {
   return listBlobFiles();
 };
 
+/**
+ * Fetches and maps pictures with their relations and URLs.
+ * @returns A list of pictures with relations and URLs.
+ */
 export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   try {
     const zinePictures = await prisma.picture.findMany({
@@ -125,14 +161,18 @@ export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
     });
 
     return Object.values(zinePictureMap);
-  } catch (e) {
-    console.error(e);
-    throw e;
+  } catch (error) {
+    console.error('Error fetching zine pictures:', error);
+    throw new Error('Failed to fetch zine pictures');
   }
 }
 
 let cachedZinePictures: PictureWithRelationsAndUrl[] | null = null;
 
+/**
+ * Fetches zine pictures with caching.
+ * @returns A list of cached zine pictures.
+ */
 export async function fetchZinePictures(): Promise<
   PictureWithRelationsAndUrl[]
 > {
