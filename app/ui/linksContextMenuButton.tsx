@@ -6,7 +6,13 @@ import LinksContextMenu from './linksContextMenu';
 
 interface LinksContextMenuButtonProps {
   title: string;
-  links: { url: string; platform: string }[];
+  links: {
+    id: string;
+    url: string;
+    platform: string;
+    bandId: string;
+    band: string;
+  }[];
 }
 
 const LinksContextMenuButton: React.FC<LinksContextMenuButtonProps> = ({

@@ -30,6 +30,21 @@ const DownloadBandPicturesButton: React.FC<DownloadButtonProps> = ({
     setIsPending(true);
 
     try {
+      // Record the download click
+      await fetch('/api/track-link-click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          linkType: 'downloadPictures',
+          bandId,
+          band: bandName,
+          url: window.location.href,
+        }),
+      });
+
+      // Fetch the zip file
       const response = await fetch('/api/download-images', {
         method: 'POST',
         headers: {

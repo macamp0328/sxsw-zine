@@ -1,5 +1,6 @@
 'use client';
 
+import type { Link } from '@prisma/client';
 import { LinkType } from '@prisma/client';
 import React, { useEffect, useState } from 'react';
 
@@ -41,6 +42,15 @@ const BandBonusDetails = ({
     new RegExp(`(${pictureDetails.band?.name})`, 'gi'),
   );
 
+  const transformLinks = (links: Link[]) =>
+    links.map((link) => ({
+      id: link.id,
+      url: link.url,
+      platform: link.platform,
+      bandId: pictureDetails.band?.id ?? '',
+      band: pictureDetails.band?.name ?? '',
+    }));
+
   return (
     <div className="w-full">
       {pictureDetails.band ? (
@@ -65,45 +75,48 @@ const BandBonusDetails = ({
             </p>
           </div>
           <div className="mt-6 flex justify-around gap-1 text-center md:flex-col md:gap-2">
-            {pictureDetails.band &&
-              pictureDetails.band.links.some(
-                (link) =>
-                  link.linkType === LinkType.Socials ||
-                  link.linkType === LinkType.Profile,
-              ) && (
-                <LinksContextMenuButton
-                  title="socials"
-                  links={pictureDetails.band.links.filter(
+            {pictureDetails.band.links.some(
+              (link) =>
+                link.linkType === LinkType.Socials ||
+                link.linkType === LinkType.Profile,
+            ) && (
+              <LinksContextMenuButton
+                title="socials"
+                links={transformLinks(
+                  pictureDetails.band.links.filter(
                     (link) =>
                       link.linkType === LinkType.Socials ||
                       link.linkType === LinkType.Profile,
-                  )}
-                />
-              )}
+                  ),
+                )}
+              />
+            )}
 
-            {pictureDetails.band &&
-              pictureDetails.band.links.some(
-                (link) => link.linkType === LinkType.Streaming,
-              ) && (
-                <LinksContextMenuButton
-                  title="streaming"
-                  links={pictureDetails.band.links.filter(
+            {pictureDetails.band.links.some(
+              (link) => link.linkType === LinkType.Streaming,
+            ) && (
+              <LinksContextMenuButton
+                title="streaming"
+                links={transformLinks(
+                  pictureDetails.band.links.filter(
                     (link) => link.linkType === LinkType.Streaming,
-                  )}
-                />
-              )}
+                  ),
+                )}
+              />
+            )}
 
-            {pictureDetails.band &&
-              pictureDetails.band.links.some(
-                (link) => link.linkType === LinkType.Internet,
-              ) && (
-                <LinksContextMenuButton
-                  title="website"
-                  links={pictureDetails.band.links.filter(
+            {pictureDetails.band.links.some(
+              (link) => link.linkType === LinkType.Internet,
+            ) && (
+              <LinksContextMenuButton
+                title="website"
+                links={transformLinks(
+                  pictureDetails.band.links.filter(
                     (link) => link.linkType === LinkType.Internet,
-                  )}
-                />
-              )}
+                  ),
+                )}
+              />
+            )}
           </div>
         </div>
       ) : (

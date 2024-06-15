@@ -1,4 +1,5 @@
 import { robotoCondensed } from '@/app/lib/fonts';
+import TrackedLink from '@/app/ui/trackedLink';
 
 export default function Footer() {
   return (
@@ -23,14 +24,13 @@ export default function Footer() {
           GitHub. I am treating this as a sandbox, so it will continue to
           evolve.
         </p>
-        <a
+        <TrackedLink
           href="https://github.com/macamp0328/sxsw-zine"
-          target="_blank"
-          rel="noopener noreferrer"
+          linkType="footerLink"
           className={`text-center text-lg text-sub-text underline ${robotoCondensed.className}`}
         >
           GitHub Repository
-        </a>
+        </TrackedLink>
       </div>
       <div className="squiggle-texture-overlay relative mx-4 my-3 w-full border-4 border-sub-text bg-sub-background p-3">
         <p className=" text-center text-base text-main-text">
@@ -39,15 +39,13 @@ export default function Footer() {
           translator between users, technical teams, and cross-functional
           stakeholders, with a simple goal: to help builders build. I appreciate
           your time, but also your help.{' '}
-          <a
+          <TrackedLink
             href="https://drive.google.com/file/d/1C4wY320KbWoiEtrAzZuYfyVY8yizbT2b/view?usp=drive_link"
-            target="_blank"
-            rel="noopener noreferrer"
+            linkType="footerLink"
             className="text-center underline"
           >
-            {' '}
             <strong>Feel free to send my resume to anyone!</strong>
-          </a>
+          </TrackedLink>
         </p>
       </div>
       <div className="flex-col items-center justify-center pb-4 sm:mt-8">
@@ -55,23 +53,21 @@ export default function Footer() {
           className={`text-center text-lg text-sub-text  ${robotoCondensed.className}`}
         >
           Other places you can find me:{' '}
-          <a
+          <TrackedLink
             href="https://www.instagram.com/twitterlessmiles/"
-            target="_blank"
-            rel="noopener noreferrer"
+            linkType="footerLink"
             className="text-center text-lg underline"
           >
             @twitterlessmiles
-          </a>
+          </TrackedLink>
           {', '}
-          <a
+          <TrackedLink
             href="https://www.linkedin.com/in/milescamp/"
-            target="_blank"
-            rel="noopener noreferrer"
+            linkType="footerLink"
             className="text-center text-lg underline"
           >
             linkedin
-          </a>
+          </TrackedLink>
           , or we could just hang out like humans.
         </p>
       </div>

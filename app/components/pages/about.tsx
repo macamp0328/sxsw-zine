@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 
 import { cutiveMono, robotoCondensed } from '../../lib/fonts';
 import ImageOverlay from '../../ui/image-overlay';
+import TrackedLink from '../../ui/trackedLink';
 
 export const metadata: Metadata = {
   title: 'Abouts',
@@ -96,14 +97,13 @@ export default function About() {
         <p className="mt-6 w-full text-center text-base text-main-text md:text-lg">
           <b>Footnote 2:</b> This site is also a playground. Stay tuned for blog
           posts about technical details. In the meantime,{' '}
-          <a
+          <TrackedLink
             href="https://github.com/macamp0328/sxsw-zine"
-            target="_blank"
-            rel="noopener noreferrer"
+            linkType="aboutLink"
             className="text-center text-sub-text underline"
           >
             check out the repo!
-          </a>
+          </TrackedLink>
         </p>
         <p className="mt-6 w-full text-center text-base text-main-text md:text-lg">
           <b>Footnote 3:</b> I utilized AI to help write the descriptions about

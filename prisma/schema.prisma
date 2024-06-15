@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["multiSchema"]
@@ -25,6 +22,7 @@ model Band {
 
   pictures        Picture[]
   links           Link[]
+  linkClicks      LinkClick[] @relation("BandLinkClicks")
 
   @@schema("public")
 }
@@ -93,9 +91,18 @@ enum LinkType {
   @@schema("public")
 }
 
+enum LinkClickType {
+  linksLink
+  downloadPictures
+  aboutLink
+  footerLink  
+
+  @@schema("public")
+}
+
 model Link {
   id          String   @id @default(uuid())
-  url         String @db.VarChar(255)
+  url         String   @db.VarChar(255)
   platform    Platform
   linkType    LinkType
 
@@ -104,6 +111,24 @@ model Link {
 
   band        Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull)
   venue       Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
+  linkClicks  LinkClick[] @relation("LinkLinkClicks")
+
+  @@schema("public")
+}
+
+model LinkClick {
+  id          String   @id @default(uuid())
+  linkId      String?
+  link        Link?    @relation(fields: [linkId], references: [id], onDelete: SetNull, name: "LinkLinkClicks")
+  url         String?  @db.VarChar(255)
+  linkType    LinkClickType
+  bandId      String?  
+  band        Band?    @relation(fields: [bandId], references: [id], onDelete: SetNull, name: "BandLinkClicks")
+  timestamp   DateTime @default(now())
+  ipAddress   String?
+  userAgent   String?
+  referrerUrl String?  // Referrer URL
+  pageUrl     String?  // Page URL where the action occurred
 
   @@schema("public")
 }
