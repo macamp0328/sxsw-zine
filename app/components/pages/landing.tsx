@@ -1,6 +1,7 @@
 'use client';
 
 import ImageOverlay from '../../ui/image-overlay';
+import ScrollURLUpdater from '../scroll-url-updater';
 
 export default function Landing() {
   const heroImageUrl = `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`;
@@ -10,7 +11,7 @@ export default function Landing() {
       id="landing"
       className="texture-overlay flex h-svh w-full snap-start snap-normal flex-col items-center justify-between overflow-hidden md:flex-row md:items-stretch"
     >
-      {/* <ScrollURLUpdater urlSegment="landing" /> */}
+      <ScrollURLUpdater urlSegment="landing" isRootSection />
       <div className="flex w-full flex-initial basis-1/4 flex-col items-center justify-end md:flex-auto md:justify-center">
         <div className="hidden flex-1 md:flex" />
         <h1 className="mb-4 mt-24 flex w-full items-center justify-center text-center align-bottom text-2xl text-main-text md:m-0 md:flex-1 md:text-3xl">

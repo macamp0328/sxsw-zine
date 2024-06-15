@@ -1,12 +1,15 @@
 import { robotoCondensed } from '@/app/lib/fonts';
 import TrackedLink from '@/app/ui/trackedLink';
 
+import ScrollURLUpdater from '../scroll-url-updater';
+
 export default function Footer() {
   return (
     <div
       id="footer"
       className="texture-overlay flex min-h-screen snap-start snap-always flex-col items-center justify-center space-y-12 px-12 pb-12 pt-24 md:px-32 lg:px-44"
     >
+      <ScrollURLUpdater urlSegment="footer" isRootSection />
       <div className="flex-col items-center justify-center text-center">
         <h1 className="py-4 text-center text-2xl text-main-text">
           You&apos;ve reached the end of the almost 50 sets.

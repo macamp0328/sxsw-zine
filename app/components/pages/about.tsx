@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { cutiveMono, robotoCondensed } from '../../lib/fonts';
 import ImageOverlay from '../../ui/image-overlay';
 import TrackedLink from '../../ui/trackedLink';
+import ScrollURLUpdater from '../scroll-url-updater';
 
 export const metadata: Metadata = {
   title: 'Abouts',
@@ -21,6 +22,7 @@ export default function About() {
       id="about"
       className={`texture-overlay flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
+      <ScrollURLUpdater urlSegment="about" isRootSection />
       <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
@@ -32,6 +34,7 @@ export default function About() {
           />
         </div>
       </div>
+      <ScrollURLUpdater urlSegment="about" isRootSection />
       <div className="flex h-fit w-full items-center justify-center p-6 md:pr-12">
         <p className="w-full text-center text-lg text-main-text md:text-right md:text-xl">
           Welcome to my slice of SXSW 2024—a digital zine documenting my quest
@@ -78,6 +81,7 @@ export default function About() {
           town—or inspire you to visit their country.
         </p>
       </div>
+      <ScrollURLUpdater urlSegment="about" isRootSection />
       <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 md:hidden">
         <div className="relative min-h-[300px] w-full">
           <ImageOverlay
@@ -117,6 +121,7 @@ export default function About() {
           <strong>Come on now, just keep scrolling.</strong>
         </p>
       </div>
+      <ScrollURLUpdater urlSegment="about" isRootSection />
     </div>
   );
 }

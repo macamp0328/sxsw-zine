@@ -72,8 +72,8 @@ export function generatePictureMetadata(
   };
 }
 
-export function updateMetadata(pictureDetails: PictureWithRelationsAndUrl) {
-  const metadata = generatePictureMetadata(pictureDetails);
+export function updateMetadata(pictureDetails?: PictureWithRelationsAndUrl) {
+  const metadata = generatePictureMetadata(pictureDetails || null);
 
   if (metadata.title) {
     document.title = metadata.title as string;
