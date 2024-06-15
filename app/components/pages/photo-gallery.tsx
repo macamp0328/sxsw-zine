@@ -43,7 +43,10 @@ export default function PhotoGallery({
               />
             )}
             <div className="mt-2 flex justify-center">
-              <DownloadBandPicturesButton bandId={zinePicture.band.id} />
+              <DownloadBandPicturesButton
+                bandId={zinePicture.band.id}
+                bandName={zinePicture.band.name}
+              />
             </div>
           </div>
         )}
