@@ -79,4 +79,47 @@
     position: relative;
     z-index: 1; /* Place the content above the texture */
   }  
+
+@layer utilities {
+  @keyframes punk-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes punk-wobble {
+    0% {
+      top: 0;
+      left: 0;
+    }
+    100% {
+      top: -2px;
+      left: -2px;
+    }
+  }
+
+  .punk-spinner {
+    @apply relative inline-block w-12 h-12 border-4 border-white rounded-full border-t-transparent border-r-transparent;
+    animation: punk-spin 1s linear infinite, punk-wobble 0.2s infinite alternate;
+  }
+
+  .punk-spinner::before,
+  .punk-spinner::after {
+    content: '';
+    @apply absolute top-[-4px] left-[-4px] w-full h-full border-4 border-white rounded-full border-t-transparent border-r-transparent opacity-30;
+    animation: punk-spin 1.5s linear infinite, punk-wobble 0.3s infinite alternate;
+  }
+
+  .punk-spinner::after {
+    animation-duration: 2s;
+    animation-direction: reverse;
+    opacity: 0.2;
+  }
+}
+
+
+
 }

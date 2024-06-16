@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import DownloadOverlay from './downloadOverlay';
 
 interface DownloadButtonProps {
   bandId: string;
@@ -17,6 +19,25 @@ const DownloadBandPicturesButton: React.FC<DownloadButtonProps> = ({
   bandName,
 }) => {
   const [isPending, setIsPending] = useState(false);
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isPending) {
+      interval = setInterval(() => {
+        setMessageIndex((prevIndex) => (prevIndex + 1) % 3);
+      }, 2000); // Change message every 2 seconds
+    } else {
+      setMessageIndex(0); // Reset to the first message when not pending
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isPending]);
 
   /**
    * Handles the download click event.
@@ -73,41 +94,44 @@ const DownloadBandPicturesButton: React.FC<DownloadButtonProps> = ({
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleDownloadClick}
-      className="flex items-center p-1 text-xs text-main-text underline decoration-solid decoration-1 transition-colors hover:bg-sub-background disabled:opacity-50"
-      disabled={isPending}
-      aria-busy={isPending}
-    >
-      {isPending ? (
-        <>
-          <svg
-            className="mr-2 size-4 animate-spin text-main-text"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-          downloading...
-        </>
-      ) : (
-        'download pictures'
-      )}
-    </button>
+    <div className="relative">
+      <button
+        type="button"
+        onClick={handleDownloadClick}
+        className="flex items-center p-1 text-xs text-main-text underline decoration-solid decoration-1 transition-colors hover:bg-sub-background disabled:opacity-50"
+        disabled={isPending}
+        aria-busy={isPending}
+      >
+        {isPending ? (
+          <>
+            <svg
+              className="mr-2 size-4 animate-spin text-main-text"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            downloading...
+          </>
+        ) : (
+          'download pictures'
+        )}
+      </button>
+      {isPending && <DownloadOverlay messageIndex={messageIndex} />}
+    </div>
   );
 };
 
