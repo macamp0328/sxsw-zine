@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { Zine } from '../components/zine';
+import { Zine } from '../components/pages/zine';
 import { fetchZinePictures } from '../lib/actions';
 import { generatePictureMetadata } from '../lib/metadata-utils';
 

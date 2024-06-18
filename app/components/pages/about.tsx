@@ -3,9 +3,9 @@
 import type { Metadata } from 'next';
 
 import { cutiveMono, robotoCondensed } from '../../lib/fonts';
-import ImageOverlay from '../../ui/image-overlay';
-import TrackedLink from '../../ui/trackedLink';
 import ScrollURLUpdater from '../scroll-url-updater';
+import ImageOverlay from '../ui/image-overlay';
+import TrackedLink from '../ui/tracked-link';
 
 export const metadata: Metadata = {
   title: 'Abouts',

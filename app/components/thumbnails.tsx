@@ -3,7 +3,7 @@
 import type { Band } from '@prisma/client';
 
 import { type NonZinePicture } from '../lib/actions';
-import ImageOverlay from '../ui/image-overlay';
+import ImageOverlay from './ui/image-overlay';
 
 export default function Thumbnails({
   notZinePictures,

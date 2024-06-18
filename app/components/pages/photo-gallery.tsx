@@ -6,8 +6,8 @@ import BandBonusDetails from '@/app/components/band-bonus-details';
 import BandMainDetails from '@/app/components/band-main-details';
 import BandPhoto from '@/app/components/band-photo';
 import Thumbnails from '@/app/components/thumbnails';
+import DownloadBandPicturesButton from '@/app/components/ui/download-band-pictures-button';
 import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
-import DownloadBandPicturesButton from '@/app/ui/downloadBandPicturesButton';
 
 import ScrollURLUpdater from '../scroll-url-updater';
 

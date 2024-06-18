@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import { type PictureWithRelationsAndUrl } from '../lib/actions';
 import { robotoCondensed } from '../lib/fonts';
-import LinksContextMenuButton from '../ui/linksContextMenuButton';
+import LinksContextMenuButton from './ui/links-context-menu-button';
 
 const BandBonusDetails = ({
   pictureDetails,

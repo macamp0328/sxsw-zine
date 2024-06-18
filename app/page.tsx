@@ -1,6 +1,6 @@
 // app/page.tsx
 
-import { Zine } from './components/zine';
+import { Zine } from './components/pages/zine';
 import { fetchZinePictures } from './lib/actions';
 
 export async function generateMetadata() {

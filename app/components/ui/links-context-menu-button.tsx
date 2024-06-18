@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import LinksContextMenu from './linksContextMenu';
+import LinksContextMenu from './links-context-menu';
 
 interface LinksContextMenuButtonProps {
   title: string;

@@ -2,11 +2,11 @@
 
 import React, { useEffect, useRef } from 'react';
 
-import type { PictureWithRelationsAndUrl } from '../lib/actions';
-import About from './pages/about';
-import Footer from './pages/footer';
-import Landing from './pages/landing';
-import PhotoGallery from './pages/photo-gallery';
+import type { PictureWithRelationsAndUrl } from '../../lib/actions';
+import About from './about';
+import Footer from './footer';
+import Landing from './landing';
+import PhotoGallery from './photo-gallery';
 
 export default function Zine({
   zinePictures,

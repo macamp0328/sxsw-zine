@@ -1,5 +1,5 @@
+import TrackedLink from '@/app/components/ui/tracked-link';
 import { robotoCondensed } from '@/app/lib/fonts';
-import TrackedLink from '@/app/ui/trackedLink';
 
 import ScrollURLUpdater from '../scroll-url-updater';
 

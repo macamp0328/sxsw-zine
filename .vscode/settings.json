@@ -18,11 +18,6 @@
     "next/dist/client/router.d.ts"
   ],
   "typescript.preferences.preferTypeOnlyAutoImports": true, // Prefer type-only imports
-  // "jest.runMode": {
-  //     "type": "on-save",
-  //     "testFileOnly": true,
-  //     "coverage": true
-  // }, // Configure Jest extension
   // Multiple language settings for json and jsonc files
   "[json][jsonc][yaml]": {
     "editor.formatOnSave": true,
