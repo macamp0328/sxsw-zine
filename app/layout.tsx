@@ -3,9 +3,11 @@ import './globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 
 import HeaderLogo from './components/header-logo';
 import { cutiveMono } from './lib/fonts';
+import { PHProvider } from './providers';
 
 export const metadata: Metadata = {
   title: "Miles's SXSW: A DIY Zine",
@@ -37,6 +39,10 @@ export const metadata: Metadata = {
   },
 };
 
+const PostHogPageView = dynamic(() => import('./post-hog-page-view'), {
+  ssr: false,
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,12 +54,15 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={cutiveMono.className}>
-        <HeaderLogo />
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </body>
+      <PHProvider>
+        <body className={cutiveMono.className}>
+          <PostHogPageView />
+          <HeaderLogo />
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </body>
+      </PHProvider>
     </html>
   );
 }
