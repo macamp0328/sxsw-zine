@@ -1,5 +1,3 @@
-// app/page.tsx
-
 import { Zine } from './components/pages/zine';
 import { fetchZinePictures } from './lib/actions';
 

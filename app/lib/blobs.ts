@@ -1,4 +1,3 @@
-// blobUtils.ts
 import type { ListBlobResultBlob } from '@vercel/blob';
 import { list } from '@vercel/blob';
 
