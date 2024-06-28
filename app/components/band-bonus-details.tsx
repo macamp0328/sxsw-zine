@@ -4,9 +4,9 @@ import type { Link } from '@prisma/client';
 import { LinkType } from '@prisma/client';
 import React, { useEffect, useState } from 'react';
 
-import { type PictureWithRelationsAndUrl } from '../lib/actions';
-import { robotoCondensed } from '../lib/fonts';
-import LinksContextMenuButton from './ui/links-context-menu-button';
+import LinksContextMenuButton from '@/app/components/ui/links-context-menu-button';
+import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
+import { robotoCondensed } from '@/app/lib/fonts';
 
 const BandBonusDetails = ({
   pictureDetails,

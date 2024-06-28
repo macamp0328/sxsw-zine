@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-import DownloadOverlay from './download-overlay';
+import DownloadOverlay from '@/app/components/ui/download-overlay';
 
 interface DownloadButtonProps {
   bandId: string;

@@ -1,7 +1,7 @@
 'use client';
 
-import ScrollURLUpdater from '../scroll-url-updater';
-import ImageOverlay from '../ui/image-overlay';
+import ScrollURLUpdater from '@/app/components/scroll-url-updater';
+import ImageOverlay from '@/app/components/ui/image-overlay';
 
 export default function Landing() {
   const heroImageUrl = `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`;

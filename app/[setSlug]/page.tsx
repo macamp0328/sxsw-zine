@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { Zine } from '../components/pages/zine';
-import { fetchZinePictures } from '../lib/actions';
-import { generatePictureMetadata } from '../lib/metadata-utils';
+import { Zine } from '@/app/components/pages/zine';
+import { fetchZinePictures } from '@/app/lib/actions';
+import { generatePictureMetadata } from '@/app/lib/metadata-utils';
 
 export async function generateStaticParams() {
   const zinePictures = await fetchZinePictures();

@@ -8,8 +8,8 @@ import {
   type Venue,
 } from '@prisma/client';
 
-import { listFiles as listBlobFiles } from './blobs';
-import { listFiles as listS3Files } from './s3';
+import { listFiles as listBlobFiles } from '@/app/lib/blobs';
+import { listFiles as listS3Files } from '@/app/lib/s3';
 
 const prisma = new PrismaClient();
 

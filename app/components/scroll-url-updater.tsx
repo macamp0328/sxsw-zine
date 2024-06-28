@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-import type { PictureWithRelationsAndUrl } from '../lib/actions';
-import { updateMetadata } from '../lib/metadata-utils';
+import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
+import { updateMetadata } from '@/app/lib/metadata-utils';
 
 type ScrollURLUpdaterProps = {
   urlSegment: string;

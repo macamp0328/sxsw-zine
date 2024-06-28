@@ -5,9 +5,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-import HeaderLogo from './components/header-logo';
-import { cutiveMono } from './lib/fonts';
-import { PHProvider } from './providers';
+import HeaderLogo from '@/app/components/header-logo';
+import { cutiveMono } from '@/app/lib/fonts';
+import { PHProvider } from '@/app/providers';
 
 export const metadata: Metadata = {
   title: "Miles's SXSW: A DIY Zine",

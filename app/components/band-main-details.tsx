@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { type PictureWithRelationsAndUrl } from '../lib/actions';
+import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
 const BandMainDetails = ({
   pictureDetails,

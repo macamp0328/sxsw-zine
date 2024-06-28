@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import type { PictureWithRelationsAndUrl } from './actions';
+import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
 export function generatePictureMetadata(
   pictureDetails: PictureWithRelationsAndUrl | null,

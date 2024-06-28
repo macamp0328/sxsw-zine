@@ -1,7 +1,7 @@
 'use client';
 
-import { type PictureWithRelationsAndUrl } from '../lib/actions';
-import ImageOverlay from './ui/image-overlay';
+import ImageOverlay from '@/app/components/ui/image-overlay';
+import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
 export default function BandPhoto(params: {
   pictureDetails: PictureWithRelationsAndUrl;

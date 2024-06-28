@@ -1,7 +1,6 @@
+import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 import TrackedLink from '@/app/components/ui/tracked-link';
 import { robotoCondensed } from '@/app/lib/fonts';
-
-import ScrollURLUpdater from '../scroll-url-updater';
 
 export default function Footer() {
   return (

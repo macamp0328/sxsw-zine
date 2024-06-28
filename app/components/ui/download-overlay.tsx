@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { robotoCondensed } from '../../lib/fonts';
+import { robotoCondensed } from '@/app/lib/fonts';
 
 const messages = [
   'Hold tight! Let me find those files for you...',

@@ -1,5 +1,5 @@
-import { Zine } from './components/pages/zine';
-import { fetchZinePictures } from './lib/actions';
+import { Zine } from '@/app/components/pages/zine';
+import { fetchZinePictures } from '@/app/lib/actions';
 
 export async function generateMetadata() {
   return {

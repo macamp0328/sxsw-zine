@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { fetchZinePictures } from './lib/actions';
+import { fetchZinePictures } from '@/app/lib/actions';
 
 const BASE_URL = 'https://campmiles.com';
 
