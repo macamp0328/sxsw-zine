@@ -1,7 +1,6 @@
 import './globals.css';
 
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
 import HeaderLogo from '@/app/components/header-logo';
@@ -56,7 +55,6 @@ export default function RootLayout({
         <HeaderLogo />
         {children}
         <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );
