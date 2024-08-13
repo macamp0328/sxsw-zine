@@ -29,8 +29,11 @@ currently deploayed at: https://campmiles.com
 ## CLI commands so I don't forget
 
 database migrations: `npx prisma migrate dev --name init`
+
 database refresh/seed (warning, clears it all out): `npx prisma db seed`
+
 `npx prisma generate`
+
 `Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch "\\\.next\\" -and $_.FullName -notmatch "\\node_modules\\" } | Select-Object FullName | Out-File -FilePath directory_structure_files_only.txt`
 
 ## Maybe features
