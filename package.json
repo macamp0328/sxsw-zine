@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -24,10 +24,10 @@
     "clsx": "^2.1.1",
     "crypto": "^1.0.1",
     "framer-motion": "^11.0.28",
-    "next": "^14.2.6",
+    "next": "^15.0.0-rc.0",
     "posthog-js": "^1.141.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.0.0-rc-b57d2823-20240822",
+    "react-dom": "^19.0.0-rc-b57d2823-20240822",
     "ua-parser-js": "^1.0.38"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "eslint": "^8",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-config-next": "^14.1.4",
+    "eslint-config-next": "^15.0.0-rc.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.9.0",
