@@ -1,0 +1,30 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {}
+  },
+  "customizations": {
+    "vscode": {
+      // pull list of extensions from .vscode/extensions.json
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "mikestead.dotenv",
+        "csstools.postcss",
+        "bradlc.vscode-tailwindcss",
+        "yoavbls.pretty-ts-errors",
+        "github.vscode-github-actions",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "GitHub.copilot",
+        "mechatroner.rainbow-csv"
+      ]
+    }
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install"
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

@@ -6,6 +6,7 @@
     "bradlc.vscode-tailwindcss",
     "yoavbls.pretty-ts-errors",
     "github.vscode-github-actions",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker"
   ]
 }
