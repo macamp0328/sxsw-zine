@@ -20,7 +20,7 @@ export default function About() {
   return (
     <div
       id="about"
-      className={`texture-overlay flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
+      className={`texture-overlay flex w-full snap-start snap-normal flex-col items-center justify-center pb-28 pt-24 md:grid md:snap-align-none md:scroll-m-0 md:grid-cols-2 md:px-12 xl:px-40 2xl:px-60 ${robotoCondensed.className}`}
     >
       <ScrollURLUpdater urlSegment="about" isRootSection />
       <div className="squiggle-texture-overlay flex size-full bg-sub-background p-2 md:hidden">
