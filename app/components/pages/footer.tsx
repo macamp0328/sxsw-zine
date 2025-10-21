@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div
       id="footer"
-      className="texture-overlay flex min-h-screen snap-start snap-always flex-col items-center justify-center space-y-12 px-12 pb-12 pt-24 md:px-32 lg:px-44"
+      className="texture-overlay flex min-h-screen snap-start snap-always flex-col items-center justify-center space-y-12 px-12 pb-12 pt-24 md:snap-align-none md:px-32 lg:px-44"
     >
       <ScrollURLUpdater urlSegment="footer" isRootSection />
       <div className="flex-col items-center justify-center text-center">

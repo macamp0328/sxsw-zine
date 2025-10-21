@@ -19,7 +19,7 @@ export default function PhotoGallery({
   return (
     <div
       id={zinePicture.setSlug}
-      className="texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:flex-row md:space-x-8"
+      className="texture-overlay flex h-svh w-full snap-start snap-always flex-col overflow-hidden md:snap-align-none md:flex-row md:space-x-8"
     >
       <div>
         <ScrollURLUpdater
