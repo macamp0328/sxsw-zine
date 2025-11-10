@@ -11,6 +11,10 @@ currently deploayed at: https://campmiles.com
 - AWS S3 and Cloudfront for images
 - Hosted by Vercel
 
+## Documentation
+
+- [Image Optimization Guide](./docs/IMAGE_OPTIMIZATION.md) - Best practices for image handling and optimization
+
 ## Project Goals
 
 - explore using next.js, tailwind css, and Vercel tooling

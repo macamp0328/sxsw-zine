@@ -33,7 +33,8 @@ export default function Landing() {
             alt="picture of Miles Camp, the maker of this page"
             priority
             isRotate
-            sizes="60vw"
+            sizes="(max-width: 768px) 100vw, 60vw"
+            quality={85}
           />
         </div>
       </div>
