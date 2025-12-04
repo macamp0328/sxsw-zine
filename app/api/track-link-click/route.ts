@@ -25,7 +25,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const { linkId, url, linkType, bandId } = await req.json();
 
     const ipAddress: string =
-      req.headers.get('x-forwarded-for') || req.ip || '';
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      '';
     const userAgentString: string = req.headers.get('user-agent') || '';
     const referrerUrl: string = req.headers.get('referer') || '';
     const salt: string = process.env.IP_HASH_SALT || 'default_salt'; // Use an environment variable for the salt

@@ -13,15 +13,15 @@ export async function generateStaticParams() {
 }
 
 type ZinePageProps = {
-  params: {
+  params: Promise<{
     setSlug: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({
   params,
 }: ZinePageProps): Promise<Metadata> {
-  const { setSlug } = params;
+  const { setSlug } = await params;
   const zinePictures = await fetchZinePictures();
   const initialPicture =
     zinePictures.find((pictureItem) => pictureItem.setSlug === setSlug) || null;
@@ -30,7 +30,7 @@ export async function generateMetadata({
 }
 
 export default async function SetPage({ params }: ZinePageProps) {
-  const { setSlug } = params;
+  const { setSlug } = await params;
   const zinePictures = await fetchZinePictures();
   const initialPicture = zinePictures.find(
     (pictureItem) => pictureItem.setSlug === setSlug,
