@@ -7,7 +7,10 @@ const nextConfig = {
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
   images: {
-    unoptimized: false,
+    // Use custom loader for CloudFront images to bypass Vercel Image Optimization
+    // This significantly reduces cache reads/writes
+    loader: 'custom',
+    loaderFile: './app/lib/cloudfront-loader.ts',
     remotePatterns: [
       {
         protocol: 'https',

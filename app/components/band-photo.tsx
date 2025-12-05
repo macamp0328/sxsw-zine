@@ -17,8 +17,8 @@ export default function BandPhoto(params: {
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
           isRotate
-          quality={100}
-          sizes="75vw"
+          quality={85}
+          sizes="(max-width: 768px) 100vw, 75vw"
         />
       ) : (
         <p>Ooops. No photo available.</p>

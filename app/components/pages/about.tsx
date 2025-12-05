@@ -31,6 +31,7 @@ export default function About() {
             priority
             isRotate
             sizes="100vw"
+            quality={85}
           />
         </div>
       </div>
@@ -54,7 +55,8 @@ export default function About() {
             alt="a random drummer in an empty lot"
             priority
             isRotate
-            sizes="45vw"
+            sizes="(min-width: 768px) 45vw, 100vw"
+            quality={85}
           />
         </div>
       </div>
@@ -65,7 +67,8 @@ export default function About() {
             alt="a boiler maker at Nickel City"
             priority
             isRotate
-            sizes="45vw"
+            sizes="(min-width: 768px) 45vw, 100vw"
+            quality={85}
           />
         </div>
       </div>
@@ -90,6 +93,7 @@ export default function About() {
             priority
             isRotate
             sizes="100vw"
+            quality={85}
           />
         </div>
       </div>

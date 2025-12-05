@@ -29,7 +29,8 @@ export default function Thumbnails({
               alt={`Photo of ${band.name} taken on ${picture.takenAt}`}
               className="rounded-md object-cover" // Adjusted to cover for thumbnail effect
               isRotate
-              sizes="25vw"
+              sizes="(max-width: 640px) 12vw, (max-width: 768px) 16vw, 24vw"
+              quality={80}
             />
           </div>
         ) : null,

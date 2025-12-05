@@ -17,7 +17,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
   isRotate = false,
   className,
   sizes = '100vw',
-  quality = 100,
+  quality = 85, // Reduced from 100 to 85 for better cache efficiency
   ...props
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -88,7 +88,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
               alt={`Zoomed in ${alt}`}
               fill
               sizes="100vw"
-              quality={100}
+              quality={85}
               className="object-contain"
             />
           </div>
