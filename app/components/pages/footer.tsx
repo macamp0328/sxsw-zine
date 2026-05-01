@@ -34,21 +34,32 @@ export default function Footer() {
           GitHub Repository
         </TrackedLink>
       </div>
-      <div className="squiggle-texture-overlay relative mx-4 my-3 w-full border-4 border-sub-text bg-sub-background p-3">
-        <p className=" text-center text-base text-main-text">
-          I am looking for a full-time position in either product management or
-          developer advocate (DevRel) roles. I excel at being the glue and
-          translator between users, technical teams, and cross-functional
-          stakeholders, with a simple goal: to help builders build. I appreciate
-          your time, but also your help.{' '}
-          <TrackedLink
-            href="https://drive.google.com/file/d/1C4wY320KbWoiEtrAzZuYfyVY8yizbT2b/view?usp=drive_link"
-            linkType="footerLink"
-            className="text-center underline"
-          >
-            <strong>Feel free to send my resume to anyone!</strong>
-          </TrackedLink>
+      <div className="squiggle-texture-overlay relative mx-4 my-3 flex w-full flex-col items-center gap-4 border-4 border-sub-text bg-sub-background p-4 text-center md:p-6">
+        <p className="max-w-5xl text-base text-main-text md:text-lg">
+          I&apos;m looking for full-time product engineering or solutions
+          architecture roles. I like the work where product judgment, hands-on
+          engineering, integrations, observability, and partner-facing technical
+          ownership all meet. AI helps me move faster, but I still keep the
+          judgment, validation, and ownership close.
         </p>
+        <div
+          className={`flex flex-col items-center gap-3 text-base text-sub-text sm:flex-row sm:justify-center md:text-lg ${robotoCondensed.className}`}
+        >
+          <TrackedLink
+            href="/resumes/camp-miles-product-engineer-resume.pdf"
+            linkType="footerLink"
+            className="button-texture-overlay border-2 border-sub-text bg-neutral-200 px-4 py-2 text-center font-bold text-main-text underline"
+          >
+            Product Engineer Resume
+          </TrackedLink>
+          <TrackedLink
+            href="/resumes/camp-miles-solutions-architect-resume.pdf"
+            linkType="footerLink"
+            className="button-texture-overlay border-2 border-sub-text bg-neutral-200 px-4 py-2 text-center font-bold text-main-text underline"
+          >
+            Solutions Architect Resume
+          </TrackedLink>
+        </div>
       </div>
       <div className="flex-col items-center justify-center pb-4 sm:mt-8">
         <p
@@ -56,19 +67,19 @@ export default function Footer() {
         >
           Other places you can find me:{' '}
           <TrackedLink
+            href="https://www.linkedin.com/in/milescamp/"
+            linkType="footerLink"
+            className="text-center text-lg font-bold underline"
+          >
+            linkedin
+          </TrackedLink>
+          {', '}
+          <TrackedLink
             href="https://www.instagram.com/twitterlessmiles/"
             linkType="footerLink"
             className="text-center text-lg underline"
           >
             @twitterlessmiles
-          </TrackedLink>
-          {', '}
-          <TrackedLink
-            href="https://www.linkedin.com/in/milescamp/"
-            linkType="footerLink"
-            className="text-center text-lg underline"
-          >
-            linkedin
           </TrackedLink>
           , or we could just hang out like humans.
         </p>
