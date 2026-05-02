@@ -71,15 +71,9 @@ export async function getBandDownloadDetails(bandId: string): Promise<{
     throw new Error('Band not found');
   }
 
-  const availableFiles = await listFiles();
-  const availableFileNames = new Set(availableFiles.map((file) => file.name));
-  const filenames = band.pictures
-    .map((picture) => picture.filename)
-    .filter((filename) => availableFileNames.has(filename));
-
   return {
     bandName: band.name,
-    filenames,
+    filenames: band.pictures.map((picture) => picture.filename),
   };
 }
 

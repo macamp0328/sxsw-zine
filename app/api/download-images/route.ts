@@ -1,26 +1,23 @@
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-import { BlobReader, BlobWriter, ZipWriter } from '@zip.js/zip.js';
+import { GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import type { Readable } from 'stream';
 
 import { getBandDownloadDetails } from '@/app/lib/actions';
+import { getFileMetadata } from '@/app/lib/blobs';
 import { getS3Env, getStorageType, MissingEnvError } from '@/app/lib/env';
 import { readLocalFile } from '@/app/lib/local-files';
 import { isRateLimited } from '@/app/lib/rate-limit';
 import { getS3Client } from '@/app/lib/s3';
+import { createZipStream } from '@/app/lib/zip-stream';
 
 const MAX_DOWNLOAD_FILES = 40;
 const MAX_DOWNLOAD_BYTES = 300 * 1024 * 1024;
 
-// Helper function to convert Node.js stream to Buffer
-const streamToBuffer = async (stream: Readable): Promise<Buffer> => {
-  return new Promise<Buffer>((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    stream.on('data', (chunk) => chunks.push(chunk));
-    stream.on('end', () => resolve(Buffer.concat(chunks)));
-    stream.on('error', reject);
-  });
+type DownloadEntry = {
+  filename: string;
+  size: number;
+  stream: () => Promise<AsyncIterable<Uint8Array>>;
 };
 
 const sanitizeFilenamePart = (value: string) =>
@@ -36,6 +33,82 @@ const isValidRequestBody = (value: unknown): value is { bandId: string } => {
     typeof value === 'object' &&
     typeof (value as { bandId?: unknown }).bandId === 'string'
   );
+};
+
+async function* bufferToAsyncIterable(buffer: Buffer) {
+  yield new Uint8Array(buffer);
+}
+
+async function* webStreamToAsyncIterable(stream: ReadableStream<Uint8Array>) {
+  const reader = stream.getReader();
+
+  try {
+    /* eslint-disable no-await-in-loop -- Web stream readers expose chunks one read at a time. */
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      if (value) {
+        yield value;
+      }
+    }
+    /* eslint-enable no-await-in-loop */
+  } finally {
+    reader.releaseLock();
+  }
+}
+
+const getDownloadEntry = async (
+  filename: string,
+  storageType: ReturnType<typeof getStorageType>,
+): Promise<DownloadEntry> => {
+  if (storageType === 'local') {
+    const buffer = await readLocalFile(filename);
+    return {
+      filename,
+      size: buffer.byteLength,
+      stream: async () => bufferToAsyncIterable(buffer),
+    };
+  }
+
+  if (storageType === 's3') {
+    const { bucketName } = getS3Env();
+    const headCommand = new HeadObjectCommand({
+      Bucket: bucketName,
+      Key: filename,
+    });
+    const { ContentLength } = await getS3Client().send(headCommand);
+
+    return {
+      filename,
+      size: ContentLength || 0,
+      stream: async () => {
+        const command = new GetObjectCommand({
+          Bucket: bucketName,
+          Key: filename,
+        });
+        const { Body } = await getS3Client().send(command);
+        if (!Body) {
+          throw new Error(`Failed to fetch ${filename}`);
+        }
+        return Body as Readable;
+      },
+    };
+  }
+
+  const metadata = await getFileMetadata(filename);
+  return {
+    filename,
+    size: metadata.size,
+    stream: async () => {
+      const response = await fetch(metadata.downloadUrl || metadata.url);
+      if (!response.ok || !response.body) {
+        throw new Error(`Failed to fetch ${filename}`);
+      }
+      return webStreamToAsyncIterable(response.body);
+    },
+  };
 };
 
 export async function POST(req: NextRequest) {
@@ -76,74 +149,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Fetch files and convert streams to Buffers
     const storageType = getStorageType();
-    const files: { filename: string; buffer: Buffer }[] = [];
+    const entries: DownloadEntry[] = [];
     let totalBytes = 0;
 
-    /* eslint-disable no-await-in-loop -- Keep downloads sequential so byte caps are enforced before fetching more originals. */
+    /* eslint-disable no-await-in-loop -- Preflight entries sequentially so byte caps are enforced before the zip response starts. */
     for (const filename of filenames) {
-      if (storageType === 'local') {
-        const buffer = await readLocalFile(filename);
-        totalBytes += buffer.byteLength;
-        if (totalBytes > MAX_DOWNLOAD_BYTES) {
-          return NextResponse.json(
-            { error: 'Download is too large' },
-            { status: 413 },
-          );
-        }
-        files.push({ filename, buffer });
-      } else if (storageType === 's3') {
-        const { bucketName } = getS3Env();
-        const command = new GetObjectCommand({
-          Bucket: bucketName,
-          Key: filename,
-        });
-        const { Body, ContentLength } = await getS3Client().send(command);
-        if (!Body) {
-          throw new Error(`Failed to fetch ${filename}`);
-        }
-        totalBytes += ContentLength || 0;
-        if (totalBytes > MAX_DOWNLOAD_BYTES) {
-          return NextResponse.json(
-            { error: 'Download is too large' },
-            { status: 413 },
-          );
-        }
-        const buffer = await streamToBuffer(Body as Readable);
-        files.push({ filename, buffer });
-      } else {
+      const entry = await getDownloadEntry(filename, storageType);
+      totalBytes += entry.size;
+      if (totalBytes > MAX_DOWNLOAD_BYTES) {
         return NextResponse.json(
-          { error: 'Downloads are only supported for local and S3 storage' },
-          { status: 501 },
+          { error: 'Download is too large' },
+          { status: 413 },
         );
       }
+      entries.push(entry);
     }
     /* eslint-enable no-await-in-loop */
 
-    // Create zip writer
-    const zipWriter = new ZipWriter(new BlobWriter('application/zip'));
-
-    // Add files to zip
-    await Promise.all(
-      files.map(({ filename, buffer }) =>
-        zipWriter.add(filename, new BlobReader(new Blob([buffer]))),
-      ),
-    );
-
-    // Close zip and get buffer
-    const zipBlob = await zipWriter.close();
-    const zipBuffer = await zipBlob.arrayBuffer();
-    const zipSize = zipBuffer.byteLength;
-
-    // Create response
-    const response = new NextResponse(zipBuffer, {
+    const response = new NextResponse(createZipStream(entries), {
       headers: {
         'Content-Type': 'application/zip',
         'Content-Disposition': `attachment; filename="${sanitizeFilenamePart(
           bandName,
         )}-miles-sxsw.zip"`,
-        'Content-Length': zipSize.toString(),
       },
     });
 

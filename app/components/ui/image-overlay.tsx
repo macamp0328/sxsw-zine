@@ -23,6 +23,8 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
   const [showOverlay, setShowOverlay] = useState(false);
   const [rotationClass, setRotationClass] = useState('');
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isRotate) {
@@ -47,15 +49,43 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
     }
 
     closeButtonRef.current?.focus();
-    const closeOnEscape = (event: KeyboardEvent) => {
+    const triggerButton = triggerButtonRef.current;
+    const handleDialogKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setShowOverlay(false);
+        return;
+      }
+
+      if (event.key !== 'Tab' || !overlayRef.current) {
+        return;
+      }
+
+      const focusableElements = Array.from(
+        overlayRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hasAttribute('disabled'));
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
-    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('keydown', handleDialogKeyDown);
     return () => {
-      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('keydown', handleDialogKeyDown);
+      triggerButton?.focus();
     };
   }, [showOverlay]);
 
@@ -75,6 +105,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
   return (
     <>
       <button
+        ref={triggerButtonRef}
         type="button"
         onClick={toggleOverlay}
         onKeyDown={handleKeyDown}
@@ -94,6 +125,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
       </button>
       {showOverlay && (
         <div
+          ref={overlayRef}
           role="dialog"
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
