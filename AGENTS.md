@@ -55,11 +55,6 @@ Required for S3 mode:
 - `AWS_CLOUDFRONT_DOMAIN`
 - `NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN`
 
-Optional/dormant:
-
-- `NEXT_PUBLIC_POSTHOG_KEY`
-- `NEXT_PUBLIC_POSTHOG_HOST`
-
 ## Implementation Preferences
 
 - Prefer Server Components by default. Add `'use client'` only for browser APIs, state, effects, or event handlers.

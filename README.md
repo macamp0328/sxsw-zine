@@ -52,11 +52,6 @@ Always populate:
 - `STORAGE_TYPE`
 - `IP_HASH_SALT`
 
-Optional/dormant analytics variables:
-
-- `NEXT_PUBLIC_POSTHOG_KEY`
-- `NEXT_PUBLIC_POSTHOG_HOST`
-
 Useful checks:
 
 ```bash

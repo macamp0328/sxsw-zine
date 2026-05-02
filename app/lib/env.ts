@@ -1,8 +1,3 @@
-const optionalClientEnv = [
-  'NEXT_PUBLIC_POSTHOG_KEY',
-  'NEXT_PUBLIC_POSTHOG_HOST',
-] as const;
-
 export type StorageType = 's3' | 'blob' | 'local';
 
 export class MissingEnvError extends Error {
@@ -62,4 +57,4 @@ export const requiredS3Env = [
   'NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN',
 ] as const;
 
-export const optionalEnv = [...optionalClientEnv] as const;
+export const optionalEnv = [] as const;

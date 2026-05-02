@@ -40,10 +40,6 @@ export const metadata: Metadata = {
   },
 };
 
-// const PostHogPageView = dynamic(() => import('./post-hog-page-view'), {
-//   ssr: false,
-// });
-
 export default function RootLayout({
   children,
 }: Readonly<{
