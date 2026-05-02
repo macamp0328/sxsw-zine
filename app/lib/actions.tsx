@@ -1,17 +1,30 @@
 'use server';
 
-import {
-  type Band,
-  type Link,
-  type Picture,
-  PrismaClient,
-  type Venue,
-} from '@prisma/client';
+import { type Band, type Link, type Picture, type Venue } from '@prisma/client';
 
 import { listFiles as listBlobFiles } from '@/app/lib/blobs';
+import { getStorageType } from '@/app/lib/env';
+import { listFiles as listLocalFiles } from '@/app/lib/local-files';
+import { getPrisma } from '@/app/lib/prisma';
 import { listFiles as listS3Files } from '@/app/lib/s3';
 
-const prisma = new PrismaClient();
+/**
+ * Lists files based on the storage type.
+ * @returns A list of files.
+ */
+const listFiles = async () => {
+  const storageType = getStorageType();
+
+  if (storageType === 's3') {
+    return listS3Files();
+  }
+
+  if (storageType === 'local') {
+    return listLocalFiles();
+  }
+
+  return listBlobFiles();
+};
 
 /**
  * Fetches filenames of pictures associated with a specific band.
@@ -20,12 +33,13 @@ const prisma = new PrismaClient();
  */
 export async function getBandFilenames(bandId: string): Promise<string[]> {
   try {
+    const prisma = getPrisma();
     const pictures = await prisma.picture.findMany({
       where: { bandId },
       select: { filename: true },
     });
 
-    const files = await listS3Files();
+    const files = await listFiles();
     const filenames = pictures.map((picture) => picture.filename);
 
     return files
@@ -35,6 +49,38 @@ export async function getBandFilenames(bandId: string): Promise<string[]> {
     console.error('Error fetching band filenames:', error);
     throw new Error('Failed to fetch band filenames');
   }
+}
+
+export async function getBandDownloadDetails(bandId: string): Promise<{
+  bandName: string;
+  filenames: string[];
+}> {
+  const prisma = getPrisma();
+  const band = await prisma.band.findUnique({
+    where: { id: bandId },
+    select: {
+      name: true,
+      pictures: {
+        select: { filename: true },
+        orderBy: { takenAt: 'asc' },
+      },
+    },
+  });
+
+  if (!band) {
+    throw new Error('Band not found');
+  }
+
+  const availableFiles = await listFiles();
+  const availableFileNames = new Set(availableFiles.map((file) => file.name));
+  const filenames = band.pictures
+    .map((picture) => picture.filename)
+    .filter((filename) => availableFileNames.has(filename));
+
+  return {
+    bandName: band.name,
+    filenames,
+  };
 }
 
 /**
@@ -72,22 +118,12 @@ export type PictureWithRelationsAndUrl = Picture & {
 };
 
 /**
- * Lists files based on the storage type.
- * @returns A list of files.
- */
-const listFiles = async () => {
-  if (process.env.STORAGE_TYPE === 's3') {
-    return listS3Files();
-  }
-  return listBlobFiles();
-};
-
-/**
  * Fetches and maps pictures with their relations and URLs.
  * @returns A list of pictures with relations and URLs.
  */
 export async function getZinePictures(): Promise<PictureWithRelationsAndUrl[]> {
   try {
+    const prisma = getPrisma();
     const zinePictures = await prisma.picture.findMany({
       where: { isZine: true },
       include: {

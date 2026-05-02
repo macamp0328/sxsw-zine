@@ -27,6 +27,8 @@ const LinksContextMenuButton: React.FC<LinksContextMenuButtonProps> = ({
       <button
         type="button"
         onClick={toggleMenu}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
         className="button-texture-overlay bg-main-text p-1 text-xs text-sub-background transition-colors hover:bg-gray-900 xs:p-2 xs:text-sm xs:underline xs:decoration-sub-background xs:decoration-solid xs:decoration-1 xs:underline-offset-8 xl:p-4"
       >
         {title}

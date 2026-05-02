@@ -27,32 +27,48 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
         onClose();
       }
     };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
     document.addEventListener('mousedown', checkIfClickedOutside);
+    document.addEventListener('keydown', closeOnEscape);
 
     return () => {
       document.removeEventListener('mousedown', checkIfClickedOutside);
+      document.removeEventListener('keydown', closeOnEscape);
     };
   }, [isOpen, onClose]);
 
   const handleLinkClick = useCallback(
-    async (linkId: string, url: string, bandId: string, band: string) => {
-      try {
-        await fetch('/api/track-link-click', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            linkId,
-            url,
-            linkType: 'linksLink',
-            bandId,
-            band,
-          }),
-        });
-      } catch (error) {
-        console.error('Failed to record link click:', error);
+    (linkId: string, url: string, bandId: string, band: string) => {
+      const payload = JSON.stringify({
+        linkId,
+        url,
+        linkType: 'linksLink',
+        bandId,
+        band,
+      });
+
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(
+          '/api/track-link-click',
+          new Blob([payload], { type: 'application/json' }),
+        );
+        return;
       }
+
+      fetch('/api/track-link-click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: payload,
+        keepalive: true,
+      }).catch((error) => {
+        console.error('Failed to record link click:', error);
+      });
     },
     [],
   );
@@ -65,10 +81,8 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
       bandId: string;
       band: string;
     }) => {
-      return (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        e.preventDefault();
+      return () => {
         handleLinkClick(link.id, link.url, link.bandId, link.band);
-        window.open(link.url, '_blank', 'noopener,noreferrer');
       };
     },
     [handleLinkClick],
@@ -78,6 +92,7 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
     <div
       className={`${isOpen ? 'block' : 'hidden'} button-texture-overlay absolute z-10 mt-2 bg-main-text text-xs text-sub-background xs:text-sm`}
       style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)' }}
+      role="menu"
     >
       <div ref={ref} className="flex flex-col">
         {links.map((link) => (
@@ -85,6 +100,9 @@ const LinksContextMenu: React.FC<LinksContextMenuProps> = ({
             key={`${link.url}-${link.platform}`}
             href={link.url}
             onClick={handleClick(link)}
+            target="_blank"
+            rel="noopener noreferrer"
+            role="menuitem"
             className="px-4 py-2 text-xs transition-colors hover:bg-gray-700 xs:text-sm"
           >
             {link.platform.replace(/_/g, ' ')}

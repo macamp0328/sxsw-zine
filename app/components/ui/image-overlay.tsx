@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ImageOverlayProps extends ImageProps {
   src: string; // Ensuring 'src' is always required
@@ -22,6 +22,7 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [rotationClass, setRotationClass] = useState('');
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isRotate) {
@@ -40,7 +41,25 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
     }
   }, [isRotate]);
 
-  const toggleOverlay = () => setShowOverlay(!showOverlay);
+  useEffect(() => {
+    if (!showOverlay) {
+      return undefined;
+    }
+
+    closeButtonRef.current?.focus();
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowOverlay(false);
+      }
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [showOverlay]);
+
+  const toggleOverlay = () => setShowOverlay((current) => !current);
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -55,13 +74,12 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
 
   return (
     <>
-      <div
+      <button
+        type="button"
         onClick={toggleOverlay}
         onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-        className="relative size-full cursor-pointer"
-        aria-label={alt}
+        className="relative block size-full cursor-pointer border-0 bg-transparent p-0"
+        aria-label={`Open full size image: ${alt}`}
       >
         <Image
           src={src}
@@ -72,26 +90,37 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
           quality={quality}
           {...props}
         />
-      </div>
+      </button>
       {showOverlay && (
         <div
-          onClick={toggleOverlay}
-          onKeyDown={handleKeyDown}
-          role="button"
-          tabIndex={0}
+          role="dialog"
+          aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
-          aria-label="Close image view"
+          aria-label="Full size image view"
         >
-          <div className="relative size-full max-h-full max-w-full p-4">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={toggleOverlay}
+            className="absolute right-4 top-4 z-10 bg-neutral-100 px-3 py-2 text-sm text-main-text underline"
+          >
+            close
+          </button>
+          <button
+            type="button"
+            onClick={toggleOverlay}
+            className="relative size-full max-h-full max-w-full border-0 bg-transparent p-4"
+            aria-label="Close image view"
+          >
             <Image
               src={src}
               alt={`Zoomed in ${alt}`}
               fill
               sizes="100vw"
-              quality={85}
+              quality={95}
               className="object-contain"
             />
-          </div>
+          </button>
         </div>
       )}
     </>

@@ -1,5 +1,3 @@
-'use client';
-
 import ImageOverlay from '@/app/components/ui/image-overlay';
 import { type PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
@@ -17,8 +15,8 @@ export default function BandPhoto(params: {
           src={params.pictureDetails.url}
           alt={`Photo of ${params.pictureDetails.band?.name} taken on ${params.pictureDetails.takenAt}`}
           isRotate
-          quality={85}
-          sizes="(max-width: 768px) 100vw, 75vw"
+          quality={95}
+          sizes="(max-width: 768px) 100vw, 72vw"
         />
       ) : (
         <p>Ooops. No photo available.</p>
