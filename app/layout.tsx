@@ -11,6 +11,7 @@ const openGraphImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
   : '/photos/opengraph-meta.jpg';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://campmiles.com'),
   title: "Miles's SXSW: A DIY Zine",
   description:
     'Experience SXSW 2024 through the lens of Miles. This digital zine is a gritty, unfiltered tribute to the energy of live music.',
