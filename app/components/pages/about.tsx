@@ -1,5 +1,3 @@
-'use client';
-
 import type { Metadata } from 'next';
 
 import ScrollURLUpdater from '@/app/components/scroll-url-updater';
@@ -14,8 +12,12 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
-  const drummingImageUrl = `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg`;
-  const nickelImageUrl = `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg`;
+  const drummingImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
+    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg`
+    : '/photos/drumming.jpg';
+  const nickelImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
+    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg`
+    : '/photos/nickel.jpg';
 
   return (
     <div

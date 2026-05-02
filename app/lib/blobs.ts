@@ -1,5 +1,5 @@
 import type { ListBlobResultBlob } from '@vercel/blob';
-import { list } from '@vercel/blob';
+import { head, list } from '@vercel/blob';
 
 type BlobFile = {
   name: string;
@@ -49,3 +49,12 @@ export const listFiles = async (): Promise<BlobFile[]> => {
 //   throw new Error('Could not retrieve file metadata');
 // }
 // };
+
+export const getFileMetadata = async (pathname: string) => {
+  try {
+    return await head(pathname);
+  } catch (error) {
+    console.error(`Failed to retrieve metadata for ${pathname}:`, error);
+    throw new Error('Could not retrieve file metadata');
+  }
+};

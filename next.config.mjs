@@ -3,10 +3,9 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN:
       process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN,
-    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
   images: {
+    qualities: [80, 85, 95],
     // Use custom loader for CloudFront images to bypass Vercel Image Optimization
     // This significantly reduces cache reads/writes
     loader: 'custom',

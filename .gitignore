@@ -2,6 +2,7 @@
 
 .env
 .env*
+!.env.example
 
 duck2/AppData/Local/Temp/node-jiti/*
 /prisma/scripts/images/*
@@ -17,6 +18,8 @@ directory_structure*
 
 # testingnp
 /coverage
+/test-results
+/playwright-report
 
 # next.js
 /.next/

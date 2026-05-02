@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ImageOverlayProps extends ImageProps {
   src: string; // Ensuring 'src' is always required
@@ -22,6 +22,9 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [rotationClass, setRotationClass] = useState('');
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isRotate) {
@@ -40,7 +43,53 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
     }
   }, [isRotate]);
 
-  const toggleOverlay = () => setShowOverlay(!showOverlay);
+  useEffect(() => {
+    if (!showOverlay) {
+      return undefined;
+    }
+
+    closeButtonRef.current?.focus();
+    const triggerButton = triggerButtonRef.current;
+    const handleDialogKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowOverlay(false);
+        return;
+      }
+
+      if (event.key !== 'Tab' || !overlayRef.current) {
+        return;
+      }
+
+      const focusableElements = Array.from(
+        overlayRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hasAttribute('disabled'));
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleDialogKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleDialogKeyDown);
+      triggerButton?.focus();
+    };
+  }, [showOverlay]);
+
+  const toggleOverlay = () => setShowOverlay((current) => !current);
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -55,13 +104,13 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
 
   return (
     <>
-      <div
+      <button
+        ref={triggerButtonRef}
+        type="button"
         onClick={toggleOverlay}
         onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-        className="relative size-full cursor-pointer"
-        aria-label={alt}
+        className="relative block size-full cursor-pointer border-0 bg-transparent p-0"
+        aria-label={`Open full size image: ${alt}`}
       >
         <Image
           src={src}
@@ -70,28 +119,42 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
           sizes={sizes}
           className={imageClass}
           quality={quality}
+          unoptimized
           {...props}
         />
-      </div>
+      </button>
       {showOverlay && (
         <div
-          onClick={toggleOverlay}
-          onKeyDown={handleKeyDown}
-          role="button"
-          tabIndex={0}
+          ref={overlayRef}
+          role="dialog"
+          aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
-          aria-label="Close image view"
+          aria-label="Full size image view"
         >
-          <div className="relative size-full max-h-full max-w-full p-4">
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={toggleOverlay}
+            className="absolute right-4 top-4 z-10 bg-neutral-100 px-3 py-2 text-sm text-main-text underline"
+          >
+            close
+          </button>
+          <button
+            type="button"
+            onClick={toggleOverlay}
+            className="relative size-full max-h-full max-w-full border-0 bg-transparent p-4"
+            aria-label="Close image view"
+          >
             <Image
               src={src}
               alt={`Zoomed in ${alt}`}
               fill
               sizes="100vw"
-              quality={85}
+              quality={95}
               className="object-contain"
+              unoptimized
             />
-          </div>
+          </button>
         </div>
       )}
     </>

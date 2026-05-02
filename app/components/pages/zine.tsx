@@ -24,7 +24,7 @@ export default function Zine({
         element.scrollIntoView({ behavior: 'instant' });
       }
     }
-  });
+  }, [initialPicture]);
 
   return (
     <div

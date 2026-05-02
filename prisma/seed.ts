@@ -1,4 +1,5 @@
 // run using: npx prisma db seed
+/* eslint-disable no-await-in-loop, no-console */
 import type { Prisma } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 import csv from 'csv-parser';

@@ -1,5 +1,3 @@
-'use client';
-
 import type { Band } from '@prisma/client';
 
 import ImageOverlay from '@/app/components/ui/image-overlay';
