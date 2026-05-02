@@ -100,14 +100,13 @@ export default function About() {
           </p>
         </div>
 
-        <div className="w-full justify-center text-center">
+        <div className="w-full text-center">
           <p
             className={`animate-bounce text-lg text-sub-text ${cutiveMono.className}`}
           >
             <strong>Come on now, just keep scrolling.</strong>
           </p>
         </div>
-        <ScrollURLUpdater urlSegment="about" isRootSection />
       </div>
     </div>
   );
