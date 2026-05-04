@@ -5,6 +5,10 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN,
   },
   images: {
+    // Keep this ladder intentionally small. Each extra width multiplies Vercel
+    // image-cache variants across every photo in the zine.
+    deviceSizes: [640, 1080, 1600, 2048, 2560],
+    imageSizes: [160, 320, 480],
     qualities: [80, 85, 95],
     remotePatterns: [
       {

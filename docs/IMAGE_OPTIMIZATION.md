@@ -19,6 +19,8 @@ remote patterns aligned with supported storage providers:
 Configuration in `next.config.mjs`:
 ```javascript
 images: {
+  deviceSizes: [640, 1080, 1600, 2048, 2560],
+  imageSizes: [160, 320, 480],
   qualities: [80, 85, 95],
   remotePatterns: [
     // S3, CloudFront, and Vercel Blob hostnames
@@ -54,6 +56,19 @@ sizes="(max-width: 768px) 100vw, 60vw"
 // Split layout images
 sizes="(min-width: 768px) 45vw, 100vw"
 ```
+
+### Width Buckets
+
+Keep `deviceSizes` and `imageSizes` in `next.config.mjs` intentionally small.
+Every extra width bucket multiplies Vercel Image Optimization writes across the
+whole photo set. The current ladder is tuned for this zine:
+
+- `640`: mobile full-width photos
+- `1080`: tablet and small laptop views
+- `1600`, `2048`, `2560`: large desktop and overlay views
+- `160`, `320`, `480`: small preview/thumbnail candidates
+
+Do not add more buckets unless visual testing shows a real sharpness gap.
 
 ### Adding New Images
 
@@ -123,7 +138,8 @@ If you notice high cache reads/writes:
 1. Check if `quality={100}` is being used
 2. Review `sizes` attributes for optimization
 3. Confirm main photos are not marked `unoptimized`
-4. Ensure remote image hostnames are intentionally listed in `next.config.mjs`
+4. Confirm `deviceSizes` and `imageSizes` have not grown beyond the documented ladder
+5. Ensure remote image hostnames are intentionally listed in `next.config.mjs`
 
 ### Image Quality Issues
 
