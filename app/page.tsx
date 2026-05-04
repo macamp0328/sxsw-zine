@@ -1,7 +1,13 @@
 import { Zine } from '@/app/components/pages/zine';
 import { fetchZinePictures } from '@/app/lib/actions';
+import { getStaticPhotoUrl } from '@/app/lib/metadata-utils';
 
 export async function generateMetadata() {
+  const openGraphImageUrl = getStaticPhotoUrl(
+    'opengraph-meta.jpg',
+    '/photos/opengraph-meta.jpg',
+  );
+
   return {
     title: "Miles's SXSW: A DIY Zine",
     description:
@@ -13,7 +19,7 @@ export async function generateMetadata() {
         'Dive into the raw, unpolished beauty of SXSW 2024. Captured with a small camera, this digital zine is a tribute to the live music and the artists who create it.',
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/opengraph-meta.jpg`,
+          url: openGraphImageUrl,
           alt: "Cover image for Miles's SXSW 2024 Zine",
         },
       ],
@@ -25,7 +31,7 @@ export async function generateMetadata() {
         'Join Miles on a journey through SXSW 2024. This digital zine, captured with a Ricoh GR II, is a raw, unfiltered celebration of live music and the artists who bring it to life.',
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/opengraph-meta.jpg`,
+          url: openGraphImageUrl,
           alt: "Cover image for Miles's SXSW 2024 Zine",
         },
       ],

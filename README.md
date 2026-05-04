@@ -1,6 +1,6 @@
 # sxsw-zine
 
-currently deploayed at: https://campmiles.com
+Currently deployed at: https://campmiles.com
 
 ## Current Tooling
 
@@ -15,6 +15,62 @@ currently deploayed at: https://campmiles.com
 
 - [Image Optimization Guide](./docs/IMAGE_OPTIMIZATION.md) - Best practices for image handling and optimization
 - [Testing and Monitoring Guide](./docs/TESTING_AND_MONITORING.md) - Post-deployment testing and monitoring instructions
+- [Agent Guide](./AGENTS.md) - Ground rules for AI-agent-first development
+- [Claude Guide](./CLAUDE.md) - Claude-specific agent notes
+
+## Local Development
+
+Local testing is a project requirement. Start with the checked-in sample photo
+mode, then switch to S3 mode when you need production-like image behavior.
+
+```bash
+cp .env.example .env.local
+npm ci
+npx prisma generate
+npx prisma migrate dev
+npx prisma db seed
+npm run dev
+```
+
+The default `.env.example` uses `STORAGE_TYPE=local`, which maps seeded picture
+filenames to sample images in `public/photos`. This lets the gallery, metadata
+routes, tracking route, and download route run without AWS credentials.
+
+For production-like testing, set `STORAGE_TYPE=s3` and populate:
+
+- `AWS_REGION`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `S3_BUCKET_NAME`
+- `AWS_CLOUDFRONT_DOMAIN`
+- `NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN`
+
+For legacy blob-backed testing, set `STORAGE_TYPE=blob` and populate:
+
+- `BLOB_READ_WRITE_TOKEN`
+
+Always populate:
+
+- `DATABASE_URL`
+- `DIRECT_URL`
+- `STORAGE_TYPE`
+- `IP_HASH_SALT`
+
+Useful checks:
+
+```bash
+npm run check-types
+npm run lint
+npm run build
+npm run test:e2e
+```
+
+## Photo Quality Rule
+
+The photographs are the point of the project. Main gallery photos should render
+at the largest size that entirely fits the screen, with high visual quality and
+no cropping. Use `object-contain` for main photos and overlays; reserve
+`object-cover` for thumbnails or decorative images.
 
 ## Project Goals
 

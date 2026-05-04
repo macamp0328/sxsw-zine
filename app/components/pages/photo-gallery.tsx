@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import BandBonusDetails from '@/app/components/band-bonus-details';

@@ -2,7 +2,7 @@
  * run from root using: node .\prisma\scripts\generate-pictures-seed.js
  */
 
-/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/no-extraneous-dependencies, no-console, no-restricted-syntax */
 const fs = require('fs');
 const sharp = require('sharp');
 const exifReader = require('exif-reader');

@@ -3,14 +3,13 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN:
       process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN,
-    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
   images: {
-    // Use custom loader for CloudFront images to bypass Vercel Image Optimization
-    // This significantly reduces cache reads/writes
-    loader: 'custom',
-    loaderFile: './app/lib/cloudfront-loader.ts',
+    // Keep this ladder intentionally small. Each extra width multiplies Vercel
+    // image-cache variants across every photo in the zine.
+    deviceSizes: [640, 1080, 1600, 2048, 2560],
+    imageSizes: [160, 320, 480],
+    qualities: [80, 85, 95],
     remotePatterns: [
       {
         protocol: 'https',
@@ -29,6 +28,11 @@ const nextConfig = {
         hostname: 'd2qb1jexhp0efc.cloudfront.net',
         port: '',
         // pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+        port: '',
       },
     ],
   },

@@ -1,10 +1,12 @@
-'use client';
-
 import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 import ImageOverlay from '@/app/components/ui/image-overlay';
+import { getStaticPhotoUrl } from '@/app/lib/metadata-utils';
 
 export default function Landing() {
-  const heroImageUrl = `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/start-page-miles.jpg`;
+  const heroImageUrl = getStaticPhotoUrl(
+    'start-page-miles.jpg',
+    '/photos/header-miles.jpg',
+  );
 
   return (
     <div
