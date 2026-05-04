@@ -55,6 +55,10 @@ Required for S3 mode:
 - `AWS_CLOUDFRONT_DOMAIN`
 - `NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN`
 
+Required for blob mode:
+
+- `BLOB_READ_WRITE_TOKEN`
+
 ## Implementation Preferences
 
 - Prefer Server Components by default. Add `'use client'` only for browser APIs, state, effects, or event handlers.

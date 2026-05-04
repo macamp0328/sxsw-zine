@@ -119,7 +119,6 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
           sizes={sizes}
           className={imageClass}
           quality={quality}
-          unoptimized
           {...props}
         />
       </button>
@@ -152,7 +151,6 @@ const ImageOverlay: React.FC<ImageOverlayProps> = ({
               sizes="100vw"
               quality={95}
               className="object-contain"
-              unoptimized
             />
           </button>
         </div>

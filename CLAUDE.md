@@ -40,4 +40,4 @@ npm run dev
 npm run test:e2e
 ```
 
-With `STORAGE_TYPE=local`, the gallery should render using checked-in sample photos. With `STORAGE_TYPE=s3`, the same flow should use S3/CloudFront after AWS env vars are populated.
+With `STORAGE_TYPE=local`, the gallery should render using checked-in sample photos. With `STORAGE_TYPE=s3`, the same flow should use S3/CloudFront after AWS env vars are populated. With legacy `STORAGE_TYPE=blob`, populate `BLOB_READ_WRITE_TOKEN`.

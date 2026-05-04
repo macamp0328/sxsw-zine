@@ -6,10 +6,6 @@ const nextConfig = {
   },
   images: {
     qualities: [80, 85, 95],
-    // Use custom loader for CloudFront images to bypass Vercel Image Optimization
-    // This significantly reduces cache reads/writes
-    loader: 'custom',
-    loaderFile: './app/lib/cloudfront-loader.ts',
     remotePatterns: [
       {
         protocol: 'https',
@@ -28,6 +24,11 @@ const nextConfig = {
         hostname: 'd2qb1jexhp0efc.cloudfront.net',
         port: '',
         // pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+        port: '',
       },
     ],
   },

@@ -57,4 +57,6 @@ export const requiredS3Env = [
   'NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN',
 ] as const;
 
+export const requiredBlobEnv = ['BLOB_READ_WRITE_TOKEN'] as const;
+
 export const optionalEnv = [] as const;

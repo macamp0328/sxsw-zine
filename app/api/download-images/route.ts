@@ -6,7 +6,7 @@ import type { Readable } from 'stream';
 import { getBandDownloadDetails } from '@/app/lib/actions';
 import { getFileMetadata } from '@/app/lib/blobs';
 import { getS3Env, getStorageType, MissingEnvError } from '@/app/lib/env';
-import { readLocalFile } from '@/app/lib/local-files';
+import { MissingLocalFileError, readLocalFile } from '@/app/lib/local-files';
 import { isRateLimited } from '@/app/lib/rate-limit';
 import { getS3Client } from '@/app/lib/s3';
 import { createZipStream } from '@/app/lib/zip-stream';
@@ -18,6 +18,12 @@ type DownloadEntry = {
   filename: string;
   size: number;
   stream: () => Promise<AsyncIterable<Uint8Array>>;
+};
+
+type StorageError = Error & {
+  $metadata?: {
+    httpStatusCode?: number;
+  };
 };
 
 const sanitizeFilenamePart = (value: string) =>
@@ -32,6 +38,20 @@ const isValidRequestBody = (value: unknown): value is { bandId: string } => {
     !!value &&
     typeof value === 'object' &&
     typeof (value as { bandId?: unknown }).bandId === 'string'
+  );
+};
+
+const isMissingRemoteAssetError = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const storageError = error as StorageError;
+  return (
+    storageError.$metadata?.httpStatusCode === 404 ||
+    error.name === 'NoSuchKey' ||
+    error.name === 'NotFound' ||
+    error.name === 'BlobNotFoundError'
   );
 };
 
@@ -155,17 +175,36 @@ export async function POST(req: NextRequest) {
 
     /* eslint-disable no-await-in-loop -- Preflight entries sequentially so byte caps are enforced before the zip response starts. */
     for (const filename of filenames) {
-      const entry = await getDownloadEntry(filename, storageType);
-      totalBytes += entry.size;
-      if (totalBytes > MAX_DOWNLOAD_BYTES) {
-        return NextResponse.json(
-          { error: 'Download is too large' },
-          { status: 413 },
-        );
+      let entry: DownloadEntry | null = null;
+      try {
+        entry = await getDownloadEntry(filename, storageType);
+      } catch (error) {
+        if (storageType !== 'local' && isMissingRemoteAssetError(error)) {
+          console.warn(`Skipping missing download asset: ${filename}`);
+        } else {
+          throw error;
+        }
       }
-      entries.push(entry);
+
+      if (entry) {
+        totalBytes += entry.size;
+        if (totalBytes > MAX_DOWNLOAD_BYTES) {
+          return NextResponse.json(
+            { error: 'Download is too large' },
+            { status: 413 },
+          );
+        }
+        entries.push(entry);
+      }
     }
     /* eslint-enable no-await-in-loop */
+
+    if (!entries.length) {
+      return NextResponse.json(
+        { error: 'No downloadable images found for this band' },
+        { status: 404 },
+      );
+    }
 
     const response = new NextResponse(createZipStream(entries), {
       headers: {
@@ -186,6 +225,10 @@ export async function POST(req: NextRequest) {
 
     if (error instanceof Error && error.message === 'Band not found') {
       return NextResponse.json({ error: 'Band not found' }, { status: 404 });
+    }
+
+    if (error instanceof MissingLocalFileError) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json(

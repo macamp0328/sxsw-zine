@@ -4,6 +4,7 @@ import ScrollURLUpdater from '@/app/components/scroll-url-updater';
 import ImageOverlay from '@/app/components/ui/image-overlay';
 import TrackedLink from '@/app/components/ui/tracked-link';
 import { cutiveMono, robotoCondensed } from '@/app/lib/fonts';
+import { getStaticPhotoUrl } from '@/app/lib/metadata-utils';
 
 export const metadata: Metadata = {
   title: 'Abouts',
@@ -12,12 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
-  const drummingImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
-    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/drumming.jpg`
-    : '/photos/drumming.jpg';
-  const nickelImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
-    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/nickel.jpg`
-    : '/photos/nickel.jpg';
+  const drummingImageUrl = getStaticPhotoUrl(
+    'drumming.jpg',
+    '/photos/drumming.jpg',
+  );
+  const nickelImageUrl = getStaticPhotoUrl('nickel.jpg', '/photos/nickel.jpg');
 
   return (
     <div

@@ -6,6 +6,13 @@ type LocalFile = {
   url: string;
 };
 
+export class MissingLocalFileError extends Error {
+  constructor(filename: string) {
+    super(`Missing local file mapping for ${filename}`);
+    this.name = 'MissingLocalFileError';
+  }
+}
+
 const localPhotoUrls = [
   '/photos/opengraph-meta.jpg',
   '/photos/header-miles.jpg',
@@ -42,6 +49,9 @@ export async function listFiles(): Promise<LocalFile[]> {
 export async function readLocalFile(filename: string): Promise<Buffer> {
   const files = await listFiles();
   const file = files.find((candidate) => candidate.name === filename);
-  const url = file?.url || localPhotoUrls[0];
-  return fs.readFile(path.join(process.cwd(), 'public', url));
+  if (!file) {
+    throw new MissingLocalFileError(filename);
+  }
+
+  return fs.readFile(path.join(process.cwd(), 'public', file.url));
 }

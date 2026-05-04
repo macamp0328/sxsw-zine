@@ -45,6 +45,10 @@ For production-like testing, set `STORAGE_TYPE=s3` and populate:
 - `AWS_CLOUDFRONT_DOMAIN`
 - `NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN`
 
+For legacy blob-backed testing, set `STORAGE_TYPE=blob` and populate:
+
+- `BLOB_READ_WRITE_TOKEN`
+
 Always populate:
 
 - `DATABASE_URL`

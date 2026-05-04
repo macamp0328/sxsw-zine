@@ -2,10 +2,17 @@ import type { Metadata } from 'next';
 
 import type { PictureWithRelationsAndUrl } from '@/app/lib/actions';
 
+export const getStaticPhotoUrl = (filename: string, localPath: string) => {
+  const cloudfrontDomain = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN;
+  if (process.env.STORAGE_TYPE === 'local' || !cloudfrontDomain) {
+    return localPath;
+  }
+
+  return `${cloudfrontDomain}/statics/${filename}`;
+};
+
 const getFallbackOpenGraphImageUrl = () =>
-  process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
-    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/opengraph-meta.jpg`
-    : '/photos/opengraph-meta.jpg';
+  getStaticPhotoUrl('opengraph-meta.jpg', '/photos/opengraph-meta.jpg');
 
 export function generatePictureMetadata(
   pictureDetails: PictureWithRelationsAndUrl | null,

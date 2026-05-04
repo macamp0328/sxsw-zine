@@ -5,10 +5,12 @@ import type { Metadata } from 'next';
 
 import HeaderLogo from '@/app/components/header-logo';
 import { cutiveMono } from '@/app/lib/fonts';
+import { getStaticPhotoUrl } from '@/app/lib/metadata-utils';
 
-const openGraphImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
-  ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/opengraph-meta.jpg`
-  : '/photos/opengraph-meta.jpg';
+const openGraphImageUrl = getStaticPhotoUrl(
+  'opengraph-meta.jpg',
+  '/photos/opengraph-meta.jpg',
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://campmiles.com'),

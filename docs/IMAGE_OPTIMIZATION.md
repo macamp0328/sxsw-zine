@@ -2,28 +2,27 @@
 
 ## Overview
 
-This project uses a custom image optimization strategy to minimize Vercel's Image Cache reads/writes while maintaining high-quality visuals. Images are served directly from AWS CloudFront CDN, bypassing Vercel's Image Optimization service.
+This project uses Next.js Image with explicit remote allow-lists, accurate `sizes`, and high quality settings so photos stay sharp while browsers receive viewport-appropriate image candidates.
 
 ## Architecture
 
 1. **Storage**: Images are stored in AWS S3
 2. **CDN**: CloudFront distributes images globally
-3. **Optimization**: Custom loader serves CloudFront images directly
+3. **Optimization**: Next.js Image generates responsive candidates from local, S3, CloudFront, or Vercel Blob sources
 4. **Component**: Next.js Image component with optimized settings
 
-## Custom Image Loader
+## Image Configuration
 
-The project uses a custom image loader (`app/lib/cloudfront-loader.ts`) that:
-- Bypasses Vercel's Image Optimization for CloudFront URLs
-- Serves images directly from CloudFront
-- Reduces cache reads/writes significantly
-- Maintains Next.js Image component benefits (lazy loading, placeholder, etc.)
+The project uses the default Next.js image optimizer. Keep `next.config.mjs`
+remote patterns aligned with supported storage providers:
 
 Configuration in `next.config.mjs`:
 ```javascript
 images: {
-  loader: 'custom',
-  loaderFile: './app/lib/cloudfront-loader.ts',
+  qualities: [80, 85, 95],
+  remotePatterns: [
+    // S3, CloudFront, and Vercel Blob hostnames
+  ],
 }
 ```
 
@@ -92,14 +91,14 @@ When adding images to the project:
 ✅ Provide descriptive `alt` text
 ✅ Set appropriate `sizes` attribute
 ✅ Use `priority` for above-the-fold images
-✅ Use reasonable quality settings (75-85)
+✅ Use high but reasonable quality settings (85 for most photos, 95 for main gallery/overlay views)
 
 **DON'T:**
 ❌ Use `quality={100}`
 ❌ Use generic `sizes="100vw"` everywhere
 ❌ Skip `alt` attributes
 ❌ Use regular `<img>` tags
-❌ Bypass the custom loader
+❌ Add `unoptimized` to main gallery photos without a documented reason
 
 ### Performance Monitoring
 
@@ -122,9 +121,9 @@ CloudFront is configured with appropriate cache headers:
 
 If you notice high cache reads/writes:
 1. Check if `quality={100}` is being used
-2. Verify custom loader is active in `next.config.mjs`
-3. Ensure images are served from CloudFront URLs
-4. Review `sizes` attributes for optimization
+2. Review `sizes` attributes for optimization
+3. Confirm main photos are not marked `unoptimized`
+4. Ensure remote image hostnames are intentionally listed in `next.config.mjs`
 
 ### Image Quality Issues
 
@@ -137,39 +136,33 @@ If images appear degraded:
 ### Build Errors
 
 If you encounter build errors related to images:
-1. Verify `cloudfront-loader.ts` exists and is correct
-2. Check `next.config.mjs` loader configuration
+1. Check `next.config.mjs` remote image patterns
+2. Confirm the image host is allowed for the active storage mode
 3. Ensure all image URLs are valid
 4. Review console for specific error messages
 
 ## Technical Details
 
-### Why Custom Loader?
+### Why Default Next.js Optimization?
 
-By default, Next.js Image component uses Vercel's Image Optimization even for remote URLs:
-- Generates multiple optimized versions
-- Stores them in Vercel's cache
-- Results in high cache reads/writes
-- Can be expensive at scale
+The zine's product rule is that photos should be large, uncropped, and sharp.
+The default optimizer gives the browser responsive candidates while preserving
+the `object-contain` layout and high quality settings used by `ImageOverlay`.
 
-Our custom loader:
-- Serves images directly from CloudFront
-- Eliminates redundant optimization
-- Reduces Vercel costs
-- Improves performance
+Supported hosts are listed explicitly in `next.config.mjs` so local sample
+photos, S3, CloudFront, and Vercel Blob remain predictable across environments.
 
 ### Trade-offs
 
 **Pros:**
-- Drastically reduced cache usage
-- Lower Vercel costs
-- Faster image delivery (CloudFront edge locations)
-- Better control over image serving
+- Responsive image candidates for small and large viewports
+- Better bandwidth behavior than serving original files everywhere
+- Centralized host allow-list for storage modes
 
 **Cons:**
-- Manual optimization required before upload
-- No automatic format conversion (WebP/AVIF)
-- Need to manage CloudFront separately
+- Uses Vercel Image Optimization for remote assets
+- Remote hosts must be kept current in `next.config.mjs`
+- Very high quality settings can increase transformed image size
 
 ### Future Improvements
 
@@ -190,5 +183,5 @@ Potential enhancements:
 
 For questions or issues related to image optimization, please:
 1. Check this documentation
-2. Review the code in `app/lib/cloudfront-loader.ts`
+2. Review `next.config.mjs` image settings
 3. Open an issue on GitHub with specific details

@@ -1,10 +1,12 @@
 import { Zine } from '@/app/components/pages/zine';
 import { fetchZinePictures } from '@/app/lib/actions';
+import { getStaticPhotoUrl } from '@/app/lib/metadata-utils';
 
 export async function generateMetadata() {
-  const openGraphImageUrl = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN
-    ? `${process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN}/statics/opengraph-meta.jpg`
-    : '/photos/opengraph-meta.jpg';
+  const openGraphImageUrl = getStaticPhotoUrl(
+    'opengraph-meta.jpg',
+    '/photos/opengraph-meta.jpg',
+  );
 
   return {
     title: "Miles's SXSW: A DIY Zine",
