@@ -58,7 +58,7 @@ Monitor these metrics **before and after** deployment:
 
 ### 3. Technical Validation
 
-**Verify Custom Loader is Active:**
+**Verify `unoptimized: true` is active:**
 
 ```javascript
 // In browser DevTools Console, check image URLs
@@ -132,15 +132,8 @@ document.querySelectorAll('img').forEach(img => {
 If issues arise, here's how to rollback:
 
 **Quick Rollback (Emergency):**
-```javascript
-// In next.config.mjs, comment out custom loader:
-images: {
-  // loader: 'custom',
-  // loaderFile: './app/lib/cloudfront-loader.ts',
-  remotePatterns: [...]
-}
-```
-Then redeploy.
+Remove `unoptimized: true` from `next.config.mjs` and redeploy.
+⚠️ This re-enables Vercel image optimization and will consume cache write quota — only appropriate on a paid Vercel plan.
 
 **Full Rollback:**
 ```bash
@@ -173,15 +166,14 @@ The optimization is considered successful if:
 - Verify CloudFront serving correct files
 
 **Problem: Cache metrics still high**
-- Verify custom loader is deployed
-- Check that image URLs are CloudFront URLs
-- Review Network tab for `/_next/image` URLs
-- Ensure configuration is correct in production
+- Verify `unoptimized: true` is present in `next.config.mjs` on the deployed build
+- Check that image URLs are CloudFront URLs in the Network tab
+- Review Network tab for any `/_next/image` URLs (there should be none)
 
 **Problem: Build errors**
-- Verify `cloudfront-loader.ts` path is correct
 - Check TypeScript compilation
 - Review Next.js version compatibility
+- Verify `remotePatterns` hostnames are correct in `next.config.mjs`
 
 ### 9. Documentation
 

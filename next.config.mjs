@@ -7,7 +7,7 @@ const nextConfig = {
   images: {
     // Images are served directly from CloudFront (global CDN), so Vercel's
     // image optimization is disabled. This keeps cache writes at zero on the
-    // free tier. remotePatterns still validates allowed hostnames at build time.
+    // free tier. remotePatterns still validates allowed hostnames at render time.
     unoptimized: true,
     remotePatterns: [
       {

@@ -71,7 +71,7 @@ The `quality` prop is ignored when `unoptimized: true`. Images are served at the
 **DO:**
 - Use `ImageOverlay` for all photos
 - Provide descriptive `alt` text
-- Use `object-contain` for main/overlay photos (enforced by `ImageOverlay`)
+- Use `object-contain` for main/overlay photos (`ImageOverlay` defaults to this; thumbnails may pass `object-cover` via `className`)
 - Use `priority` for the first visible image on each page
 
 **DON'T:**
