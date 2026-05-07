@@ -64,23 +64,17 @@ Three comprehensive guides were created:
 
 ## 🔧 Key Technical Changes
 
-### 1. Custom Loader (New File)
-```typescript
-// app/lib/cloudfront-loader.ts
-export default function cloudfrontLoader({ src }) {
-  // Return CloudFront URLs directly
-  return src;
-}
-```
-
-### 2. Next.js Config
+### Next.js Config
 ```javascript
 // next.config.mjs
 images: {
-  loader: 'custom',
-  loaderFile: './app/lib/cloudfront-loader.ts',
+  unoptimized: true,   // bypass Vercel Image Optimizer entirely
+  remotePatterns: [...] // hostname allowlist still enforced
 }
 ```
+
+`app/lib/cloudfront-loader.ts` (used in a previous iteration) has been removed.
+`unoptimized: true` is the simpler, more explicit replacement.
 
 ### 3. Image Quality
 - Changed from `quality={100}` to `quality={85}`
@@ -94,11 +88,8 @@ images: {
 
 If something goes wrong:
 
-1. **Quick fix**: Comment out these lines in `next.config.mjs`:
-   ```javascript
-   // loader: 'custom',
-   // loaderFile: './app/lib/cloudfront-loader.ts',
-   ```
+1. **Quick fix**: Remove `unoptimized: true` from `next.config.mjs` and redeploy.
+   ⚠️ This re-enables Vercel image optimization and will consume cache write quota — only appropriate on a paid plan.
 2. **Or**: Revert the PR: `git revert <commit>`
 3. **Then**: Redeploy
 

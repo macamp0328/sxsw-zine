@@ -28,38 +28,29 @@ Generate Optimized Version → Cache Write → Serve to User → Cache Read
 
 ## Solution Implemented
 
-### 1. Custom Image Loader
+### 1. Disable Vercel Image Optimization
 
-Created `app/lib/cloudfront-loader.ts` that bypasses Vercel's Image Optimization:
+Set `unoptimized: true` in `next.config.mjs`. This tells Next.js to serve images
+as-is without routing them through Vercel's Image Optimizer.
 
-```typescript
-export default function cloudfrontLoader({ src, width: _width, quality: _quality }) {
-  // If src is already a full URL (CloudFront), return it as-is
-  if (src.startsWith('http://') || src.startsWith('https://')) {
-    return src;
-  }
-  return src;
-}
-```
-
-This tells Next.js to serve CloudFront URLs directly without additional processing.
+`app/lib/cloudfront-loader.ts` (used in an earlier iteration) has been removed.
+The current approach uses the built-in `unoptimized` flag instead.
 
 ### 2. Next.js Configuration
 
-Updated `next.config.mjs` to use the custom loader:
+Updated `next.config.mjs`:
 
 ```javascript
 images: {
-  loader: 'custom',
-  loaderFile: './app/lib/cloudfront-loader.ts',
+  unoptimized: true,
   remotePatterns: [...]
 }
 ```
 
 **New Flow:**
 ```
-CloudFront URL → Next.js Image Component → Custom Loader → 
-Serve Directly from CloudFront (No Cache Operation)
+CloudFront URL → Next.js Image Component → 
+Serve Directly from CloudFront (No Vercel Cache Operation)
 ```
 
 ### 3. Image Quality Optimization
@@ -89,19 +80,14 @@ Created comprehensive documentation:
 
 ## Files Changed
 
-### Modified Files (7)
-1. `next.config.mjs` - Custom loader configuration
-2. `app/components/ui/image-overlay.tsx` - Default quality 85
-3. `app/components/band-photo.tsx` - Quality 85, better sizes
-4. `app/components/thumbnails.tsx` - Quality 80, responsive sizes
-5. `app/components/pages/landing.tsx` - Quality 85, responsive sizes
-6. `app/components/pages/about.tsx` - Quality 85, responsive sizes (4 instances)
-7. `README.md` - Documentation links
+### Modified Files
+1. `next.config.mjs` - `unoptimized: true`, removed unused sizing/quality ladders
+2. `docs/IMAGE_OPTIMIZATION.md` - Rewritten to document CloudFront-direct strategy
+3. `docs/IMPLEMENTATION_SUMMARY.md` - Updated to reflect current approach
+4. `docs/TESTING_AND_MONITORING.md` - Updated rollback and validation sections
 
-### New Files (3)
-1. `app/lib/cloudfront-loader.ts` - Custom image loader
-2. `docs/IMAGE_OPTIMIZATION.md` - Comprehensive optimization guide
-3. `docs/TESTING_AND_MONITORING.md` - Testing and monitoring guide
+### Deleted Files
+1. `app/lib/cloudfront-loader.ts` - Removed (dead code; superseded by `unoptimized: true`)
 
 ## Expected Impact
 
@@ -196,7 +182,9 @@ The implementation is successful if:
 If issues occur:
 
 **Quick Fix:**
-Comment out custom loader in `next.config.mjs` and redeploy.
+Remove `unoptimized: true` from `next.config.mjs` and redeploy. Note that
+re-enabling Vercel optimization will immediately start consuming cache write
+quota — only do this on a paid plan.
 
 **Full Rollback:**
 ```bash

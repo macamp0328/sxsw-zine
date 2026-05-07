@@ -1,203 +1,104 @@
 # Image Optimization Guide
 
-## Overview
-
-This project uses Next.js Image with explicit remote allow-lists, accurate `sizes`, and high quality settings so photos stay sharp while browsers receive viewport-appropriate image candidates.
-
 ## Architecture
 
 1. **Storage**: Images are stored in AWS S3
-2. **CDN**: CloudFront distributes images globally
-3. **Optimization**: Next.js Image generates responsive candidates from local, S3, CloudFront, or Vercel Blob sources
-4. **Component**: Next.js Image component with optimized settings
+2. **CDN**: CloudFront distributes images globally from edge locations
+3. **Optimization**: Disabled on Vercel — CloudFront handles delivery
+4. **Component**: `ImageOverlay` wraps `next/image` for all gallery photos
 
-## Image Configuration
+## Why `unoptimized: true`?
 
-The project uses the default Next.js image optimizer. Keep `next.config.mjs`
-remote patterns aligned with supported storage providers:
+Vercel's Image Optimization is intentionally disabled (`unoptimized: true` in `next.config.mjs`). The reasons:
 
-Configuration in `next.config.mjs`:
+- **Free tier limit**: Vercel caps image cache writes at 100,000/month on the free plan. Each photo × each width × each quality level = one write. A gallery with many photos exhausts this quickly.
+- **CloudFront already does the job**: Images are served from a global CDN with edge caching. Routing them through Vercel's optimizer adds latency without benefit.
+- **Photo quality is paramount**: The gallery prioritizes the largest, sharpest image that fits on screen. Serving originals directly from CloudFront honors this.
+
+`remotePatterns` in `next.config.mjs` still validates that image `src` values come from known, trusted hosts, even with optimization disabled.
+
+## Configuration (`next.config.mjs`)
+
 ```javascript
 images: {
-  deviceSizes: [640, 1080, 1600, 2048, 2560],
-  imageSizes: [160, 320, 480],
-  qualities: [80, 85, 95],
+  unoptimized: true,
   remotePatterns: [
-    // S3, CloudFront, and Vercel Blob hostnames
+    { protocol: 'https', hostname: 'sxsw-zine-bucket.s3.amazonaws.com' },
+    { protocol: 'https', hostname: 'sxsw-zine-bucket.s3.us-east-1.amazonaws.com' },
+    { protocol: 'https', hostname: 'd2qb1jexhp0efc.cloudfront.net' },
+    { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
   ],
 }
 ```
 
-## Best Practices for Contributors
+## For Contributors
 
-### Image Quality Settings
+### Adding New Images
 
-**Recommended quality levels:**
-- **Hero/Featured images**: `quality={85}` (default)
-- **Thumbnails**: `quality={80}`
-- **Background images**: `quality={75}`
-
-⚠️ **Never use `quality={100}`** - it creates unnecessarily large images and increases cache usage.
-
-### Sizes Attribute
-
-Always provide appropriate `sizes` attribute for responsive images:
+1. Upload to S3 — CloudFront will distribute automatically
+2. Add metadata to the Prisma database (filename, band, venue)
+3. Use the `ImageOverlay` component:
 
 ```tsx
-// Main photo gallery images
-sizes="(max-width: 768px) 100vw, 75vw"
+<ImageOverlay
+  src={imageUrl}
+  alt="Descriptive alt text"
+  sizes="(max-width: 768px) 100vw, 75vw"
+/>
+```
+
+### `sizes` Attribute
+
+The `sizes` prop is still correct to include — it tells the browser what fraction of the viewport the image occupies, which helps the browser prioritize loading. With `unoptimized: true`, no actual srcset variants are generated, but the attribute causes no harm and documents intent.
+
+```tsx
+// Main band photos
+sizes="(max-width: 768px) 100vw, 72vw"
 
 // Thumbnails
 sizes="(max-width: 640px) 12vw, (max-width: 768px) 16vw, 24vw"
 
 // Hero images
 sizes="(max-width: 768px) 100vw, 60vw"
-
-// Split layout images
-sizes="(min-width: 768px) 45vw, 100vw"
 ```
 
-### Width Buckets
+### `quality` Prop
 
-Keep `deviceSizes` and `imageSizes` in `next.config.mjs` intentionally small.
-Every extra width bucket multiplies Vercel Image Optimization writes across the
-whole photo set. The current ladder is tuned for this zine:
+The `quality` prop is ignored when `unoptimized: true`. Images are served at their original quality from S3/CloudFront. You may leave existing `quality` props in place — they have no effect.
 
-- `640`: mobile full-width photos
-- `1080`: tablet and small laptop views
-- `1600`, `2048`, `2560`: large desktop and overlay views
-- `160`, `320`, `480`: small preview/thumbnail candidates
-
-Do not add more buckets unless visual testing shows a real sharpness gap.
-
-### Adding New Images
-
-When adding images to the project:
-
-1. **Optimize before upload**:
-   - Use tools like ImageOptim, Squoosh, or Sharp
-   - Target file size: < 500KB for full-size photos
-   - Format: JPEG for photos, PNG for graphics/logos
-
-2. **Upload to S3**:
-   ```bash
-   # Images should be uploaded to the S3 bucket
-   # CloudFront will automatically distribute them
-   ```
-
-3. **Update database**:
-   - Add image metadata to Prisma database
-   - Include filename, band, venue information
-
-4. **Use ImageOverlay component**:
-   ```tsx
-   <ImageOverlay
-     src={imageUrl}
-     alt="Descriptive alt text"
-     sizes="(max-width: 768px) 100vw, 75vw"
-     quality={85}
-   />
-   ```
-
-### Image Component Usage
+### DO / DON'T
 
 **DO:**
-✅ Use `ImageOverlay` component for all photos
-✅ Provide descriptive `alt` text
-✅ Set appropriate `sizes` attribute
-✅ Use `priority` for above-the-fold images
-✅ Use high but reasonable quality settings (85 for most photos, 95 for main gallery/overlay views)
+- Use `ImageOverlay` for all photos
+- Provide descriptive `alt` text
+- Use `object-contain` for main/overlay photos (`ImageOverlay` defaults to this; thumbnails may pass `object-cover` via `className`)
+- Use `priority` for the first visible image on each page
 
 **DON'T:**
-❌ Use `quality={100}`
-❌ Use generic `sizes="100vw"` everywhere
-❌ Skip `alt` attributes
-❌ Use regular `<img>` tags
-❌ Add `unoptimized` to main gallery photos without a documented reason
-
-### Performance Monitoring
-
-Monitor image performance using:
-- Vercel Analytics Dashboard
-- Image Cache Reads/Writes metrics
-- Lighthouse performance scores
-- Core Web Vitals (LCP, CLS)
-
-### Cache Headers
-
-CloudFront is configured with appropriate cache headers:
-- Images are cached at the edge
-- Long cache duration for static assets
-- Proper invalidation on updates
+- Add `loader` or remove `unoptimized: true` without understanding the cache write implications
+- Use regular `<img>` tags — they bypass `remotePatterns` validation
+- Remove hostnames from `remotePatterns` that are still in use
 
 ## Troubleshooting
 
-### High Cache Usage
+### Images not loading in production
 
-If you notice high cache reads/writes:
-1. Check if `quality={100}` is being used
-2. Review `sizes` attributes for optimization
-3. Confirm main photos are not marked `unoptimized`
-4. Confirm `deviceSizes` and `imageSizes` have not grown beyond the documented ladder
-5. Ensure remote image hostnames are intentionally listed in `next.config.mjs`
+1. Confirm the image hostname is in `remotePatterns` in `next.config.mjs`
+2. Verify `NEXT_PUBLIC_AWS_CLOUDFRONT_DOMAIN` and `AWS_CLOUDFRONT_DOMAIN` are set in Vercel env vars
+3. Check CloudFront distribution is healthy and the S3 object exists
 
-### Image Quality Issues
+### Image quality looks poor
 
-If images appear degraded:
-1. Adjust quality setting (85 is recommended baseline)
-2. Check original image resolution
-3. Verify CloudFront is serving correct files
-4. Test on multiple devices/screen sizes
+Original files served from S3 should be high-quality JPEGs. If they look poor:
+1. Check the source file in S3 — it may have been uploaded at low quality
+2. Confirm CloudFront is not re-compressing (check CloudFront cache behaviors)
+3. Check browser DevTools → Network for the actual file size
 
-### Build Errors
+### Considering re-enabling Vercel optimization in the future
 
-If you encounter build errors related to images:
-1. Check `next.config.mjs` remote image patterns
-2. Confirm the image host is allowed for the active storage mode
-3. Ensure all image URLs are valid
-4. Review console for specific error messages
-
-## Technical Details
-
-### Why Default Next.js Optimization?
-
-The zine's product rule is that photos should be large, uncropped, and sharp.
-The default optimizer gives the browser responsive candidates while preserving
-the `object-contain` layout and high quality settings used by `ImageOverlay`.
-
-Supported hosts are listed explicitly in `next.config.mjs` so local sample
-photos, S3, CloudFront, and Vercel Blob remain predictable across environments.
-
-### Trade-offs
-
-**Pros:**
-- Responsive image candidates for small and large viewports
-- Better bandwidth behavior than serving original files everywhere
-- Centralized host allow-list for storage modes
-
-**Cons:**
-- Uses Vercel Image Optimization for remote assets
-- Remote hosts must be kept current in `next.config.mjs`
-- Very high quality settings can increase transformed image size
-
-### Future Improvements
-
-Potential enhancements:
-- [ ] Implement WebP/AVIF conversion in upload pipeline
-- [ ] Add image processing Lambda at CloudFront edge
-- [ ] Automated image optimization on S3 upload
-- [ ] Integration with Cloudinary or similar service
+Don't — unless you upgrade to a paid Vercel plan. If responsive resizing is needed for mobile bandwidth, the right path is to add a CloudFront Function or Lambda@Edge image resizer and pass `?w=<width>` query params through `app/lib/s3.ts` URL construction. That keeps Vercel out of the loop entirely.
 
 ## Resources
 
-- [Next.js Image Optimization](https://nextjs.org/docs/basic-features/image-optimization)
-- [Vercel Image Optimization](https://vercel.com/docs/image-optimization)
+- [Next.js `unoptimized` prop docs](https://nextjs.org/docs/app/api-reference/components/image#unoptimized)
 - [CloudFront Documentation](https://docs.aws.amazon.com/cloudfront/)
-- [Web.dev Image Optimization](https://web.dev/fast/#optimize-your-images)
-
-## Questions?
-
-For questions or issues related to image optimization, please:
-1. Check this documentation
-2. Review `next.config.mjs` image settings
-3. Open an issue on GitHub with specific details
