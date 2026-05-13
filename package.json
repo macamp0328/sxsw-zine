@@ -27,7 +27,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "@zip.js/zip.js": "^2.7.45",
     "clsx": "^2.1.1",
-    "next": "^15.5.15",
+    "next": "^15.5.18",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "ua-parser-js": "^1.0.38"
