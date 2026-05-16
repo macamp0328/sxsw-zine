@@ -30,7 +30,7 @@
     "next": "^15.5.18",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "ua-parser-js": "^1.0.38"
+    "ua-parser-js": "^2.0.9"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
