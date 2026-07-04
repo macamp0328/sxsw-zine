@@ -36,7 +36,7 @@
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^21.0.0",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^20.12.7",
+    "@types/node": "^26.1.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/ua-parser-js": "^0.7.39",
